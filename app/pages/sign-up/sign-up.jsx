@@ -135,7 +135,8 @@ class SignUp extends Component {
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
-                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && grecaptcha.ready(() => {
+                // this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && 
+                grecaptcha.ready(() => {
                   grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
                     apiServices.post(_config.urls.recaptcha_post.replace('{token}', token)).then(response => {
                       console.log('recaptcha', response)

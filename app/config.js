@@ -1,13 +1,15 @@
 var _config = {}
 
 _config.data = {isRTL: false}
-
+_config.lang = 'en'
 _config.urls = {
   check_login: '/check-login',
   static: './media/',
 
   // api
-  recaptcha_post: 'http://atzma.im/recaptcha.php?token={token}'
+  base: 'https://api.bewebmaster.co.il/', // domain name
+  recaptcha_post: 'http://atzma.im/recaptcha.php?token={token}',
+  business_types_get: 'business_types?lang={lang}'
 }
 
 _config.keys = {
@@ -24,7 +26,8 @@ _config.routing = {
     }
   },
   sign_up_path: '/',
-  all_set_path: '/all-set'
+  all_set_path: '/all-set',
+  business_type_path: '/business-type'
 }
 
 _config.translations = {

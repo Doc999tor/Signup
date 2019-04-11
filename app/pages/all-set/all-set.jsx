@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import StartButton from '../../components/start-button/start-button.jsx'
 import './all-set.less'
 
 class AllSet extends Component {
@@ -48,11 +49,12 @@ class AllSet extends Component {
               </div>
               </div>
               {/* {console.log(this.firstCheckbox)} */}
-          <footer className='start-button'>&nbsp;
+          {/* <footer className='start-button'>&nbsp;
             <button className={`all-set-form__button start ${this.state.isFirstCheckboxChecked && this.state.isTwiceCheckboxChecked ? 'active' : ''}`}>
               <span className='start-button__all-set'>{_config.translations.all_set.lets_start}</span>
             </button>
-          </footer>
+          </footer> */}
+          <StartButton active={this.state.isFirstCheckboxChecked && this.state.isTwiceCheckboxChecked} />
         </div>
       </div>
     )
