@@ -5,11 +5,12 @@ _config.lang = 'en'
 _config.urls = {
   check_login: '/check-login',
   static: './media/',
-
+  business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
   recaptcha_post: 'http://atzma.im/recaptcha.php?token={token}',
-  business_types_get: 'business_types?lang={lang}'
+  business_types_get: 'business_types?lang={lang}',
+  countries_get: 'countries'
 }
 
 _config.keys = {

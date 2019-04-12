@@ -9,10 +9,11 @@
   .bussiness-container {
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     .bussiness-type {
-      width: 6.4rem;
-      height: 6.4rem;
+      width: 6.2rem;
+      height: 6.2rem;
+      margin: 0.425rem;
       border-radius: 20px;
       border: solid 0.8px #ffffff;
       background-color: rgba(209, 189, 255, 0.5);
@@ -28,8 +29,46 @@
       }
       &.active {
         box-shadow: 0 2px 8px 0 #deceff;
+        color: var(--dark-color);
         background-color: #ffffff;
       }
+      .bussiness-type__checkmark {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--sec-bgcolor);
+        border-radius: 50%;
+        margin-inline-start: 3rem;
+        position: absolute;
+        margin-top: 2.6rem;
+      }
+      .bussiness-type__name {
+        text-align: center;
+        font-size: .75rem;
+      }
+    }
+  }
+  .checkmark{
+    padding-bottom: 0.1rem;
+    display:inline-block;
+    
+    &:after{
+      /*Add another block-level blank space*/
+      content: '';
+      display: block;
+   
+      /*Make it a small rectangle so the border will create an L-shape*/
+      width: 0.4rem;
+      height: 0.8rem;
+   
+      /*Add a white border on the bottom and left, creating that 'L' */
+      border: solid var(--white-color);
+      border-width: 0 2px 2px 0;
+   
+      /*Rotate the L 45 degrees to turn it into a checkmark*/
+      transform: rotate(45deg);
     }
   }
 .text-wrap {
@@ -69,6 +108,25 @@
       align-items: center;
       justify-content: center;
       color: var(--white-color);
+    }
+  }
+  .add-menu {
+    .add-menu__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .selected-business {
+        padding: 0.15rem 0.4rem;
+        span {
+          padding: 0 0.3rem;
+        }
+      }
+    }
+    .add-menu__text {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

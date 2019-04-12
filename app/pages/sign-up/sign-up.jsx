@@ -18,13 +18,17 @@ class SignUp extends Component {
       } else {
         return ''
       }
-    })()
+    })(),
+    countries: {}
   }
   componentDidMount () {
     // recaptcha v3
     loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.keys.recaptcha_v3}`, document.body)
     // recaptcha v2
     loadJS('https://www.google.com/recaptcha/api.js', document.body)
+    apiServices.get(_config.urls.countries_get).then(response => {
+      this.setState({countries: response})
+    })
   }
   // toggle password -> show/hide
   togglePass = () => {
