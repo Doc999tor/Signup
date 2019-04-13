@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {loadJS, apiServices} from 'services'
+import { withRouter } from 'react-router-dom'
+
 import './sign-up.less'
 
 class SignUp extends Component {
@@ -14,21 +15,18 @@ class SignUp extends Component {
       let params = (new URL(document.location)).searchParams
       let error = params.get(_config.routing.url_params.error)
       if (error === _config.routing.url_params.values.incorrect) {
-        return _config.translations.sign_in.error_incorrect
+        return _config.translations[_config.lang].sign_in.error_incorrect
       } else {
         return ''
       }
-    })(),
-    countries: {}
+    })()
   }
   componentDidMount () {
     // recaptcha v3
-    loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.keys.recaptcha_v3}`, document.body)
+    // loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.keys.recaptcha_v3}`, document.body)
     // recaptcha v2
-    loadJS('https://www.google.com/recaptcha/api.js', document.body)
-    apiServices.get(_config.urls.countries_get).then(response => {
-      this.setState({countries: response})
-    })
+    // loadJS('https://www.google.com/recaptcha/api.js', document.body)
+
   }
   // toggle password -> show/hide
   togglePass = () => {
@@ -44,22 +42,22 @@ class SignUp extends Component {
   // check email and pass values
   checkPassAndEmail = () => {
     // if password and email empty
-    if (this.state.emailValue === '' && this.state.passValue === '') {
-      this.setState({isValidEmail: false, isValidPass: false, errMessage: _config.translations.sign_in.enter_email_pass})
+    if (this.props.email === '' && this.props.pass === '') {
+      this.setState({isValidEmail: false, isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.enter_email_pass})
       return false
     } else { return true }
   }
   checkEmail = () => {
     // mail epmty
-    if (this.state.emailValue === '') {
-      this.setState({isValidEmail: false, errMessage: _config.translations.sign_in.missing_email})
+    if (this.props.email === '') {
+      this.setState({isValidEmail: false, errMessage: _config.translations[_config.lang].sign_in.missing_email})
       return false
     } else {
       // check valid email
       let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       // mail not valid (if not: @, .com or there are prohibited characters)
-      if (!re.test(this.state.emailValue)) {
-        this.setState({isValidEmail: false, errMessage: _config.translations.sign_in.wrong_email})
+      if (!re.test(this.props.email)) {
+        this.setState({isValidEmail: false, errMessage: _config.translations[_config.lang].sign_in.wrong_email})
         return false
       } else {
         this.setState({errMessage: '', isValidEmail: true})
@@ -69,12 +67,12 @@ class SignUp extends Component {
   }
   checkPassword = () => {
     // pass epmty
-    if (this.state.passValue === '') {
-      this.setState({isValidPass: false, errMessage: _config.translations.sign_in.missing_password})
+    if (this.props.pass === '') {
+      this.setState({isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.missing_password})
       this.checkPassAndEmail()
       return false
-    } else if (this.state.passValue.length < 8) {
-      this.setState({isValidPass: false, errMessage: _config.translations.sign_in.password_short})
+    } else if (this.props.pass.length < 8) {
+      this.setState({isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.password_short})
       return false
     } else {
       this.setState({isValidPass: true, errMessage: ''})
@@ -87,29 +85,29 @@ class SignUp extends Component {
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
         <div className='sign-up-wrap'>
           <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
-          <form ref={form => this.form = form} action={_config.urls.check_login} method='POST'>
+          <form ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
           <div className='text-content-wrap'>
-            <div className='login-form__text'>{_config.translations.sign_up.fill_dateils_create}</div>
+            <div className='login-form__text'>{_config.translations[_config.lang].sign_up.fill_dateils_create}</div>
             <button className='login-form__button google dispay-none'>
               <img className='login-form__img' src={_config.urls.static + 'search.svg'} />
-              <span>{_config.translations.sign_in.login_google}</span>
+              <span>{_config.translations[_config.lang].sign_in.login_google}</span>
             </button>
             <input className='login-form__time-zone'
               type='text'
               name='time_zone'
               defaultValue={Intl && Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone} />
-            <span className='login-form__text or dispay-none' >{_config.translations.sign_in.login_or}</span>
+            <span className='login-form__text or dispay-none' >{_config.translations[_config.lang].sign_in.login_or}</span>
             <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
               <img className='group__email'
                 src={_config.urls.static + (this.state.isValidEmail ? 'mail.svg' : 'mail-err.svg')} />
               <input type='email'
                 name='email'
                 ref={email => this.email = email}
-                onChange={e => this.setState({emailValue: e.target.value})}
+                onChange={e => this.props.onHandleEmailValue(e)}
                 // if the password and email are empty then we do not do an additional check
                 onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
                 className='group__input email'
-                placeholder={_config.translations.sign_in.enter_email}
+                placeholder={_config.translations[_config.lang].sign_in.enter_email}
                 autoComplete='username' />
             </div>
             <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
@@ -117,15 +115,15 @@ class SignUp extends Component {
                 src={_config.urls.static + (this.state.isValidPass ? 'lock.svg' : 'lock-err.svg')} />
               <input type='password'
                 name='pass'
-                onChange={e => this.setState({passValue: e.target.value})}
+                onChange={e => this.props.onHandlePassValue(e)}
                 // if the password and email are empty then we do not do an additional check
                 onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
                 ref={pass => this.pass = pass}
                 className='group__input password'
                 data-type='password'
-                placeholder={_config.translations.sign_in.enter_password}
+                placeholder={_config.translations[_config.lang].sign_in.enter_password}
                 autoComplete='current-password' />
-              {this.state.passValue && <img className='group__eye'
+              {this.props.pass && <img className='group__eye'
                 onClick={this.togglePass}
                 src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
             </div>
@@ -139,21 +137,23 @@ class SignUp extends Component {
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
-                // this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && 
-                grecaptcha.ready(() => {
-                  grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
-                    apiServices.post(_config.urls.recaptcha_post.replace('{token}', token)).then(response => {
-                      console.log('recaptcha', response)
-                      if (!response.success) {
-                        grecaptcha.execute()
-                      } else {
-                        this.form.submit()
-                      }
-                    })
-                  })
-                })
+                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.routing.business_type_path)
+                // this.form.submit()
+                
+                // grecaptcha.ready(() => {
+                //   grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
+                //     apiServices.post('http://localhost/recaptcha/index.php?token={token}'.replace('{token}', token)).then(response => {
+                //       console.log('recaptcha', response)
+                //       if (!response.success) {
+                //         grecaptcha.execute()
+                //       } else {
+                //         this.form.submit()
+                //       }
+                //     })
+                //   })
+                // })
               }}>
-              {_config.translations.sign_up.continue}
+              {_config.translations[_config.lang].sign_up.continue}
             </button>
           </form>
         </div>
@@ -162,4 +162,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default withRouter(SignUp)

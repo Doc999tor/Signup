@@ -1,11 +1,39 @@
 import React, {Component} from 'react'
+import {apiServices, getPrettyDate} from 'services'
 import StartButton from '../../components/start-button/start-button.jsx'
 import './all-set.less'
 
 class AllSet extends Component {
   state = {
-    isFirstCheckboxChecked: false,
-    isTwiceCheckboxChecked: false
+    isPermitAds: false,
+    isAgreeToAllTerms: false,
+    countries: {}
+  }
+  componentDidMount () {
+    apiServices.get(_config.urls.countries_get).then(response => {
+      this.setState({countries: response})
+    })
+  }
+  handleRequest = () => {
+    let sendSingUpData = {}
+    sendSingUpData.added = getPrettyDate()
+    sendSingUpData.email = this.props.email
+    sendSingUpData.pass = this.props.pass
+    sendSingUpData.permit_ads = this.state.isPermitAds
+    sendSingUpData.business_types = '[' + this.props.selectedBusinessIds + ']'
+    sendSingUpData.lang = _config.lang
+    sendSingUpData.timezone = this.state.countries.timezone
+    sendSingUpData.country = this.state.countries.country
+    sendSingUpData.city = this.state.countries.city
+    // another_business_type
+    apiServices.post(_config.urls.signup_post, {
+      params: sendSingUpData,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      }
+    }).then(response => {
+      this.setState({countries: response})
+    })
   }
   render () {
     return (
@@ -16,45 +44,41 @@ class AllSet extends Component {
             <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />        
             <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
           </div>
-          <div className='all-set-form__text'>{_config.translations.all_set.we_all_set}</div>
+          <div className='all-set-form__text'>{_config.translations[_config.lang].all_set.we_all_set}</div>
             <span className='all-set-form__forgot'>
-              {_config.translations.all_set.enjoy_your_choice}
+              {_config.translations[_config.lang].all_set.enjoy_your_choice}
             </span>
             <span className='all-set-form__forgot'>
-              {_config.translations.all_set.you_can_continue}
+              {_config.translations[_config.lang].all_set.you_can_continue}
             </span>
           </form>
           <div className='block-with-checkbox'>
-          <div className={`checkbox-wrap ${this.state.isFirstCheckboxChecked ? 'opacity' : ''}`} 
-            onClick={()=> this.setState({isFirstCheckboxChecked: !this.state.isFirstCheckboxChecked})}>
-            <input id="first" type="checkbox" 
-             checked={this.state.isFirstCheckboxChecked}/>
-            <label for="first" onClick={()=> {this.setState({isFirstCheckboxChecked: !this.state.isFirstCheckboxChecked}); debugger}}>
+          <div className={`checkbox-wrap ${this.state.isPermitAds ? 'opacity' : ''}`} 
+            onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
+            <input id='first' type='checkbox' 
+             checked={this.state.isPermitAds}/>
+            <label for='first' onClick={()=> {this.setState({isPermitAds: !this.state.isPermitAds}); debugger}}>
               <span onClick={(e)=>e.preventDefault()}></span>
             </label>
               <span className='checkbox-wrap__text'>
-                {_config.translations.all_set.send_important_information}
+                {_config.translations[_config.lang].all_set.send_important_information}
               </span>
           </div>
-          <div className={`checkbox-wrap ${this.state.isTwiceCheckboxChecked ? 'opacity' : ''}`} 
-          onClick={()=> this.setState({isTwiceCheckboxChecked: !this.state.isTwiceCheckboxChecked})}>
-            <input id="twice" type="checkbox" 
-            checked={this.state.isTwiceCheckboxChecked} />
-            <label for="twice">
+          <div className={`checkbox-wrap ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
+          onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
+            <input id='twice' type='checkbox' 
+            checked={this.state.isAgreeToAllTerms} />
+            <label for='twice'>
               <span onClick={(e)=>e.preventDefault()}></span>
             </label>
               <span className='checkbox-wrap__text'>
-                {_config.translations.all_set.agree_to_all_the_Terms}
+                {_config.translations[_config.lang].all_set.agree_to_all_the_Terms}
               </span>
               </div>
               </div>
-              {/* {console.log(this.firstCheckbox)} */}
-          {/* <footer className='start-button'>&nbsp;
-            <button className={`all-set-form__button start ${this.state.isFirstCheckboxChecked && this.state.isTwiceCheckboxChecked ? 'active' : ''}`}>
-              <span className='start-button__all-set'>{_config.translations.all_set.lets_start}</span>
-            </button>
-          </footer> */}
-          <StartButton active={this.state.isFirstCheckboxChecked && this.state.isTwiceCheckboxChecked} />
+            <div className='all-set__button--start' onClick={()=>this.handleRequest()}>
+            <StartButton active={this.state.isAgreeToAllTerms} />
+          </div>
         </div>
       </div>
     )

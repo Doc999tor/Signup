@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {apiServices} from 'services'
+import { withRouter } from 'react-router-dom'
+
 import StartButton from '../../components/start-button/start-button.jsx'
 import './business-type.less'
 
 class BusinessType extends Component {
   state = {
-    isFirstCheckboxChecked: false,
-    isTwiceCheckboxChecked: false,
     businessList: [],
-    activeItems: []
+    selectedBusinessIds: []
   }
   componentDidMount () {
     apiServices.get(_config.urls.business_types_get.replace('{lang}', _config.lang)).then(response => {
@@ -20,7 +20,7 @@ class BusinessType extends Component {
   render () {
     // console.log(this.state.businessList)
     return (
-      <div className='business-type'style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} >
+      <div className='business-type' style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} >
         <div className='top-menu-wrap'>
           <div className='topnav'>
             {/* <div className='topnav-arrow'></div> */}
@@ -28,26 +28,28 @@ class BusinessType extends Component {
               <div className='text-container'>
                 <div className='text-container__title'>
                   {/* <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} /> */}
-                  Please select business type
+                  {_config.translations[_config.lang].business_type.select_business_type}
                 </div>
-                <div className='text-container__text'>We’ll adjuas the app to your needs</div>
+                <div className='text-container__text'>{_config.translations[_config.lang].business_type.adjuas_the_app}</div>
               </div>
             </div>
-            {!this.state.activeItems.length && <div className='choose-menu'>
-              <div className='choose-menu__text'>You can choose more the one or</div>
-              <button className='choose-menu__button'>skip here</button>
+            {!this.props.selectedBusinessIds.length && <div className='choose-menu'>
+              <div className='choose-menu__text'>{_config.translations[_config.lang].business_type.can_choose_more}</div>
+              <button className='choose-menu__button'>{_config.translations[_config.lang].business_type.skip_here}</button>
             </div>}
-            {!!this.state.activeItems.length && <div className='add-menu'>
-            <div className='add-menu__text'>Your choose:</div>
+            {!!this.props.selectedBusinessIds.length && <div className='add-menu'>
+            <div className='add-menu__text'>{_config.translations[_config.lang].business_type.your_choose}</div>
               <div className='add-menu__list'>
                 {
-                this.state.businessList.map((el, key) => {
-                  return (
-                    <div key={key} className='selected-business'><div className='checkmark'></div>
-                      <span>{el.name}</span>
-                    </div>
-                  )
-                })
+                  this.state.businessList.map((el, key) => {
+                    if (!this.props.selectedBusinessIds.includes(el.id)) return false
+                    return (
+                      <div key={key} className='selected-business'>
+                        <div className='checkmark' />
+                        <span>{el.name}</span>
+                      </div>
+                    )
+                  })
                 }
               </div>
             </div>
@@ -56,33 +58,30 @@ class BusinessType extends Component {
           <div className='bussiness-container'>
             {
               this.state.businessList.map((el, key) => {
-                let isActive = this.state.activeItems.includes(el.id)
-                return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')} key={key} onClick={(e) => {
-                  let isActive = this.state.activeItems.includes(el.id)
-                  if (isActive) {
-                    this.setState({
-                      activeItems: [...this.state.activeItems].filter((item) => (item !== el.id))
-                    })
-                  } else {
-                    this.setState({
-                      activeItems: [...this.state.activeItems, el.id]
-                    })
-                  }
-                }}>
-                  <img className='bussiness-type__img' src={_config.urls.business_types_icons + (!isActive ? el.icon : el.icon)} />
+                let isActive = this.props.selectedBusinessIds.includes(el.id)
+                return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')} 
+                  key={key} onClick={() => {
+                    this.props.onHandleBusinessIds(el)
+                  }}>
+                  <img className='bussiness-type__img' src={_config.urls.business_types_icons + (isActive ? el.icon.replace(el.icon, `violet-${el.icon}`) : el.icon)} />
                   <div className='bussiness-type__name'>{el.name}</div>
-                  <div className='bussiness-type__checkmark'>
+                  {isActive && <div className='bussiness-type__checkmark'>
                     <div className='checkmark'></div>
-                  </div>
+                  </div>}
                 </div>)
               })
             }
           </div>
         </div>
-        <StartButton />
+        <StartButton route={() => { 
+          this.props.history.push({
+            pathname: _config.routing.all_set_path,
+            search: window.location.search
+          })
+        }} active={this.props.selectedBusinessIds.length}/>
       </div>
     )
   }
 }
 
-export default BusinessType
+export default withRouter(BusinessType)
