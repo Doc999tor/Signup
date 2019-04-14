@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {apiServices, getPrettyDate} from 'services'
+import { withRouter } from 'react-router-dom'
 import StartButton from '../../components/start-button/start-button.jsx'
+
 import './all-set.less'
 
 class AllSet extends Component {
@@ -32,7 +34,8 @@ class AllSet extends Component {
         'content-type': 'application/x-www-form-urlencoded'
       }
     }).then(response => {
-      this.setState({countries: response})
+      console.log(response)
+      this.props.history.push(_config.routing.calendar)
     })
   }
   render () {
@@ -76,13 +79,11 @@ class AllSet extends Component {
               </span>
               </div>
               </div>
-            <div className='all-set__button--start' onClick={()=>this.handleRequest()}>
-            <StartButton active={this.state.isAgreeToAllTerms} />
-          </div>
+            <StartButton route={()=>this.handleRequest()} active={this.state.isAgreeToAllTerms} />
         </div>
       </div>
     )
   }
 }
 
-export default AllSet
+export default withRouter(AllSet)

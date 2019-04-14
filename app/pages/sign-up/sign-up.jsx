@@ -83,63 +83,77 @@ class SignUp extends Component {
   render () {
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
+        <ul className='nav'>
+          <li className='drop'>{_config.lang}
+            <ul>
+              {
+                  _config.all_langs.map((el, key) => {
+                    if (el !== _config.lang) {
+                      return (
+                        <li key={key} onClick={()=>{_config.lang = el; this.forceUpdate()}}>{el}</li>
+                      )
+                    }
+                  })
+                }
+            </ul>
+          </li>
+        </ul>
         <div className='sign-up-wrap'>
           <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
           <form ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
-          <div className='text-content-wrap'>
-            <div className='login-form__text'>{_config.translations[_config.lang].sign_up.fill_dateils_create}</div>
-            <button className='login-form__button google dispay-none'>
-              <img className='login-form__img' src={_config.urls.static + 'search.svg'} />
-              <span>{_config.translations[_config.lang].sign_in.login_google}</span>
-            </button>
-            <input className='login-form__time-zone'
-              type='text'
-              name='time_zone'
-              defaultValue={Intl && Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone} />
-            <span className='login-form__text or dispay-none' >{_config.translations[_config.lang].sign_in.login_or}</span>
-            <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
-              <img className='group__email'
-                src={_config.urls.static + (this.state.isValidEmail ? 'mail.svg' : 'mail-err.svg')} />
-              <input type='email'
-                name='email'
-                ref={email => this.email = email}
-                onChange={e => this.props.onHandleEmailValue(e)}
-                // if the password and email are empty then we do not do an additional check
-                onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
-                className='group__input email'
-                placeholder={_config.translations[_config.lang].sign_in.enter_email}
-                autoComplete='username' />
+            <div className='text-content-wrap'>
+              <div className='login-form__text'>{_config.translations[_config.lang].sign_up.fill_dateils_create}</div>
+              <button className='login-form__button google dispay-none'>
+                <img className='login-form__img' src={_config.urls.static + 'search.svg'} />
+                <span>{_config.translations[_config.lang].sign_in.login_google}</span>
+              </button>
+              <input className='login-form__time-zone'
+                type='text'
+                name='time_zone'
+                defaultValue={Intl && Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone} />
+              <span className='login-form__text or dispay-none' >{_config.translations[_config.lang].sign_in.login_or}</span>
+              <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
+                <img className='group__email'
+                  src={_config.urls.static + (this.state.isValidEmail ? 'mail.svg' : 'mail-err.svg')} />
+                <input type='email'
+                  name='email'
+                  ref={email => this.email = email}
+                  onChange={e => this.props.onHandleEmailValue(e)}
+                  // if the password and email are empty then we do not do an additional check
+                  onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
+                  className='group__input email'
+                  placeholder={_config.translations[_config.lang].sign_in.enter_email}
+                  autoComplete='username' />
+              </div>
+              <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
+                <img className='group__lock'
+                  src={_config.urls.static + (this.state.isValidPass ? 'lock.svg' : 'lock-err.svg')} />
+                <input type='password'
+                  name='pass'
+                  onChange={e => this.props.onHandlePassValue(e)}
+                  // if the password and email are empty then we do not do an additional check
+                  onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
+                  ref={pass => this.pass = pass}
+                  className='group__input password'
+                  data-type='password'
+                  placeholder={_config.translations[_config.lang].sign_in.enter_password}
+                  autoComplete='current-password' />
+                {this.props.pass && <img className='group__eye'
+                  onClick={this.togglePass}
+                  src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
+              </div>
+              <div className='login-err'>
+                {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}
+                <span className='login-err__text'>{this.state.errMessage}</span>
+              </div>
+              <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.keys.recaptcha_v2} />
             </div>
-            <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
-              <img className='group__lock'
-                src={_config.urls.static + (this.state.isValidPass ? 'lock.svg' : 'lock-err.svg')} />
-              <input type='password'
-                name='pass'
-                onChange={e => this.props.onHandlePassValue(e)}
-                // if the password and email are empty then we do not do an additional check
-                onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
-                ref={pass => this.pass = pass}
-                className='group__input password'
-                data-type='password'
-                placeholder={_config.translations[_config.lang].sign_in.enter_password}
-                autoComplete='current-password' />
-              {this.props.pass && <img className='group__eye'
-                onClick={this.togglePass}
-                src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
-            </div>
-            <div className='login-err'>
-              {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}
-              <span className='login-err__text'>{this.state.errMessage}</span>
-            </div>
-            <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.keys.recaptcha_v2} />
-          </div>
             <button className='login-form__button login-button'
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
                 this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.routing.business_type_path)
                 // this.form.submit()
-                
                 // grecaptcha.ready(() => {
                 //   grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
                 //     apiServices.post('http://localhost/recaptcha/index.php?token={token}'.replace('{token}', token)).then(response => {

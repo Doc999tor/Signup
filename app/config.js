@@ -1,7 +1,8 @@
 var _config = {}
 
-_config.data = {isRTL: false}
+_config.data = {isRTL: true}
 _config.lang = 'en'
+_config.all_langs = ['en', 'he', 'ru']
 _config.urls = {
   business_type: '/business-type',
   static: './media/',
@@ -21,6 +22,7 @@ _config.keys = {
 }
 
 _config.routing = {
+  calendar: '/calendar',
   // ?error=incorrect
   url_params: {
     error: 'error',
