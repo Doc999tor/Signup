@@ -41,7 +41,7 @@ export async function get(url) {
 
 export async function post(url) {
   let {params, qvery, headers} = arguments[1] || {}
-  var apiUrl = config.urls.base + url
+  var apiUrl = url
   var options = {
     credentials: 'include'
   }

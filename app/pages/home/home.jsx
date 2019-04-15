@@ -8,14 +8,8 @@ class Home extends React.Component {
   state = {
     email: '',
     pass: '',
-    selectedBusinessIds: []
-    // permitAds: 'true&',
-    // lang: 'config.lang &',
-    // timezone: 'ответ из /countries запроса',
-    // country: 'ответ из /countries запроса',
-    // city: 'ответ из /countries запроса',
-    // added: '2019-01-01 // local time',
-    // another_business_type: 'сантехник' 
+    selectedBusinessIds: [],
+    anotherBusinessType: ''
   }
   handleEmailValue = (e) => {
     this.setState({email: e.target.value})
@@ -23,25 +17,27 @@ class Home extends React.Component {
   handlePassValue = (e) => {
     this.setState({pass: e.target.value})
   }
-  handleBusinessIds = (el) => {
-    if (this.state.selectedBusinessIds.includes(el.id)) {
+  handleBusinessIds = (id) => {
+    if (this.state.selectedBusinessIds.includes(id)) {
       this.setState({
-        selectedBusinessIds: [...this.state.selectedBusinessIds].filter((item) => (item !== el.id))
+        selectedBusinessIds: [...this.state.selectedBusinessIds].filter((item) => (item !== id))
       })
     } else {
       this.setState({
-        selectedBusinessIds: [...this.state.selectedBusinessIds, el.id]
+        selectedBusinessIds: [...this.state.selectedBusinessIds, id]
       })
     }
   }
-
+  handleBusinessType = val => {
+    this.setState({anotherBusinessType: val})
+  }
   render () {
     return (
       <div id='home'>
         <Router>
           <Switch>
             <Route exact path={_config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
-            <Route exact path={_config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds}/>} />
+            <Route exact path={_config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
             <Route exact path={_config.routing.all_set_path} render={() => <AllSet {...this.state} />} />
             <Route path='*' render={() => <SignUp />} />
           </Switch>

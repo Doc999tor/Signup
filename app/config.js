@@ -1,6 +1,11 @@
 var _config = {}
 
-_config.data = {isRTL: false}
+_config.data = {
+  isRTL: false
+}
+_config.user_data = {
+  other_business_type_id: 6
+}
 _config.lang = 'en'
 _config.all_langs = ['en', 'he', 'ru']
 _config.urls = {
@@ -72,7 +77,8 @@ _config.translations = {
       adjuas_the_app: 'We’ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
-      your_choose: 'Your choose:'
+      your_choose: 'Your choose:',
+      type_business_name: 'Your business type'
     }
   },
   he: {
@@ -143,7 +149,8 @@ _config.translations = {
       adjuas_the_app: 'We’ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
-      your_choose: 'Your choose:'
+      your_choose: 'Your choose:',
+      type_business_name: 'Your business type'
     }
   }
 }

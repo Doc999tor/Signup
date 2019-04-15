@@ -10,6 +10,7 @@
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     .bussiness-type {
       width: 6.2rem;
       height: 6.2rem;
@@ -128,6 +129,29 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+  .subject-textarea {
+    background: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    margin-top: 1.75rem;
+    .subject-textarea-wrap {
+      padding-bottom: 0.6rem;
+      display: flex;
+    }
+  
+    .subject-textarea-wrap__text {
+      font-size: .875rem;
+      border: none;
+      resize: none;
+      border-bottom: solid 1px var(--sec-bgcolor);
+      overflow: hidden;
+    }
+  
+    .subject-textarea-wrap__note {
+      padding: 0 0.75rem;
     }
   }
 }

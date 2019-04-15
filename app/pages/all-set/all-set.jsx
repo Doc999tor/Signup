@@ -27,8 +27,11 @@ class AllSet extends Component {
     sendSingUpData.timezone = this.state.countries.timezone
     sendSingUpData.country = this.state.countries.country
     sendSingUpData.city = this.state.countries.city
-    // another_business_type
-    apiServices.post(_config.urls.signup_post, {
+
+    if (this.props.selectedBusinessIds.includes(_config.user_data.other_business_type_id) && this.props.anotherBusinessType) { 
+      sendSingUpData.another_business_type_id = this.props.anotherBusinessType
+    }
+      apiServices.post(_config.urls.base + _config.urls.signup_post, {
       params: sendSingUpData,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -44,7 +47,7 @@ class AllSet extends Component {
         <div className='all-set-wrap'>
           <form ref={form => this.form = form} action={_config.urls.check_login} method='POST'>
           <div className='images-wrap'> 
-            <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />
+            <img className='images-wrap__back' onClick={() => { this.props.history.goBack() }} src={_config.urls.static + 'ic_back.svg'} />
             <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
           </div>
           <div className='all-set-form__text'>{_config.translations[_config.lang].all_set.we_all_set}</div>
@@ -67,19 +70,19 @@ class AllSet extends Component {
                 {_config.translations[_config.lang].all_set.send_important_information}
               </span>
           </div>
-          <div className={`checkbox-wrap ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
-          onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
-            <input id='twice' type='checkbox' 
-            checked={this.state.isAgreeToAllTerms} onChange={()=>{}}/>
-            <label htmlFor='twice'>
-              <span onClick={(e)=>e.preventDefault()}></span>
-            </label>
+            <div className={`checkbox-wrap ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
+              onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
+              <input id='twice' type='checkbox' 
+                checked={this.state.isAgreeToAllTerms} onChange={()=>{}}/>
+              <label htmlFor='twice'>
+                <span onClick={e => e.preventDefault()}></span>
+              </label>
               <span className='checkbox-wrap__text'>
                 {_config.translations[_config.lang].all_set.agree_to_all_the_Terms}
               </span>
-              </div>
-              </div>
-            <StartButton route={()=>this.handleRequest()} active={this.state.isAgreeToAllTerms} />
+            </div>
+          </div>
+          <StartButton route={()=>this.handleRequest()} active={this.state.isAgreeToAllTerms} />
         </div>
       </div>
     )

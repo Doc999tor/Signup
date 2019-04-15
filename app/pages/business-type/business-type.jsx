@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
 import {apiServices} from 'services'
 import { withRouter } from 'react-router-dom'
-
+import Modal from './components/modal/modal.jsx'
 import StartButton from '../../components/start-button/start-button.jsx'
 import './business-type.less'
 
 class BusinessType extends Component {
   state = {
     businessList: [],
-    selectedBusinessIds: []
+    selectedBusinessIds: [],
+    isModalOpen: false
   }
   componentDidMount () {
     apiServices.get(_config.urls.business_types_get.replace('{lang}', _config.lang)).then(response => {
@@ -61,12 +62,16 @@ class BusinessType extends Component {
             }
           </div>
           <div className='bussiness-container'>
-            {
+            { 
               this.state.businessList.map((el, key) => {
                 let isActive = this.props.selectedBusinessIds.includes(el.id)
                 return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')} 
                   key={key} onClick={() => {
-                    this.props.onHandleBusinessIds(el)
+                    if (!isActive && el.id === _config.user_data.other_business_type_id) {
+                      this.setState({isModalOpen: !this.state.isModalOpen})
+                    } else {
+                      this.props.onHandleBusinessIds(el.id)
+                    }
                   }}>
                   <img className='bussiness-type__img' src={_config.urls.business_types_icons + (isActive ? el.icon.replace(el.icon, `violet-${el.icon}`) : el.icon)} />
                   <div className='bussiness-type__name'>{el.name}</div>
@@ -77,6 +82,29 @@ class BusinessType extends Component {
               })
             }
           </div>
+          <Modal onClose={() => this.setState({isModal: false})} isActive={this.state.isModalOpen}>
+            <div className='top-container'>
+              <div className='modal__title'>
+                <span>Enter a different type of business</span>
+        {/* <img className='modal__title' src={config.urls.static + 'btn-not.svg'} /> */}
+      </div>
+      <div className='subject-textarea'>
+  <input className='subject-textarea-wrap__text' value={this.props.anotherBusinessType} placeholder={_config.translations[_config.lang].business_type.type_business_name}
+    onChange={(e) => {
+      this.props.onHandleBusinessType(e.target.value)
+    }} />
+</div>
+</div>
+
+        <div className='button-wrap'>
+          <div className='modal-buttons'>
+            <button className='button-wrap__button' onClick={() => { this.setState({isModalOpen: false}); this.props.onHandleBusinessIds(_config.user_data.other_business_type_id) }} disabled={!this.props.anotherBusinessType}>{'Ok'} </button>
+        </div>
+        <div className='modal-buttons'>
+          <button className='button-wrap__button' onClick={() => { this.setState({isModalOpen: false}); this.props.onHandleBusinessType('') }}>{'No, thanks'} </button>
+        </div>
+        </div>
+      </Modal>
         </div>
         <StartButton route={() => {
           if (this.props.selectedBusinessIds.length) {
