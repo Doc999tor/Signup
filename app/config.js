@@ -1,6 +1,6 @@
 var _config = {}
 
-_config.data = {isRTL: true}
+_config.data = {isRTL: false}
 _config.lang = 'en'
 _config.all_langs = ['en', 'he', 'ru']
 _config.urls = {

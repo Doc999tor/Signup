@@ -121,7 +121,7 @@ class SignUp extends Component {
                   onChange={e => this.props.onHandleEmailValue(e)}
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
-                  className='group__input email'
+                  className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
                   placeholder={_config.translations[_config.lang].sign_in.enter_email}
                   autoComplete='username' />
               </div>
@@ -134,7 +134,7 @@ class SignUp extends Component {
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
                   ref={pass => this.pass = pass}
-                  className='group__input password'
+                  className={`group__input   password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
                   placeholder={_config.translations[_config.lang].sign_in.enter_password}
                   autoComplete='current-password' />

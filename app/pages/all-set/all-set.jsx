@@ -44,7 +44,7 @@ class AllSet extends Component {
         <div className='all-set-wrap'>
           <form ref={form => this.form = form} action={_config.urls.check_login} method='POST'>
           <div className='images-wrap'> 
-            <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />        
+            <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />
             <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
           </div>
           <div className='all-set-form__text'>{_config.translations[_config.lang].all_set.we_all_set}</div>
@@ -59,8 +59,8 @@ class AllSet extends Component {
           <div className={`checkbox-wrap ${this.state.isPermitAds ? 'opacity' : ''}`} 
             onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
             <input id='first' type='checkbox' 
-             checked={this.state.isPermitAds}/>
-            <label for='first' onClick={()=> {this.setState({isPermitAds: !this.state.isPermitAds}); debugger}}>
+             checked={this.state.isPermitAds} onChange={()=> {this.setState({isPermitAds: !this.state.isPermitAds})}} />
+            <label htmlFor='first'>
               <span onClick={(e)=>e.preventDefault()}></span>
             </label>
               <span className='checkbox-wrap__text'>
@@ -70,8 +70,8 @@ class AllSet extends Component {
           <div className={`checkbox-wrap ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
           onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
             <input id='twice' type='checkbox' 
-            checked={this.state.isAgreeToAllTerms} />
-            <label for='twice'>
+            checked={this.state.isAgreeToAllTerms} onChange={()=>{}}/>
+            <label htmlFor='twice'>
               <span onClick={(e)=>e.preventDefault()}></span>
             </label>
               <span className='checkbox-wrap__text'>
