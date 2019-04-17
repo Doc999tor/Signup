@@ -45,7 +45,7 @@ class AllSet extends Component {
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='all-set'>
         <div className='all-set-wrap'>
-          <form ref={form => this.form = form} action={_config.urls.check_login} method='POST'>
+          <form action={_config.urls.check_login} method='POST'>
           <div className='images-wrap'> 
             <img className='images-wrap__back' onClick={() => { this.props.history.goBack() }} src={_config.urls.static + 'ic_back.svg'} />
             <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
@@ -59,7 +59,7 @@ class AllSet extends Component {
             </span>
           </form>
           <div className='block-with-checkbox'>
-          <div className={`checkbox-wrap ${this.state.isPermitAds ? 'opacity' : ''}`} 
+          <div className={`checkbox-wrap send-information ${this.state.isPermitAds ? 'opacity' : ''}`} 
             onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
             <input id='first' type='checkbox' 
              checked={this.state.isPermitAds} onChange={()=> {this.setState({isPermitAds: !this.state.isPermitAds})}} />
@@ -70,7 +70,8 @@ class AllSet extends Component {
                 {_config.translations[_config.lang].all_set.send_important_information}
               </span>
           </div>
-            <div className={`checkbox-wrap ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
+            <div className={`checkbox-wrap agree-to-all-terms ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
+              ref={CheckBoxWrapAgree => this.CheckBoxWrapAgree = CheckBoxWrapAgree}
               onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
               <input id='twice' type='checkbox' 
                 checked={this.state.isAgreeToAllTerms} onChange={()=>{}}/>
@@ -82,7 +83,13 @@ class AllSet extends Component {
               </span>
             </div>
           </div>
-          <StartButton route={()=>this.handleRequest()} active={this.state.isAgreeToAllTerms} />
+          <div className='start-button-wrap' onClick={() => {
+            if (!this.state.isAgreeToAllTerms) {
+              this.CheckBoxWrapAgree.classList.add('active')
+            }
+          }}>
+            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms} />
+          </div>
         </div>
       </div>
     )

@@ -124,11 +124,11 @@
       flex-direction: row;
       align-items: center;
       opacity: .5;
-      -webkit-transition: opacity .15s ease-in-out;
-      -moz-transition: opacity .15s ease-in-out;
-      -ms-transition: opacity .15s ease-in-out;
-      -o-transition: opacity .15s ease-in-out;
-      transition: opacity .15s ease-in-out;
+      -webkit-transition: all .15s ease-in-out;
+      -moz-transition: all .15s ease-in-out;
+      -ms-transition: all .15s ease-in-out;
+      -o-transition: all .15s ease-in-out;
+      transition: all .15s ease-in-out;
       .checkbox-wrap__text {
         padding: 0.5rem;
         font-size: 0.75rem;
@@ -136,10 +136,13 @@
       &.opacity {
         opacity: 1;
       }
+      &.send-information {
+        opacity: 1;
+      }
     }
   }
 }
-input[type='checkbox']{ display: none; height: 0; width: 0; }
+input[type='checkbox'] { display: none; height: 0; width: 0; }
 
 input[type='checkbox'] + label{
   position: relative;
@@ -166,7 +169,7 @@ input[type='checkbox'] + label > ins > i{
   font-style: normal;
   color: #4FC3F7;
 }
-input[type='checkbox'] + label > span{
+input[type='checkbox'] + label > span {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,6 +204,36 @@ input[type='checkbox']:checked + label > span:before{
   transform: rotate(45deg);
   transform-origin: 0% 100%;
   animation: checkbox-check 125ms 250ms cubic-bezier(0.4, 0, 0.23, 1) forwards;
+}
+
+.all-set .block-with-checkbox .checkbox-wrap.active {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  opacity: 1;
+  color: var(--err-color);
+  input[type='checkbox'] + label > span {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 
 @keyframes shrink-bounce{

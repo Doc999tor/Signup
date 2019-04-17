@@ -1,7 +1,7 @@
 var _config = {}
 
 _config.data = {
-  isRTL: false
+  isRTL: true
 }
 _config.user_data = {
   other_business_type_id: 6
