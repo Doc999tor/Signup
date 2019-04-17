@@ -4,13 +4,16 @@
   height:100%;
   min-height: 100vh;
   .topnav {
-    padding: 1.2rem 1.2rem 0rem 1.2rem;
+    padding: 1.2rem;
   }
   .bussiness-container {
-    padding: 1rem;
+    padding: 0rem 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 26rem;
     .bussiness-type {
       width: 6.2rem;
       height: 6.2rem;
@@ -22,6 +25,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      position: relative;
       .bussiness-type__img {
         min-width: 32px;
         min-height: 32px;

@@ -18,6 +18,7 @@ class BusinessType extends Component {
       }
     })
   }
+
   render () {
     // console.log(this.state.businessList)
     return (
@@ -73,7 +74,7 @@ class BusinessType extends Component {
                       this.props.onHandleBusinessIds(el.id)
                     }
                   }}>
-                  <img className='bussiness-type__img' src={_config.urls.business_types_icons + (isActive ? el.icon.replace(el.icon, `violet-${el.icon}`) : el.icon)} />
+                  <img className='bussiness-type__img' src={_config.urls.business_types_icons + (isActive ? `violet-${el.icon}` : el.icon)} />
                   <div className='bussiness-type__name'>{el.name}</div>
                   {isActive && <div className='bussiness-type__checkmark'>
                     <div className='checkmark'></div>
