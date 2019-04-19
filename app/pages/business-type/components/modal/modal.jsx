@@ -1,8 +1,5 @@
 import React from 'react'
-
 import './modal.less'
-
-const config = window._config
 
 const Modal = props => {
   let closeModal = e => {

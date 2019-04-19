@@ -1,7 +1,8 @@
 .business-type {
-  background-position: center;
+  background-position: bottom;
   background-size: cover;
-  height:100%;
+  background-attachment: fixed;
+  height: 100%;
   min-height: 100vh;
   .topnav {
     padding: 1.2rem;
@@ -84,9 +85,19 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
+      .topbar-wrap {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+      
       .text-container__title {
         font-size: 1.125rem;
         font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
       }
       .text-container__text {
         font-size: 0.875rem;
@@ -124,7 +135,9 @@
         font-size: 1.125rem;
         padding: 0.15rem 0.4rem;
         span {
-          padding: 0 0.3rem;
+          padding-inline-start: .5rem;
+          -webkit-padding-start: .5rem;
+          -moz-padding-start: .5rem;
         }
       }
     }
@@ -152,6 +165,7 @@
       resize: none;
       border-bottom: solid 1px var(--sec-bgcolor);
       overflow: hidden;
+      background-color: #ffffff !important;
     }
   
     .subject-textarea-wrap__note {

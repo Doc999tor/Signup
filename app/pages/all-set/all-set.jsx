@@ -23,15 +23,15 @@ class AllSet extends Component {
     sendSingUpData.pass = this.props.pass
     sendSingUpData.permit_ads = this.state.isPermitAds
     sendSingUpData.business_types = '[' + this.props.selectedBusinessIds + ']'
-    sendSingUpData.lang = _config.lang
+    sendSingUpData.lang = _config.data.lang
     sendSingUpData.timezone = this.state.countries.timezone
     sendSingUpData.country = this.state.countries.country
     sendSingUpData.city = this.state.countries.city
 
-    if (this.props.selectedBusinessIds.includes(_config.user_data.other_business_type_id) && this.props.anotherBusinessType) { 
+    if (this.props.selectedBusinessIds.includes(_config.other_business_type_id) && this.props.anotherBusinessType) { 
       sendSingUpData.another_business_type_id = this.props.anotherBusinessType
     }
-      apiServices.post(_config.urls.base + _config.urls.signup_post, {
+    apiServices.post(_config.urls.base + _config.urls.signup_post, {
       params: sendSingUpData,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -46,30 +46,30 @@ class AllSet extends Component {
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='all-set'>
         <div className='all-set-wrap'>
           <form action={_config.urls.check_login} method='POST'>
-          <div className='images-wrap'> 
-            <img className='images-wrap__back' onClick={() => { this.props.history.goBack() }} src={_config.urls.static + 'ic_back.svg'} />
-            <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
-          </div>
-          <div className='all-set-form__text'>{_config.translations[_config.lang].all_set.we_all_set}</div>
+            <div className='images-wrap'> 
+              <img className='images-wrap__back' onClick={() => { this.props.history.goBack() }} src={_config.urls.static + 'ic_back.svg'} />
+              <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
+            </div>
+            <div className='all-set-form__text'>{_config.translations[_config.data.lang].all_set.we_all_set}</div>
             <span className='all-set-form__forgot'>
-              {_config.translations[_config.lang].all_set.enjoy_your_choice}
+              {_config.translations[_config.data.lang].all_set.enjoy_your_choice}
             </span>
             <span className='all-set-form__forgot'>
-              {_config.translations[_config.lang].all_set.you_can_continue}
+              {_config.translations[_config.data.lang].all_set.you_can_continue}
             </span>
           </form>
           <div className='block-with-checkbox'>
-          <div className={`checkbox-wrap send-information ${this.state.isPermitAds ? 'opacity' : ''}`} 
-            onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
-            <input id='first' type='checkbox' 
-             checked={this.state.isPermitAds} onChange={()=> {this.setState({isPermitAds: !this.state.isPermitAds})}} />
-            <label htmlFor='first'>
-              <span onClick={(e)=>e.preventDefault()}></span>
-            </label>
+            <div className={`checkbox-wrap send-information ${this.state.isPermitAds ? 'opacity' : ''}`} 
+              onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
+              <input id='first' type='checkbox' 
+                checked={this.state.isPermitAds} onChange={()=> {this.setState({isPermitAds: !this.state.isPermitAds})}} />
+              <label htmlFor='first'>
+                <span onClick={(e)=>e.preventDefault()}></span>
+              </label>
               <span className='checkbox-wrap__text'>
-                {_config.translations[_config.lang].all_set.send_important_information}
+                {_config.translations[_config.data.lang].all_set.send_important_information}
               </span>
-          </div>
+            </div>
             <div className={`checkbox-wrap agree-to-all-terms ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
               ref={CheckBoxWrapAgree => this.CheckBoxWrapAgree = CheckBoxWrapAgree}
               onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
@@ -79,7 +79,7 @@ class AllSet extends Component {
                 <span onClick={e => e.preventDefault()}></span>
               </label>
               <span className='checkbox-wrap__text'>
-                {_config.translations[_config.lang].all_set.agree_to_all_the_Terms}
+                {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}
               </span>
             </div>
           </div>

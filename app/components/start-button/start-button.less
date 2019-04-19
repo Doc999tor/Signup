@@ -1,7 +1,12 @@
 .start-button {
-  text-align: center;
-  margin-bottom: 2rem;
-  margin-top: 1rem;
+  // position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  // min-height: 6rem;
+  min-height: 4rem;
+  z-index: 9999;
   .all-set-form__button {
     text-align: start;
     margin: 0 auto;
@@ -14,14 +19,18 @@
     font-size: 1.125rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 14.7rem;
+    margin-top: 1rem;
     &.active {
       background: linear-gradient(to top, #f77062, #fe5196);
     }
     &.start {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
       display: flex;
       justify-content: center;
-      // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      // background-image: linear-gradient(to top, #f77062, #fe5196);
+      margin-bottom: 3rem;
       span {
         padding: 0rem 0.85rem;
       }

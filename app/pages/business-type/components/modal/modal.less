@@ -1,5 +1,6 @@
 .modal__wrap {
-  display: none;
+  // display: none;
+  visibility: hidden;
   position: fixed;
   left: 0;
   right: 0;
@@ -7,12 +8,19 @@
   bottom: 0;
   z-index: 999;
   background-color: rgba(255, 255, 255, 0.7);
-
-  &.modal__wrap--active {
-    display: block;
-  }
+  overflow-x: hidden;
 }
-
+.modal__wrap--active {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.7);
+  overflow-x: hidden;
+  visibility: visible;
+}
 .modal {
   font-weight: 500;
   position: fixed;
@@ -23,7 +31,7 @@
   transform: translate(-50%, -50%);
   background-color: var(--white-color);
   border-radius: 8px;
-  box-shadow: 0 2px 8px 0 #deceff, 0 2px 4px 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 2px 4px 0 var(--sec-bgcolor);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

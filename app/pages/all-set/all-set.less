@@ -6,7 +6,16 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  .start-button {
+    height: 100%;
+    display: block;
+    position: static;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+  }
   .images-wrap {
+    width: 88%;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -52,8 +61,7 @@
       }
       .all-set-form__text {
         font-size: 1.5rem;
-        text-align: center;
-        width: 100%;
+        padding: 0.75rem;
         &.or {
           font-size: 1.025rem;
           margin: 1rem;
@@ -123,7 +131,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      opacity: .5;
+      // opacity: .5;
       -webkit-transition: all .15s ease-in-out;
       -moz-transition: all .15s ease-in-out;
       -ms-transition: all .15s ease-in-out;
@@ -178,7 +186,6 @@ input[type='checkbox'] + label > span {
   background: transparent;
   border: 1px solid var(--white-color);
   border-radius: 2px;
-  cursor: pointer;  
   transition: all 250ms cubic-bezier(.4,.0,.23,1);
 }
 
@@ -190,7 +197,7 @@ input[type='checkbox'] + label:hover > span, input[type='checkbox']:focus + labe
 }
 input[type='checkbox']:checked + label > ins{ height: 100%; }
 
-input[type='checkbox']:checked + label > span{
+input[type='checkbox']:checked + label > span {
   border: 1px solid var(--white-color);
   animation: shrink-bounce 200ms cubic-bezier(.4,.0,.23,1);
 }
@@ -212,16 +219,23 @@ input[type='checkbox']:checked + label > span:before{
   backface-visibility: hidden;
   perspective: 1000px;
   opacity: 1;
-  color: var(--err-color);
+  // color: var(--err-color);
   input[type='checkbox'] + label > span {
-    border: 1px solid var(--err-color);
+    animation: check-box-color 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    // transform: translate3d(0, 0, 0);
+    // backface-visibility: hidden;
+    // perspective: 1000px;
+    // opacity: 1;
   }
 }
 
 @keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
-  }
+}
   
   20%, 80% {
     transform: translate3d(2px, 0, 0);
@@ -233,6 +247,11 @@ input[type='checkbox']:checked + label > span:before{
 
   40%, 60% {
     transform: translate3d(4px, 0, 0);
+  }
+}
+@keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
   }
 }
 
@@ -248,6 +267,287 @@ input[type='checkbox']:checked + label > span:before{
   }
 }
 @keyframes checkbox-check{
+  0%{
+    width: 0;
+    height: 0;
+    border-color: var(--white-color);
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  33%{
+    width: .2em;
+    height: 0;
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  100%{    
+    width: .2em;
+    height: .5em;    
+    border-color: var(--white-color);
+    transform: translate3d(0,-.5em,0) rotate(45deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+}
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@keyframes shrink-bounce{
+  0%{
+    transform: scale(1);
+  }
+  33%{    
+    transform: scale(.85);
+  }
+  100%{
+    transform: scale(1);    
+  }
+}
+@keyframes checkbox-check{
+  0%{
+    width: 0;
+    height: 0;
+    border-color: var(--white-color);
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  33%{
+    width: .2em;
+    height: 0;
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  100%{    
+    width: .2em;
+    height: .5em;    
+    border-color: var(--white-color);
+    transform: translate3d(0,-.5em,0) rotate(45deg);
+  }
+}
+@keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+}
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@keyframes shrink-bounce{
+  0%{
+    transform: scale(1);
+  }
+  33%{    
+    transform: scale(.85);
+  }
+  100%{
+    transform: scale(1);    
+  }
+}
+@keyframes checkbox-check{
+  0%{
+    width: 0;
+    height: 0;
+    border-color: var(--white-color);
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  33%{
+    width: .2em;
+    height: 0;
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  100%{    
+    width: .2em;
+    height: .5em;    
+    border-color: var(--white-color);
+    transform: translate3d(0,-.5em,0) rotate(45deg);
+  }
+}
+@keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+}
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@keyframes shrink-bounce{
+  0%{
+    transform: scale(1);
+  }
+  33%{    
+    transform: scale(.85);
+  }
+  100%{
+    transform: scale(1);    
+  }
+}
+@keyframes checkbox-check{
+  0%{
+    width: 0;
+    height: 0;
+    border-color: var(--white-color);
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  33%{
+    width: .2em;
+    height: 0;
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  100%{    
+    width: .2em;
+    height: .5em;    
+    border-color: var(--white-color);
+    transform: translate3d(0,-.5em,0) rotate(45deg);
+  }
+}
+@-webkit-keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+}
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@-webkit-keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@-webkit-keyframes shrink-bounce{
+  0%{
+    transform: scale(1);
+  }
+  33%{    
+    transform: scale(.85);
+  }
+  100%{
+    transform: scale(1);    
+  }
+}
+@-webkit-keyframes checkbox-check{
+  0%{
+    width: 0;
+    height: 0;
+    border-color: var(--white-color);
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  33%{
+    width: .2em;
+    height: 0;
+    transform: translate3d(0,0,0) rotate(45deg);
+  }
+  100%{    
+    width: .2em;
+    height: .5em;    
+    border-color: var(--white-color);
+    transform: translate3d(0,-.5em,0) rotate(45deg);
+  }
+}
+@-moz-keyframes shake {
+  0% {
+    color: var(--err-color);
+  }
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+}
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+@-moz-keyframes check-box-color {
+  0% {
+    border: 1px solid var(--err-color);
+  }
+}
+
+@-moz-keyframes shrink-bounce{
+  0%{
+    transform: scale(1);
+  }
+  33%{    
+    transform: scale(.85);
+  }
+  100%{
+    transform: scale(1);    
+  }
+}
+@-moz-keyframes checkbox-check{
   0%{
     width: 0;
     height: 0;

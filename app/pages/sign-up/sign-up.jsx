@@ -15,7 +15,7 @@ class SignUp extends Component {
       let params = (new URL(document.location)).searchParams
       let error = params.get(_config.routing.url_params.error)
       if (error === _config.routing.url_params.values.incorrect) {
-        return _config.translations[_config.lang].sign_in.error_incorrect
+        return _config.translations[_config.data.lang].sign_in.error_incorrect
       } else {
         return ''
       }
@@ -43,21 +43,21 @@ class SignUp extends Component {
   checkPassAndEmail = () => {
     // if password and email empty
     if (this.props.email === '' && this.props.pass === '') {
-      this.setState({isValidEmail: false, isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.enter_email_pass})
+      this.setState({isValidEmail: false, isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.enter_email_pass})
       return false
     } else { return true }
   }
   checkEmail = () => {
     // mail epmty
     if (this.props.email === '') {
-      this.setState({isValidEmail: false, errMessage: _config.translations[_config.lang].sign_in.missing_email})
+      this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
       return false
     } else {
       // check valid email
       let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       // mail not valid (if not: @, .com or there are prohibited characters)
       if (!re.test(this.props.email)) {
-        this.setState({isValidEmail: false, errMessage: _config.translations[_config.lang].sign_in.wrong_email})
+        this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
         return false
       } else {
         this.setState({errMessage: '', isValidEmail: true})
@@ -68,11 +68,11 @@ class SignUp extends Component {
   checkPassword = () => {
     // pass epmty
     if (this.props.pass === '') {
-      this.setState({isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.missing_password})
+      this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_password})
       this.checkPassAndEmail()
       return false
     } else if (this.props.pass.length < 8) {
-      this.setState({isValidPass: false, errMessage: _config.translations[_config.lang].sign_in.password_short})
+      this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.password_short})
       return false
     } else {
       this.setState({isValidPass: true, errMessage: ''})
@@ -84,13 +84,13 @@ class SignUp extends Component {
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
         <ul className='nav'>
-          <li className='drop'>{_config.lang}
+          <li className='drop'>{_config.data.lang}
             <ul>
               {
-                  _config.all_langs.map((el, key) => {
-                    if (el !== _config.lang) {
+                  _config.data.all_langs.map((el, key) => {
+                    if (el !== _config.data.lang) {
                       return (
-                        <li key={key} onClick={()=>{_config.lang = el; this.forceUpdate()}}>{el}</li>
+                        <li key={key} onClick={()=>{_config.data.lang = el; this.forceUpdate()}}>{el}</li>
                       )
                     }
                   })
@@ -102,16 +102,16 @@ class SignUp extends Component {
           <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
           <form ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
             <div className='text-content-wrap'>
-              <div className='login-form__text'>{_config.translations[_config.lang].sign_up.fill_dateils_create}</div>
+              <div className='login-form__text'>{_config.translations[_config.data.lang].sign_up.fill_dateils_create}</div>
               <button className='login-form__button google dispay-none'>
                 <img className='login-form__img' src={_config.urls.static + 'search.svg'} />
-                <span>{_config.translations[_config.lang].sign_in.login_google}</span>
+                <span>{_config.translations[_config.data.lang].sign_in.login_google}</span>
               </button>
               <input className='login-form__time-zone'
                 type='text'
                 name='time_zone'
                 defaultValue={Intl && Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone} />
-              <span className='login-form__text or dispay-none' >{_config.translations[_config.lang].sign_in.login_or}</span>
+              <span className='login-form__text or dispay-none' >{_config.translations[_config.data.lang].sign_in.login_or}</span>
               <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
                 <img className='group__email'
                   src={_config.urls.static + (this.state.isValidEmail ? 'mail.svg' : 'mail-err.svg')} />
@@ -122,7 +122,7 @@ class SignUp extends Component {
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
                   className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
-                  placeholder={_config.translations[_config.lang].sign_in.enter_email}
+                  placeholder={_config.translations[_config.data.lang].sign_in.enter_email}
                   autoComplete='username' />
               </div>
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
@@ -136,7 +136,7 @@ class SignUp extends Component {
                   ref={pass => this.pass = pass}
                   className={`group__input   password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
-                  placeholder={_config.translations[_config.lang].sign_in.enter_password}
+                  placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
                   autoComplete='current-password' />
                 {this.props.pass && <img className='group__eye'
                   onClick={this.togglePass}
@@ -167,7 +167,7 @@ class SignUp extends Component {
                 //   })
                 // })
               }}>
-              {_config.translations[_config.lang].sign_up.continue}
+              {_config.translations[_config.data.lang].sign_up.continue}
             </button>
           </form>
         </div>
