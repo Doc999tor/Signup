@@ -118,7 +118,7 @@ class SignUp extends Component {
                 <input type='email'
                   name='email'
                   ref={email => this.email = email}
-                  onChange={e => this.props.onHandleEmailValue(e)}
+                  onChange={e => this.props.onHandleEmailValue(e.target.value)}
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
                   className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
@@ -130,7 +130,7 @@ class SignUp extends Component {
                   src={_config.urls.static + (this.state.isValidPass ? 'lock.svg' : 'lock-err.svg')} />
                 <input type='password'
                   name='pass'
-                  onChange={e => this.props.onHandlePassValue(e)}
+                  onChange={e => this.props.onHandlePassValue(e.target.value)}
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
                   ref={pass => this.pass = pass}
