@@ -56,6 +56,7 @@ function getProdSettings(module) {
           filename: './[name].js',
           library: '[name]'
       },
+      devtool: 'source-map',
       module: {
           rules: [
               {
