@@ -4,23 +4,27 @@ import { withRouter } from 'react-router-dom'
 import './sign-up.less'
 
 class SignUp extends Component {
-  state = {
-    isVisiblePass: false,
-    isValidEmail: true,
-    isValidPass: true,
-    passValue: '',
-    emailValue: '',
-    errMessage: (() => {
-      // when loading the constructor, check url for an error
-      let params = (new URL(document.location)).searchParams
-      let error = params.get(_config.routing.url_params.error)
-      if (error === _config.routing.url_params.values.incorrect) {
-        return _config.translations[_config.data.lang].sign_in.error_incorrect
-      } else {
-        return ''
-      }
-    })()
+  constructor (props) {
+    super(props)
+    this.state = {
+      isVisiblePass: false,
+      isValidEmail: true,
+      isValidPass: true,
+      passValue: '',
+      emailValue: '',
+      errMessage: (() => {
+        // when loading the constructor, check url for an error
+        let params = (new URL(document.location)).searchParams
+        let error = params.get(_config.routing.url_params.error)
+        if (error === _config.routing.url_params.values.incorrect) {
+          return _config.translations[_config.data.lang].sign_in.error_incorrect
+        } else {
+          return ''
+        }
+      })()
+    }
   }
+
   componentDidMount () {
     // recaptcha v3
     // loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.keys.recaptcha_v3}`, document.body)

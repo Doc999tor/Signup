@@ -11,11 +11,12 @@ class Home extends React.Component {
     selectedBusinessIds: [],
     anotherBusinessType: ''
   }
-  handleEmailValue = (e) => {
-    this.setState({email: e})
+  
+  handleEmailValue = (v) => {
+    this.setState({email: v})
   }
-  handlePassValue = (e) => {
-    this.setState({pass: e})
+  handlePassValue = (v) => {
+    this.setState({pass: v})
   }
   handleBusinessIds = (id) => {
     if (this.state.selectedBusinessIds.includes(id)) {
