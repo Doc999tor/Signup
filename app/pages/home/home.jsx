@@ -37,7 +37,7 @@ class Home extends React.Component {
       <div id='home'>
         <Router>  
           <Switch>
-            <Route exact path={_config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={pass => this.handlePassValue(pass)} onHandleEmailValue={email => this.handleEmailValue(email)} />} />
+            <Route exact path={_config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
             <Route exact path={_config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
             <Route exact path={_config.routing.all_set_path} render={() => <AllSet {...this.state} />} />
             <Route path='*' render={() => <SignUp />} />
