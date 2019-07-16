@@ -2,7 +2,9 @@ import React from 'react'
 import AllSet from '../all-set/all-set.jsx'
 import SignUp from '../sign-up/sign-up.jsx'
 import BusinessType from '../business-type/business-type.jsx'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+
+const baseUrl = window.REACT_ROUTER_BASENAME
 
 class Home extends React.Component {
   state = {
@@ -35,14 +37,15 @@ class Home extends React.Component {
   render () {
     return (
       <div id='home'>
-        <Router>  
+        <BrowserRouter>
           <Switch>
-            <Route exact path={_config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
-            <Route exact path={_config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
-            <Route exact path={_config.routing.all_set_path} render={() => <AllSet {...this.state} />} />
-            <Route path='*' render={() => <SignUp />} />
+            <Route exact path={baseUrl + _config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
+            <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
+            <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} />} />
+            <Route path={baseUrl} render={() => <SignUp />} />
+            <Redirect from='/' to={baseUrl} />
           </Switch>
-        </Router>
+        </BrowserRouter>
       </div>
     )
   }
