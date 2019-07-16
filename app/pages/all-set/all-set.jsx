@@ -38,7 +38,7 @@ class AllSet extends Component {
       }
     }).then(response => {
       console.log(response)
-      this.props.history.push(_config.routing.calendar)
+      window.location = _config.urls.redirect_after_success_sign_up
     })
   }
   render () {

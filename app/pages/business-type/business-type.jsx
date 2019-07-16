@@ -40,7 +40,7 @@ class BusinessType extends Component {
               <div className='choose-menu__text'>{_config.translations[_config.data.lang].business_type.can_choose_more}</div>
               <button className='choose-menu__button' onClick={() => {
                 this.props.history.push({
-                  pathname: _config.routing.all_set_path,
+                  pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
                   search: window.location.search
                 })
               }}>{_config.translations[_config.data.lang].business_type.skip_here}</button>
@@ -111,7 +111,7 @@ class BusinessType extends Component {
         <StartButton route={() => {
           if (this.props.selectedBusinessIds.length) {
             this.props.history.push({
-              pathname: _config.routing.all_set_path,
+              pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
               search: window.location.search
             })
           }

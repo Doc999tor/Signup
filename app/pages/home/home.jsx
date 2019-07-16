@@ -42,7 +42,6 @@ class Home extends React.Component {
             <Route exact path={baseUrl + _config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
             <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
             <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} />} />
-            <Route path={baseUrl} render={() => <SignUp />} />
             <Redirect from='/' to={baseUrl} />
           </Switch>
         </BrowserRouter>

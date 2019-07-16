@@ -11,14 +11,15 @@ _config.other_business_type_id = -1
 // _config.data.all_langs = ['en', 'he', 'ru']
 _config.urls = {
   business_type: '/business-type',
-  static: './media/',
+  static: '/media/',
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
   business_types_get: 'business_types?lang={lang}',
   countries_get: 'countries',
+  redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
 
-  recaptcha_post: 'http://atzma.im/recaptcha.php?token={token}',
+  recaptcha_post: '/recaptcha?token={token}',
   signup_post: 'signup'
 }
 
@@ -26,21 +27,6 @@ _config.keys = {
   recaptcha_v3: '6LcXaJsUAAAAABggIFrA5GbeAX0T7RgnK6tohhqn',
   recaptcha_v2: '6LcA3JwUAAAAAN0i_W6QTvoo9FW-9ectGBzB8zyf'
 }
-
-_config.routing = {
-  calendar: '/calendar',
-  // ?error=incorrect
-  url_params: {
-    error: 'error',
-    values: {
-      incorrect: 'incorrect'
-    }
-  },
-  sign_up_path: '/',
-  all_set_path: '/all-set',
-  business_type_path: '/business-type'
-}
-
 _config.translations = {
   en: {
     all_set: {
@@ -73,7 +59,7 @@ _config.translations = {
     },
     business_type: {
       select_business_type: 'Please select business type',
-      adjuas_the_app: 'We’ll adjuas the app to your needs',
+      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -93,7 +79,7 @@ _config.translations = {
       lets_start: 'Lets Start!'
     },
     sign_up: {
-      fill_dateils_create: 'Fill your dateils to create account:',
+      fill_dateils_create: 'ЧћЧњЧђ Ч¤ЧЁЧЧ™Чќ Ч›Ч“Ч™ ЧњЧ¦Ч•ЧЁ Ч—Ч©Ч‘Ч•Чџ:',
       continue: 'Continue'
     },
     sign_in: {
@@ -114,7 +100,7 @@ _config.translations = {
     },
     business_type: {
       select_business_type: 'Please select business type',
-      adjuas_the_app: 'We’ll adjuas the app to your needs',
+      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -154,7 +140,7 @@ _config.translations = {
     },
     business_type: {
       select_business_type: 'Please select business type',
-      adjuas_the_app: 'We’ll adjuas the app to your needs',
+      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -164,4 +150,18 @@ _config.translations = {
       no_thanks: 'No, thanks'
     }
   }
+}
+
+_config.routing = {
+  // calendar: '/calendar',
+  // ?error=incorrect
+  url_params: {
+    error: 'error',
+    values: {
+      incorrect: 'incorrect'
+    }
+  },
+  sign_up_path: '/',
+  all_set_path: '/all-set',
+  business_type_path: '/business-type'
 }

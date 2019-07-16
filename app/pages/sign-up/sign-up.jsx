@@ -138,7 +138,7 @@ class SignUp extends Component {
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
                   ref={pass => this.pass = pass}
-                  className={`group__input   password ${this.state.isValidPass ? '' : 'err'}`}
+                  className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
                   autoComplete='current-password' />
@@ -156,7 +156,7 @@ class SignUp extends Component {
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
-                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.routing.business_type_path)
+                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
                 // this.form.submit()
                 // grecaptcha.ready(() => {
                 //   grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
