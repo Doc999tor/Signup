@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
-import {loadJS, apiServices} from 'services'
 
 import './sign-up.less'
 
@@ -28,9 +27,10 @@ class SignUp extends Component {
 
   componentDidMount () {
     // recaptcha v3
-    loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.recaptcha_v3}`, document.body)
+    // loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.recaptcha_v3}`, document.body)
     // recaptcha v2
-    loadJS('https://www.google.com/recaptcha/api.js', document.body)
+    // loadJS('https://www.google.com/recaptcha/api.js', document.body)
+
   }
   // toggle password -> show/hide
   togglePass = () => {
@@ -156,21 +156,20 @@ class SignUp extends Component {
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
-                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() &&
+                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
                 // this.form.submit()
-                grecaptcha.ready(() => {
-                  grecaptcha.execute(_config.recaptcha_v3, {action: 'homepage'}).then(token => {
-                    apiServices.post(_config.urls.recaptcha_post.replace('{token}', token)).then(response => {
-                      console.log('recaptcha', response)
-                      if (!response.success) {
-                        grecaptcha.execute()
-                      } else {
-                        this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
-                        // this.form.submit()
-                      }
-                    })
-                  })
-                })
+                // grecaptcha.ready(() => {
+                //   grecaptcha.execute(_config.recaptcha_v3, {action: 'homepage'}).then(token => {
+                //     apiServices.post('http://localhost/recaptcha/index.php?token={token}'.replace('{token}', token)).then(response => {
+                //       console.log('recaptcha', response)
+                //       if (!response.success) {
+                //         grecaptcha.execute()
+                //       } else {
+                //         this.form.submit()
+                //       }
+                //     })
+                //   })
+                // })
               }}>
               {_config.translations[_config.data.lang].sign_up.continue}
             </button>
