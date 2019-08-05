@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
+import {loadJS, apiServices} from 'services'
 
 import './sign-up.less'
 
@@ -27,10 +28,9 @@ class SignUp extends Component {
 
   componentDidMount () {
     // recaptcha v3
-    // loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.keys.recaptcha_v3}`, document.body)
+    loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.recaptcha_v3}`, document.body)
     // recaptcha v2
-    // loadJS('https://www.google.com/recaptcha/api.js', document.body)
-
+    loadJS('https://www.google.com/recaptcha/api.js', document.body)
   }
   // toggle password -> show/hide
   togglePass = () => {
@@ -108,7 +108,7 @@ class SignUp extends Component {
             <div className='text-content-wrap'>
               <div className='login-form__text'>{_config.translations[_config.data.lang].sign_up.fill_dateils_create}</div>
               <button className='login-form__button google dispay-none'>
-                <img className='login-form__img' src={_config.urls.static + 'search.svg'} />
+                {/* <img className='login-form__img' src={_config.urls.static + 'search.svg'} /> */}
                 <span>{_config.translations[_config.data.lang].sign_in.login_google}</span>
               </button>
               <input className='login-form__time-zone'
@@ -150,26 +150,27 @@ class SignUp extends Component {
                 {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}
                 <span className='login-err__text'>{this.state.errMessage}</span>
               </div>
-              <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.keys.recaptcha_v2} />
+              <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
             </div>
             <button className='login-form__button login-button'
               type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
               onClick={e => {
                 e.preventDefault()
-                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
+                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() &&
                 // this.form.submit()
-                // grecaptcha.ready(() => {
-                //   grecaptcha.execute(_config.keys.recaptcha_v3, {action: 'homepage'}).then(token => {
-                //     apiServices.post('http://localhost/recaptcha/index.php?token={token}'.replace('{token}', token)).then(response => {
-                //       console.log('recaptcha', response)
-                //       if (!response.success) {
-                //         grecaptcha.execute()
-                //       } else {
-                //         this.form.submit()
-                //       }
-                //     })
-                //   })
-                // })
+                grecaptcha.ready(() => {
+                  grecaptcha.execute(_config.recaptcha_v3, {action: 'homepage'}).then(token => {
+                    apiServices.post(_config.urls.recaptcha_post.replace('{token}', token)).then(response => {
+                      console.log('recaptcha', response)
+                      if (!response.success) {
+                        grecaptcha.execute()
+                      } else {
+                        this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
+                        // this.form.submit()
+                      }
+                    })
+                  })
+                })
               }}>
               {_config.translations[_config.data.lang].sign_up.continue}
             </button>

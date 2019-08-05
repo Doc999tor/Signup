@@ -23,10 +23,6 @@ _config.urls = {
   signup_post: 'signup'
 }
 
-_config.keys = {
-  recaptcha_v3: '6LcXaJsUAAAAABggIFrA5GbeAX0T7RgnK6tohhqn',
-  recaptcha_v2: '6LcA3JwUAAAAAN0i_W6QTvoo9FW-9ectGBzB8zyf'
-}
 _config.translations = {
   en: {
     all_set: {
