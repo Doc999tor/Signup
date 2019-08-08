@@ -88,14 +88,24 @@ class SignUp extends Component {
   render () {
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
-        <ul className='nav'>
+        <ul className='nav-lang'>
           <li className='drop'>{_config.data.lang}
             <ul>
               {
                   _config.data.all_langs.map((el, key) => {
                     if (el !== _config.data.lang) {
                       return (
-                        <li key={key} onClick={()=>{_config.data.lang = el; this.forceUpdate()}}>{el}</li>
+                        <li key={key} onClick={()=>{
+                          if (el === 'he') {
+                            _config.data.isRTL = true
+                            document.body.dir = 'rtl'
+                          } else {
+                            _config.data.isRTL = false
+                            document.body.dir = 'ltr'
+                          }
+                          _config.data.lang = el
+                          this.forceUpdate()
+                        }}>{el}</li>
                       )
                     }
                   })
@@ -105,7 +115,9 @@ class SignUp extends Component {
         </ul>
         <div className='sign-up-wrap'>
           <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
-          <form ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
+          <form onSubmit={e => {
+            e.preventDefault()
+          }} ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
             <div className='text-content-wrap'>
               <div className='login-form__text'>{_config.translations[_config.data.lang].sign_up.fill_dateils_create}</div>
               <button className='login-form__button google dispay-none'>
