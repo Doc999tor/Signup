@@ -57,10 +57,13 @@ class SignUp extends Component {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
       return false
     } else {
-      // check valid email
-      let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      // mail not valid (if not: @, .com or there are prohibited characters)
-      if (!re.test(this.props.email)) {
+      // mail not valid (if not: @, .)
+      let checkMail = () => {
+        if (this.props.email.indexOf('@') == -1 || this.props.email.indexOf('.') == -1) {
+          return true
+        }
+      }
+      if (checkMail()) {
         this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
         return false
       } else {
