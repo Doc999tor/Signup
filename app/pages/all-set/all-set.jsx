@@ -15,6 +15,7 @@ class AllSet extends Component {
     apiServices.get(_config.urls.countries_get).then(response => {
       this.setState({countries: response})
     })
+    this.checkboxWrapText.innerHTML = this.checkboxWrapText.innerHTML.replace('{privacy_policy}', `<a target='_blank' href=${_config.urls.privacy_policy}>${_config.translations[_config.data.lang].all_set.privacy_policy}</a>`)
   }
   handleRequest = () => {
     let sendSingUpData = {}
@@ -41,7 +42,19 @@ class AllSet extends Component {
       window.location = _config.urls.redirect_after_success_sign_up
     })
   }
+  // createElementFromHTML = (htmlString) => {
+  //   var a = document.createElement('a');
+  //   a.innerHTML = htmlString.trim();
+  //   // return a.firstChild; 
+  // }
+  //  createElementFromHTML = (htmlString) => {
+  //   <span className='checkbox-wrap__text'>
+  //     {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms.replace('{privacy_policy}', _config.translations[_config.data.lang].all_set.privacy_policy)}
+  //   </span>
+  // }
+  
   render () {
+  
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='all-set'>
         <div className='all-set-wrap'>
@@ -78,8 +91,9 @@ class AllSet extends Component {
               <label htmlFor='twice'>
                 <span onClick={e => e.preventDefault()}></span>
               </label>
-              <span className='checkbox-wrap__text'>
-                {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}
+              <span className='checkbox-wrap__text' ref={checkboxWrapText => this.checkboxWrapText = checkboxWrapText}>
+              {/* {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms.replace('{privacy_policy}', _config.translations[_config.data.lang].all_set.privacy_policy)} */}
+              {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}
               </span>
             </div>
           </div>

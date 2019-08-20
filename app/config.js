@@ -11,6 +11,7 @@ _config.other_business_type_id = -1
 // _config.data.all_langs = ['en', 'he', 'ru']
 _config.urls = {
   business_type: '/business-type',
+  privacy_policy: '/privacy-policy',
   static: '/media/',
   business_types_icons: './media/business_types_icons/',
   // api
@@ -30,8 +31,9 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I agree to all the Terms of Use of the Atzmaim app and the legal',
-      lets_start: 'Lets Start!'
+      agree_to_all_the_Terms: 'I agree to all the {privacy_policy} of the Atzmaim app and the legal',
+      lets_start: 'Lets Start!',
+      privacy_policy: 'Privacy Policy page'
     },
     sign_up: {
       fill_dateils_create: 'Fill your dateils to create account:',
