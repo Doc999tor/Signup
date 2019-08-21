@@ -18,7 +18,7 @@ _config.urls = {
   base: 'https://api.bewebmaster.co.il/', // domain name
   business_types_get: 'business_types?lang={lang}',
   countries_get: 'countries',
-  redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
+  // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
 
   recaptcha_post: '/recaptcha?token={token}',
   signup_post: 'signup'

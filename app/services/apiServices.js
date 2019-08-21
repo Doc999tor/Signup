@@ -174,11 +174,16 @@ var _promise = (apiUrl, options) => {
       var options = options;
       var reqConfig = new Request(apiUrl, options);
       fetch(reqConfig).then(response => {
-        if (reqConfig.method === "GET" && response.status === 200 || reqConfig.method === "POST" && response.status === 201 || (reqConfig.method === "PUT" || reqConfig.method === "PATCH" || reqConfig.method === "DELETE") && response.status === 204) {
+        if (reqConfig.method === "GET" && response.status === 200 || (reqConfig.method === "PUT" || reqConfig.method === "PATCH" || reqConfig.method === "DELETE") && response.status === 204) {
           response.text().then(formattedData => {
             formattedData
               ? resolve(JSON.parse(formattedData))
               : resolve()
+          })
+        }
+        if (reqConfig.method === "POST" && response.status === 201) {
+          response.text().then(formattedData => {
+            resolve(formattedData)
           })
         }
         if (response.status === 503) {

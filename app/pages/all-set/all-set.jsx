@@ -37,24 +37,14 @@ class AllSet extends Component {
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       }
-    }).then(response => {
-      console.log(response)
-      window.location = _config.urls.redirect_after_success_sign_up
+    }).then(nextPath => {
+      if (nextPath) {
+        window.location = window.location.origin + nextPath
+      }
     })
   }
-  // createElementFromHTML = (htmlString) => {
-  //   var a = document.createElement('a');
-  //   a.innerHTML = htmlString.trim();
-  //   // return a.firstChild; 
-  // }
-  //  createElementFromHTML = (htmlString) => {
-  //   <span className='checkbox-wrap__text'>
-  //     {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms.replace('{privacy_policy}', _config.translations[_config.data.lang].all_set.privacy_policy)}
-  //   </span>
-  // }
-  
+
   render () {
-  
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='all-set'>
         <div className='all-set-wrap'>
