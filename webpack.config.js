@@ -8,6 +8,7 @@ const renameOutputPlugin = require('rename-output-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const NgrockWebpackPlugin = require('ngrock-webpack-plugin')
 
 const statConf = {
   assets: false,
@@ -248,6 +249,7 @@ function getDevSettings(module) {
       },
       plugins: [
           new HtmlWebpackPlugin({template: "./app/index.html"}),
+          new NgrockWebpackPlugin()
       ],
       resolve: {
           alias: alias

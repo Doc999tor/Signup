@@ -76,8 +76,8 @@ class AllSet extends Component {
             <div className={`checkbox-wrap agree-to-all-terms ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
               ref={CheckBoxWrapAgree => this.CheckBoxWrapAgree = CheckBoxWrapAgree}
               onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
-              <input id='twice' type='checkbox' 
-                checked={this.state.isAgreeToAllTerms} onChange={()=>{}}/>
+              <input id='twice' type='checkbox'
+                checked={this.state.isAgreeToAllTerms} />
               <label htmlFor='twice'>
                 <span onClick={e => e.preventDefault()}></span>
               </label>

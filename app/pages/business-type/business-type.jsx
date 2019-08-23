@@ -12,6 +12,7 @@ class BusinessType extends Component {
     isModalOpen: false
   }
   componentDidMount () {
+    // debugger;
     apiServices.get(_config.urls.business_types_get.replace('{lang}', _config.data.lang)).then(response => {
       if (response && response.length) {
         this.setState({businessList: response})
@@ -20,6 +21,10 @@ class BusinessType extends Component {
   }
 
   render () {
+    if (this.addMenuNode) {
+
+      // console.log(this.addMenuNode.offsetHeight)
+    }
     return (
       <div className='business-type' style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} >
         <div className='top-menu-wrap'>
@@ -45,7 +50,7 @@ class BusinessType extends Component {
                 })
               }}>{_config.translations[_config.data.lang].business_type.skip_here}</button>
             </div>}
-            {!!this.props.selectedBusinessIds.length && <div className='add-menu'>
+            {!!this.props.selectedBusinessIds.length && <div className='add-menu' ref={addMenuNode => this.addMenuNode = addMenuNode}>
               <div className='add-menu__text'>{_config.translations[_config.data.lang].business_type.your_choose}</div>
               <div className='add-menu__list'>
                 {
@@ -63,7 +68,8 @@ class BusinessType extends Component {
             </div>
             }
           </div>
-          <div className='bussiness-container'>
+          {/* {console.log} */}
+          <div style={{maxHeight: `calc(65vh - ${this.addMenuNode && this.addMenuNode.offsetHeight || 50}px)`}} className='bussiness-container'>
             {
               this.state.businessList.map((el, key) => {
                 console.log(el)
