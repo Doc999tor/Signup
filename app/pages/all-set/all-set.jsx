@@ -9,7 +9,8 @@ class AllSet extends Component {
   state = {
     isPermitAds: false,
     isAgreeToAllTerms: false,
-    countries: {}
+    countries: {},
+    isStartLoad: false
   }
   componentDidMount () {
     apiServices.get(_config.urls.countries_get).then(response => {
@@ -32,12 +33,14 @@ class AllSet extends Component {
     if (this.props.selectedBusinessIds.includes(_config.other_business_type_id) && this.props.anotherBusinessType) { 
       sendSingUpData.another_business_type_id = this.props.anotherBusinessType
     }
+    this.setState({isStartLoad: true})
     apiServices.post(_config.urls.base + _config.urls.signup_post, {
       params: sendSingUpData,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       }
     }).then(nextPath => {
+      this.setState({isStartLoad: false})
       if (nextPath) {
         window.location = window.location.origin + nextPath
       }
@@ -92,7 +95,7 @@ class AllSet extends Component {
               this.CheckBoxWrapAgree.classList.add('active')
             }
           }}>
-            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms} />
+            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms} isStartLoad={this.state.isStartLoad}/>
           </div>
         </div>
       </div>

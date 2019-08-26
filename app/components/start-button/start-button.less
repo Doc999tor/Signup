@@ -39,3 +39,64 @@
     font-weight: bold;
   }
 }
+.styleLoaderRTL {
+	right: 20px;
+}
+.styleLoaderLTR {
+	left: 20px;
+}
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  justify-content: normal;
+  position: absolute;
+}
+
+.preloader .loader {
+	width: 26px;
+	height: 26px;
+	animation: 1s spin infinite linear;
+	opacity: 0.8;
+}
+
+@-moz-keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@-o-keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
