@@ -1,7 +1,7 @@
 var _config = {}
 
 _config.data = {
-  isRTL: false,
+  isRTL: true,
   lang: 'en',
   all_langs: ['en', 'he', 'ru']
 }
@@ -21,7 +21,8 @@ _config.urls = {
   // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
 
   recaptcha_post: '/recaptcha?token={token}',
-  signup_post: 'signup'
+  signup_post: 'signup',
+  login: '/login'
 }
 
 _config.translations = {
@@ -36,6 +37,8 @@ _config.translations = {
       privacy_policy: 'Privacy Policy page'
     },
     sign_up: {
+      dont_have_acc_alredy: 'Do you have an account already?',
+      login_in: 'Login',
       fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue'
     },

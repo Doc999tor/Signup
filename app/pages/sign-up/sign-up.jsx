@@ -190,6 +190,10 @@ class SignUp extends Component {
               {_config.translations[_config.data.lang].sign_up.continue}
             </button>
           </form>
+          <footer className='dont-have-acc' onClick={() => window.location.href = window.location.origin + _config.urls.login}>
+            {_config.translations[_config.data.lang].sign_up.dont_have_acc_alredy} &nbsp;
+            <span className='dont-have-acc__login'>{_config.translations[_config.data.lang].sign_up.login_in}</span>
+          </footer>
         </div>
       </div>
     )
