@@ -191,7 +191,10 @@ var _promise = (apiUrl, options) => {
             request(apiUrl, options)
           }, response.headers.get('retry-after'))
         }
-        if (response.status === 400 || response.status === 405 || response.status === 422) {
+        if (response.status === 422) {
+          window.location.href = _config.urls.error_page
+        }
+        if (response.status === 400 || response.status === 405) {
           console.error('Response: ', response)
           reject(response)
         }
