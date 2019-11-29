@@ -14,7 +14,11 @@ class AllSet extends Component {
   }
   componentDidMount () {
     apiServices.get(_config.urls.countries_get).then(response => {
-      this.setState({countries: response})
+      if (response) {
+        this.setState({countries: response})
+      }
+    }).catch(err => {
+      console.log(`countries were not uploaded. Error: ${err}`)
     })
     this.checkboxWrapText.innerHTML = this.checkboxWrapText.innerHTML.replace('{privacy_policy}', `<a target='_blank' href=${_config.urls.privacy_policy}>${_config.translations[_config.data.lang].all_set.privacy_policy}</a>`)
   }
@@ -95,7 +99,7 @@ class AllSet extends Component {
               this.CheckBoxWrapAgree.classList.add('active')
             }
           }}>
-            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms} isStartLoad={this.state.isStartLoad}/>
+            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms && this.state.countries.country} isStartLoad={this.state.isStartLoad}/>
           </div>
         </div>
       </div>
