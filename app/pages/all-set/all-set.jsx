@@ -27,6 +27,7 @@ class AllSet extends Component {
     sendSingUpData.added = getPrettyDate()
     sendSingUpData.email = this.props.email
     sendSingUpData.pass = this.props.pass
+    sendSingUpData.phone = this.props.phone
     sendSingUpData.permit_ads = this.state.isPermitAds
     sendSingUpData.business_types = '[' + this.props.selectedBusinessIds + ']'
     sendSingUpData.lang = _config.data.lang

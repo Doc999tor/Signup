@@ -10,6 +10,8 @@ class SignUp extends Component {
       isVisiblePass: false,
       isValidEmail: true,
       isValidPass: true,
+      phone: null,
+      validPhone: true,
       passValue: '',
       emailValue: '',
       errMessage: (() => {
@@ -72,6 +74,7 @@ class SignUp extends Component {
       }
     }
   }
+
   checkPassword = () => {
     let minPassLength = 3
     // pass epmty
@@ -88,7 +91,17 @@ class SignUp extends Component {
     }
   }
 
+  handleChangePhone = e => {
+    const value = e.target.value
+    const reg = /(^[0-9-+]+$)/
+    this.setState({
+      phone: value,
+      validPhone: value ? reg.test(value.trim()) : true
+    }, () => this.props.onHandlePhoneValue(this.state.phone || null))
+  }
+
   render () {
+    const { validPhone, phone } = this.state
     return (
       <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
         <ul className='nav-lang'>
@@ -161,6 +174,16 @@ class SignUp extends Component {
                 {this.props.pass && <img className='group__eye'
                   onClick={this.togglePass}
                   src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
+              </div>
+              <div className={'phone_strip' + (validPhone ? '' : ' err_phone')}>
+                <img className='phone_img' src={_config.urls.static + 'phone.svg'} />
+                <input
+                  type='tel'
+                  name='phone'
+                  className='input_phone'
+                  onChange={this.handleChangePhone}
+                  placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
+                />
               </div>
               <div className='login-err'>
                 {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}

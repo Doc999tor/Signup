@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+    <defs>
+        <style>
+            .cls-1{fill:none}.cls-2{fill:url(#linear-gradient)}
+        </style>
+        <linearGradient id="linear-gradient" x2="1.021" y1=".185" y2=".838" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#9370e6"/>
+            <stop offset="1" stop-color="#522fa9"/>
+        </linearGradient>
+    </defs>
+    <g id="ic_phone" transform="translate(1 1)">
+        <path id="Path_3090" d="M0 0h26v26H0z" class="cls-1" data-name="Path 3090" transform="translate(-1 -1)"/>
+        <path id="ic_phone-2" d="M17 1.01L7 1a2 2 0 0 0-1.99 2v18A2 2 0 0 0 7 23h10a2.006 2.006 0 0 0 2-2V3a2 2 0 0 0-2-1.99zM17 19H7V5h10z" class="cls-2" data-name="ic_phone"/>
+    </g>
+</svg>
