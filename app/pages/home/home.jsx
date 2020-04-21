@@ -8,21 +8,22 @@ const baseUrl = window.REACT_ROUTER_BASENAME
 
 class Home extends React.Component {
   state = {
-    email: '',
-    pass: '',
-    phone: null,
+    email: sessionStorage.getItem('atz_email') || '',
+    pass: sessionStorage.getItem('atz_pass') || '',
+    phone: sessionStorage.getItem('atz_phone') || '',
     selectedBusinessIds: [],
     anotherBusinessType: ''
   }
-  
+
   handleEmailValue = (v) => {
-    this.setState({email: v})
-  }
-  handlePassValue = (v) => {
-    this.setState({pass: v})
+    this.setState({email: v}, () => sessionStorage.setItem('atz_email', this.state.email))
   }
 
-  handlePhoneValue = value => this.setState({phone: value})
+  handlePassValue = (v) => {
+    this.setState({pass: v}, () => sessionStorage.setItem('atz_pass', this.state.pass))
+  }
+
+  handlePhoneValue = value => this.setState({phone: value}, () => sessionStorage.setItem('atz_phone', this.state.phone))
   
   handleBusinessIds = (id) => {
     if (this.state.selectedBusinessIds.includes(id)) {

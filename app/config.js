@@ -1,8 +1,9 @@
+var lang = 'en'
 var _config = {}
 
 _config.data = {
-  isRTL: true,
-  lang: 'en',
+  isRTL: false,
+  lang: lang,
   all_langs: ['en', 'he', 'ru']
 }
 
@@ -38,8 +39,9 @@ _config.translations = {
       privacy_policy: 'Privacy Policy page'
     },
     sign_up: {
-      dont_have_acc_alredy: 'Do you have an account already?',
-      login_in: 'Login',
+      main_title: 'Sign up',
+      have_acc_alredy: 'Already have an account?',
+      login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue'
     },
