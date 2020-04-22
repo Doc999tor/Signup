@@ -15,20 +15,20 @@ class Home extends React.Component {
     anotherBusinessType: ''
   }
 
-  handleEmailValue = (v) => {
+  handleEmailValue = v => {
     this.setState({email: v}, () => sessionStorage.setItem('atz_email', this.state.email))
   }
 
-  handlePassValue = (v) => {
+  handlePassValue = v => {
     this.setState({pass: v}, () => sessionStorage.setItem('atz_pass', this.state.pass))
   }
 
   handlePhoneValue = value => this.setState({phone: value}, () => sessionStorage.setItem('atz_phone', this.state.phone))
-  
-  handleBusinessIds = (id) => {
+
+  handleBusinessIds = id => {
     if (this.state.selectedBusinessIds.includes(id)) {
       this.setState({
-        selectedBusinessIds: [...this.state.selectedBusinessIds].filter((item) => (item !== id))
+        selectedBusinessIds: [...this.state.selectedBusinessIds].filter(item => (item !== id))
       })
     } else {
       this.setState({
@@ -36,6 +36,7 @@ class Home extends React.Component {
       })
     }
   }
+
   handleBusinessType = val => {
     this.setState({anotherBusinessType: val})
   }

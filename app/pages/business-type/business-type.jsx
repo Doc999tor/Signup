@@ -20,59 +20,46 @@ class BusinessType extends Component {
     })
   }
 
-  render () {
-    if (this.addMenuNode) {
+  handleSkip = () => {
+    this.props.history.push({
+      pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
+      search: window.location.search
+    })
+  }
 
-      // console.log(this.addMenuNode.offsetHeight)
+  handleGoToAllSet = () => {
+    if (this.props.selectedBusinessIds.length) {
+      this.props.history.push({
+        pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
+        search: window.location.search
+      })
     }
+  }
+
+  backButton = () => this.props.history.goBack()
+
+  render () {
     return (
-      <div className='business-type' style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} >
+      <div className='business-type' >
         <div className='top-menu-wrap'>
           <div className='topnav'>
-            {/* <div className='topnav-arrow'></div> */}
             <div className='text-wrap'>
               <div className='text-container'>
-                <div className='topbar-wrap' onClick={() => { this.props.history.goBack() }} >
-                  <img className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />
-                  <div className='text-container__title'>
-                    {_config.translations[_config.data.lang].business_type.select_business_type}
-                  </div>
-                </div>
-                <div className='text-container__text'>{_config.translations[_config.data.lang].business_type.adjuas_the_app}</div>
+                <h2 className='text-container__title'>
+                  {_config.translations[_config.data.lang].business_type.select_business_type}
+                </h2>
+                <p className='text-container__text'>{_config.translations[_config.data.lang].business_type.adjuas_the_app}</p>
               </div>
             </div>
-            {!this.props.selectedBusinessIds.length && <div className='choose-menu'>
-              <div className='choose-menu__text'>{_config.translations[_config.data.lang].business_type.can_choose_more}</div>
-              <button className='choose-menu__button' onClick={() => {
-                this.props.history.push({
-                  pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
-                  search: window.location.search
-                })
-              }}>{_config.translations[_config.data.lang].business_type.skip_here}</button>
-            </div>}
-            {!!this.props.selectedBusinessIds.length && <div className='add-menu' ref={addMenuNode => this.addMenuNode = addMenuNode}>
-              <div className='add-menu__text'>{_config.translations[_config.data.lang].business_type.your_choose}</div>
-              <div className='add-menu__list'>
-                {
-                  this.state.businessList.map((el, key) => {
-                    if (!this.props.selectedBusinessIds.includes(el.id)) return false
-                    return (
-                      <div key={key} className='selected-business'>
-                        <div className='checkmark' />
-                        <span>{el.name}</span>
-                      </div>
-                    )
-                  })
-                }
-              </div>
+            <div className='buttons-wrap'>
+              <img onClick={this.backButton} className='images-wrap__back' src={_config.urls.static + 'ic_back.svg'} />
+              <button className='choose-menu__button' onClick={this.handleSkip}>{_config.translations[_config.data.lang].business_type.skip_here}</button>
             </div>
-            }
           </div>
-          {/* {console.log} */}
-          <div style={{maxHeight: `calc(65vh - ${this.addMenuNode && this.addMenuNode.offsetHeight || 50}px)`}} className='bussiness-container'>
+          <div className='bussiness-container'>
             {
               this.state.businessList.map((el, key) => {
-                console.log(el)
+                // console.log(el)
                 let isActive = this.props.selectedBusinessIds.includes(el.id)
                 return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')}
                   key={key} onClick={() => {
@@ -82,8 +69,10 @@ class BusinessType extends Component {
                       this.props.onHandleBusinessIds(el.id)
                     }
                   }}>
-                  <img className='bussiness-type__img' src={_config.urls.business_types_icons + (isActive ? `violet-${el.icon}` : el.icon)} />
-                  <div className='bussiness-type__name'>{el.name}</div>
+                  <div className='bussiness-type__info'>
+                    <img className={'bussiness-type__img' + ((isActive ? ' active_img' : ' inactive_img'))} src={_config.urls.business_types_icons + (isActive ? el.icon : `violet-${el.icon}`)} />
+                    <div className='bussiness-type__name'>{el.name}</div>
+                  </div>
                   {isActive && <div className='bussiness-type__checkmark'>
                     <div className='checkmark' />
                   </div>}
@@ -95,7 +84,6 @@ class BusinessType extends Component {
             <div className='top-container'>
               <div className='modal__title'>
                 <span>{_config.translations[_config.data.lang].business_type.enter_different_type}</span>
-                {/* <img className='modal__title' src={config.urls.static + 'btn-not.svg'} /> */}
               </div>
               <div className='subject-textarea'>
                 <input type='text' className='subject-textarea-wrap__text' ref={input => this.input = input} value={this.props.anotherBusinessType} placeholder={_config.translations[_config.data.lang].business_type.type_business_name}
@@ -114,14 +102,7 @@ class BusinessType extends Component {
             </div>
           </Modal>
         </div>
-        <StartButton route={() => {
-          if (this.props.selectedBusinessIds.length) {
-            this.props.history.push({
-              pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
-              search: window.location.search
-            })
-          }
-        }} active={this.props.selectedBusinessIds.length} />
+        <StartButton route={this.handleGoToAllSet} active={this.props.selectedBusinessIds.length} />
       </div>
     )
   }

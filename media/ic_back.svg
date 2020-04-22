@@ -1,3 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="11" height="18" viewBox="0 0 11 18">
-    <path fill="#FFF" fill-rule="nonzero" d="M11 1.61L9.332 0 0 9l9.332 9L11 16.39 3.337 9z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <g id="prefix__ic_back" transform="translate(-15 -39)">
+        <path id="prefix__border" d="M0 0H24V24H0z" transform="translate(15 39)" style="fill:#fff;opacity:0"/>
+        <g id="prefix__ic_back-2" data-name="ic_back" transform="translate(18 44)">
+            <path id="prefix__Combined_Shape" d="M10.293.293a1 1 0 0 0 0 1.414L14.586 6H1a1 1 0 0 0 0 2h13.586l-4.293 4.293a1 1 0 0 0 1.414 1.415l6-6a1 1 0 0 0 .172-.231l.01-.019v-.005l.007-.014.006-.012v-.008l.008-.018a1 1 0 0 0-.009-.817L17.9 6.56v-.009l-.005-.011-.007-.013v-.008l-.008-.015v-.005l-.01-.016-.011-.017-.012-.018-.012-.017L17.8 6.4l-.011-.014V6.38l-.01-.012-.009-.011-.006-.007-.015-.017-.04-.042-6-6a1 1 0 0 0-1.414 0z" data-name="Combined Shape" transform="rotate(180 9 7)" style="fill:#522fa9"/>
+        </g>
+    </g>
 </svg>

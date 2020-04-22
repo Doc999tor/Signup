@@ -1,35 +1,27 @@
 .start-button {
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
-  min-height: 4rem;
-  z-index: 9999;
-  position: absolute;
+  padding: 0.75rem 1.1rem;
   .all-set-form__button {
     text-align: center;
-    margin: 0 auto;
-    background: var(--sec-bgcolor);
+    border-radius: 3rem;
+    background-image: linear-gradient(100deg, #591ec0, #6623db 27%, #7d3ee8 53%, #be95ff 111%);
+    opacity: 0.5;
     display: flex;
+    width: 100%;
     align-items: center;
     border-radius: 10rem;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 0;
     color: var(--white-color);
     font-size: 1.125rem;
+    text-transform: uppercase;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 14.7rem;
-    margin-top: 1rem;
+    transition: opacity 0.3s;
     &.active {
-      background: linear-gradient(to top, #f77062, #fe5196);
+      opacity: 1;
+      transition: opacity 0.3s;
     }
     &.start {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
       justify-content: center;
-      margin-bottom: 3rem;
       span {
         padding: 0rem 0.85rem;
       }

@@ -63,16 +63,11 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
-      can_choose_more: 'You can choose more the one or',
-      skip_here: 'skip here',
-      your_choose: 'Your choose:',
-      type_business_name: 'Your business type',
-      enter_different_type: 'Enter a different type of business',
-      ok: 'Ok',
-      no_thanks: 'No, thanks'
-    }
+      select_business_type: 'Select Business Type or Several',
+      adjuas_the_app: 'We\'ll adjust an app for you',
+      skip_here: 'Skip'
+    },
+    done_btn: 'Done'
   },
   he: {
     all_set: {
@@ -114,7 +109,8 @@ _config.translations = {
       enter_different_type: 'Enter a different type of business',
       ok: 'Ok',
       no_thanks: 'No, thanks'
-    }
+    },
+    done_btn: 'Done'
   },
   ru: {
     all_set: {
@@ -155,7 +151,8 @@ _config.translations = {
       enter_different_type: 'Enter a different type of business',
       ok: 'Ok',
       no_thanks: 'No, thanks'
-    }
+    },
+    done_btn: 'Done'
   }
 }
 
