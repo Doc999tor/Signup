@@ -215,11 +215,15 @@
       padding: 0 0.75rem;
     }
   }
-  .start-button {
+  .start-button-wrap {
     position: fixed;
-    background-color: var(--white-color);
+    margin: 0 auto;
     bottom: 0;
     left: 0;
+  }
+  .start-button {
+    background-color: var(--white-color);
+    max-width: 640px;
   }
 }
 
@@ -238,8 +242,21 @@
     transform: rotateY(-90deg);
   }
 }
-@keyframes nextStep {
-  0% {
-    transform: translateX(100%);
-  }
-}
+// @keyframes nextStep {
+//   0% {
+//     transform: translateX(100%);
+//   }
+// }
+// @keyframes nextStepRtl {
+//   0% {
+//     transform: translateX(-100%);
+//   }
+// }
+// body[style='direction: rtl;'] {
+//   .images-wrap__back {
+//     transform: scale(-1, 1);
+//   }
+//   .business-type {
+//     animation: nextStepRtl 0.3s;
+//   }
+// }

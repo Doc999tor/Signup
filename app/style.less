@@ -8,6 +8,10 @@ html, body, #root, #home {
   margin: 0 auto;
   background: var(--sec-color);
 }
+#home {
+  overflow: hidden;
+  box-shadow: 0px 0px 15px 0px rgba(75, 75, 75, 0.2);
+}
 body {
     font-family: var(--font-family);
     font-weight: normal;
@@ -19,6 +23,26 @@ body {
     margin: 0px !important;
 }
 // rtl
+@keyframes nextStep {
+  0% {
+    transform: translateX(100%);
+  }
+}
+@keyframes nextStepRtl {
+  0% {
+    transform: translateX(-100%);
+  }
+}
+body[style='direction: rtl;'] {
+  .images-wrap__back {
+    transform: scale(-1, 1);
+  }
+  .business-type, .all-set {
+    animation: nextStepRtl 0.3s;
+  }
+  // .all-set {
+  //   animation: nextStepRtl 0.3s;
+  }
 body[dir=rtl] {
   img {
     transform: scaleX(-1);

@@ -20,7 +20,7 @@ class AllSet extends Component {
     }).catch(err => {
       console.log(`countries were not uploaded. Error: ${err}`)
     })
-    this.checkboxWrapText.innerHTML = this.checkboxWrapText.innerHTML.replace('{privacy_policy}', `<a target='_blank' href=${_config.urls.privacy_policy}>${_config.translations[_config.data.lang].all_set.privacy_policy}</a>`)
+    // this.checkboxWrapText.innerHTML = this.checkboxWrapText.innerHTML.replace('{privacy_policy}', `<a target='_blank' href=${_config.urls.privacy_policy}>${_config.translations[_config.data.lang].all_set.privacy_policy}</a>`)
   }
   handleRequest = () => {
     let sendSingUpData = {}
@@ -51,57 +51,47 @@ class AllSet extends Component {
       }
     })
   }
+  backButton = () => this.props.history.goBack()
 
+  handleChangeAds = () => this.setState({isPermitAds: !this.state.isPermitAds})
+  handleChangeAgree = () => this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})
   render () {
     return (
-      <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='all-set'>
+      <div className='all-set'>
         <div className='all-set-wrap'>
-          <form action={_config.urls.check_login} method='POST'>
-            <div className='images-wrap'> 
-              <img className='images-wrap__back' onClick={() => { this.props.history.goBack() }} src={_config.urls.static + 'ic_back.svg'} />
-              <img className='images-wrap__background' src={_config.urls.static + 'sing-up-img.png'} />
-            </div>
-            <div className='all-set-form__text'>{_config.translations[_config.data.lang].all_set.we_all_set}</div>
-            <span className='all-set-form__forgot'>
-              {_config.translations[_config.data.lang].all_set.enjoy_your_choice}
-            </span>
-            <span className='all-set-form__forgot'>
-              {_config.translations[_config.data.lang].all_set.you_can_continue}
-            </span>
-          </form>
+          <div className='all-set-header'>
+            <img className='images-wrap__back' onClick={this.backButton} src={_config.urls.static + 'ic_back.svg'} />
+          </div>
+          <div className='images-wrap'> 
+            <img className='images-wrap__background' src={_config.urls.static + 'ill_background.svg'} />
+            <img className='images-wrap__woman' src={_config.urls.static + 'ill_woman.png'} />
+          </div>
+          <h2 className='all-set-form__text'>{_config.translations[_config.data.lang].all_set.we_all_set}</h2>
+          <span className='all-set-form__forgot'>
+            {_config.translations[_config.data.lang].all_set.enjoy_your_choice}
+          </span>
           <div className='block-with-checkbox'>
-            <div className={`checkbox-wrap send-information ${this.state.isPermitAds ? 'opacity' : ''}`} 
-              onClick={()=> this.setState({isPermitAds: !this.state.isPermitAds})}>
+            <div className='checkbox-wrap' 
+              // onClick={this.handleChangeAds}
+              >
               <input id='first' type='checkbox' 
-                checked={this.state.isPermitAds} onChange={()=> {this.setState({isPermitAds: !this.state.isPermitAds})}} />
+                value={this.state.isPermitAds}
+                onChange={this.handleChangeAds} />
               <label htmlFor='first'>
-                <span onClick={(e)=>e.preventDefault()}></span>
-              </label>
-              <span className='checkbox-wrap__text'>
                 {_config.translations[_config.data.lang].all_set.send_important_information}
-              </span>
-            </div>
-            <div className={`checkbox-wrap agree-to-all-terms ${this.state.isAgreeToAllTerms ? 'opacity' : ''}`} 
-              ref={CheckBoxWrapAgree => this.CheckBoxWrapAgree = CheckBoxWrapAgree}
-              onClick={()=> this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})}>
-              <input id='twice' type='checkbox'
-                checked={this.state.isAgreeToAllTerms} />
-              <label htmlFor='twice'>
-                <span onClick={e => e.preventDefault()}></span>
               </label>
-              <span className='checkbox-wrap__text' ref={checkboxWrapText => this.checkboxWrapText = checkboxWrapText}>
-              {/* {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms.replace('{privacy_policy}', _config.translations[_config.data.lang].all_set.privacy_policy)} */}
-              {_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}
-              </span>
+            </div>
+            <div className='checkbox-wrap'>
+              <input id='twice' type='checkbox'
+                value={this.state.isAgreeToAllTerms}
+                onChange={this.handleChangeAgree} />
+              <label className='combined' htmlFor='twice'>
+                <span>{_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}</span>
+                <a className='term-link' target='_blank' href={_config.urls.privacy_policy}>{_config.translations[_config.data.lang].all_set.privacy_policy}</a>
+              </label>
             </div>
           </div>
-          <div className='start-button-wrap' onClick={() => {
-            if (!this.state.isAgreeToAllTerms) {
-              this.CheckBoxWrapAgree.classList.add('active')
-            }
-          }}>
-            <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms && this.state.countries.country} isStartLoad={this.state.isStartLoad}/>
-          </div>
+          <StartButton route={() => this.handleRequest()} active={this.state.isAgreeToAllTerms && this.state.countries.country} isStartLoad={this.state.isStartLoad}/>
         </div>
       </div>
     )

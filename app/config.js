@@ -34,9 +34,9 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I agree to all the {privacy_policy} of the Atzmaim app and the legal',
+      agree_to_all_the_Terms: 'I have read and agree to the all Atzmaim App',
       lets_start: 'Lets Start!',
-      privacy_policy: 'Privacy Policy page'
+      privacy_policy: 'Terms and Conditions of Use'
     },
     sign_up: {
       main_title: 'Sign up',
