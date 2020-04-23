@@ -10,7 +10,7 @@ class Home extends React.Component {
   state = {
     email: sessionStorage.getItem('atz_email') || '',
     pass: sessionStorage.getItem('atz_pass') || '',
-    phone: sessionStorage.getItem('atz_phone') || '',
+    phone: sessionStorage.getItem('atz_phone') || null,
     selectedBusinessIds: [],
     anotherBusinessType: ''
   }

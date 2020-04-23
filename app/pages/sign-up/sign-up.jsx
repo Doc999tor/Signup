@@ -105,17 +105,23 @@ class SignUp extends Component {
   }
   render () {
     const { email, pass, phone } = this.props
+    let phoneValue = (phone === 'null' || phone === null) ? '' : phone
     const { validPhone } = this.state
     return (
       <div className='sign-up'>
         <div style={{backgroundImage: `url(/media/wave.svg), linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
           <div className='logo-animation'>
-            <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
+            <img className='sign-up-logo' src={_config.urls.static + 'logo.svg'} />
+            <img className='sign-up-logo-name' src={_config.urls.static + 'atzma.im.svg'} />
           </div>
         </div>
         <div className='sign-up-wrap'>
-          <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
-          <p className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><a href={window.location.origin + _config.urls.login} >{_config.translations[_config.data.lang].sign_up.login_in}</a></p>
+          <div className='title-container'>
+            <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
+          </div>
+          <div className='question-container'>
+            <p className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><a href={window.location.origin + _config.urls.login} >{_config.translations[_config.data.lang].sign_up.login_in}</a></p>
+          </div>
           <form>
             <div className='text-content-wrap'>
               <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
@@ -155,7 +161,7 @@ class SignUp extends Component {
                 <input
                   type='tel'
                   name='phone'
-                  value={phone}
+                  value={phoneValue}
                   className='group__input input_phone'
                   onChange={this.handleChangePhone}
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
