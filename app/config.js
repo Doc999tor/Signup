@@ -66,6 +66,9 @@ _config.translations = {
       fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue'
     },
+    onboarding: {
+      lets_start: 'Lets Start!'
+    },
     sign_in: {
       title: 'Atzmaim',
       login_google: 'Log in with google',

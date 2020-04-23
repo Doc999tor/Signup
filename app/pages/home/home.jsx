@@ -52,7 +52,7 @@ class Home extends React.Component {
             <Route exact path={baseUrl + _config.routing.sign_up_path} render={() => <SignUp {...this.state} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
             <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
             <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} onHandleFinalRedirectValue={this.handleFinalRedirectValue} />} />
-            {_config.onboarding_pages.map((page, index) => <Route key={page.name} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1] ? _config.onboarding_pages[index + 1].path : this.state.finalRedirect} text={page.text} items={_config.onboarding_pages.length} />} />)}
+            {_config.onboarding_pages.map((page, index) => <Route key={page.name} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1] ? _config.onboarding_pages[index + 1].path : this.state.finalRedirect} text={page.text} />} />)}
             <Redirect from='/' to={baseUrl} />
           </Switch>
         </BrowserRouter>
