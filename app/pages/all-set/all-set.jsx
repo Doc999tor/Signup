@@ -47,7 +47,11 @@ class AllSet extends Component {
     }).then(nextPath => {
       this.setState({isStartLoad: false})
       if (nextPath) {
-        window.location = window.location.origin + nextPath
+        this.props.onHandleFinalRedirectValue(nextPath)
+        this.props.history.push({
+          pathname: window.REACT_ROUTER_BASENAME + _config.onboarding_pages[0].path,
+          search: window.location.search
+        })
       }
     })
   }

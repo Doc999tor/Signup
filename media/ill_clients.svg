@@ -1,0 +1,40 @@
+<svg id="ill_clients" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="184" height="220" viewBox="0 0 184 220">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="1" x2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffc9b3"/>
+      <stop offset="1" stop-color="#ffd2c2"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <circle id="Mask" cx="51.111" cy="51.111" r="51.111" fill="url(#linear-gradient)"/>
+    </clipPath>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e6864e"/>
+      <stop offset="1" stop-color="#eb965e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.811" y1="0.188" x2="0.464" y2="1.089" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e07a3f"/>
+      <stop offset="1" stop-color="#eb9154"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1d0024"/>
+      <stop offset="1" stop-color="#100014"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_13014" data-name="Path 13014" d="M224.751,54.9V169.566a109.129,109.129,0,0,1-184,0V9.8A9.772,9.772,0,0,1,50.5,0H170.145Z" transform="translate(-40.751)" fill="#fff"/>
+  <path id="Path_13015" data-name="Path 13015" d="M346.144,105.817s5.45,19.3,53.449,6.037L385.905,98.5Z" transform="translate(-215.614 -56.861)" fill="#c2c2c2"/>
+  <path id="Path_13016" data-name="Path 13016" d="M343.489,45.184V0l54.256,55H353.172A9.751,9.751,0,0,1,343.489,45.184Z" transform="translate(-213.745)" fill="#efefff"/>
+  <g id="User_05c" data-name="User 05c" transform="translate(17.299 17.286)">
+    <circle id="Mask-2" data-name="Mask" cx="51.111" cy="51.111" r="51.111" fill="#e1dfff"/>
+    <g id="User_05c-2" data-name="User 05c" clip-path="url(#clip-path)">
+      <path id="face" d="M28.963,35.532v4.089c0,5.452,7.837,7.837,7.837,7.837s-9.03,6.815-18.4,6.815S0,47.458,0,47.458s7.9-2.385,7.837-7.837-.021-8.654-.062-18C2.892,15.3,3.205,11.047,5.876,8.06c8.947-10.009,33.31-6.6,33.31-6.6s2.273,24.531-2.9,31.689C34.074,36.214,28.963,35.532,28.963,35.532Z" transform="translate(32.711 23.757)" fill="url(#linear-gradient-2)"/>
+      <path id="shade" d="M11.926,4.089A26.782,26.782,0,0,1,0,0,19.723,19.723,0,0,0,11.926,8.178Z" transform="translate(49.748 55.2)" opacity="0.6" fill="url(#linear-gradient-3)" style="mix-blend-mode: multiply;isolation: isolate"/>
+      <path id="body" d="M76.667,12.712c3.244,6.6,5.111,21.807,5.111,21.807H0S1.868,19.306,5.111,12.712,27.293,0,27.293,0C30.944,7.5,50.977,7.5,54.474,0,54.474,0,73.423,6.117,76.667,12.712Z" transform="translate(10.222 68.83)" fill="url(#linear-gradient-4)"/>
+      <path id="buttons" d="M0,14.993a1.363,1.363,0,1,1,1.363,1.363A1.363,1.363,0,0,1,0,14.993ZM0,8.178A1.363,1.363,0,1,1,1.363,9.541,1.363,1.363,0,0,1,0,8.178ZM0,1.363A1.363,1.363,0,1,1,1.363,2.726,1.363,1.363,0,0,1,0,1.363Z" transform="translate(49.748 79.733)" fill="#fff"/>
+      <path id="hair" d="M14.023,24.945a3.459,3.459,0,0,0-4.261-.59c-4.412,2.293-1.073,11.082,2.846,11.082,1.023,0,1.531,3.211-3.021,5.453,0-3.578-5.452-12.437-5.927-20.5C-1.828,18.344-.465,10.171,3.3,10.171,2.7,2.677,14.7-1.191,19.343,3.107,24.068-2.554,35.994.342,36.714,5.254c8.2-4.378,13.591,8.207,5.912,13.091-3.16,2.01-10.551,2.775-21.22,2.775-1.611,0-2.513.4-2.063,2.392C20.216,27.37,18.191,29.8,14.023,24.945Z" transform="translate(30.667 10.222)" fill="url(#linear-gradient-4)"/>
+    </g>
+  </g>
+  <g id="Group_4212" data-name="Group 4212" transform="translate(17.299 136.714)">
+    <path id="Path_13020" data-name="Path 13020" d="M227.069,360.277H96.281a5.439,5.439,0,0,1-5.375-5.5h0a5.439,5.439,0,0,1,5.375-5.5H227.069a5.439,5.439,0,0,1,5.375,5.5h0A5.439,5.439,0,0,1,227.069,360.277Z" transform="translate(-90.906 -349.277)" fill="#e1dfff"/>
+    <path id="Path_13021" data-name="Path 13021" d="M178.287,415.656H96.311a5.453,5.453,0,0,1-5.405-5.5h0a5.453,5.453,0,0,1,5.405-5.5h81.976a5.453,5.453,0,0,1,5.4,5.5h0A5.454,5.454,0,0,1,178.287,415.656Z" transform="translate(-90.906 -381.084)" fill="#e1dfff"/>
+  </g>
+</svg>

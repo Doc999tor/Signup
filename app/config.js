@@ -7,6 +7,27 @@ _config.data = {
   all_langs: ['en', 'he', 'ru']
 }
 
+_config.onboarding_pages = [
+  {
+    name: 'appointments',
+    text: 'Create appointments quickly & stay organized',
+    icon: 'ill_appointments.svg',
+    path: '/onboarding'
+  },
+  {
+    name: 'clients',
+    text: 'Keep everything you need to know about each client',
+    icon: 'ill_clients.svg',
+    path: '/onboarding1'
+  },
+  {
+    name: 'money',
+    text: 'Increase your profit with your personal assistant',
+    icon: 'ill_money.svg',
+    path: '/onboarding2'
+  }
+]
+
 _config.other_business_type_id = -1
 
 // _config.data.all_langs = ['en', 'he', 'ru']
