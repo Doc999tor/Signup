@@ -70,6 +70,17 @@
     opacity: 0;
     animation: startBtn 0.3s forwards;     
   }
+  .loader {
+    animation: 1s spin infinite linear;
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
  } 
  @keyframes startBtn {
    100% {

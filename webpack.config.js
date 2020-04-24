@@ -102,39 +102,6 @@ function getProdSettings(module) {
                   'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
                 ],
                 include: /\.module\.css$/
-              }, 
-              {
-                  test: /\.(img|png|svg)$/,
-                  use: 'url-loader'
-              },
-              {
-                  test: /\.(gif|png|jpe?g|svg)$/i,
-                  loaders: [
-                      'file-loader', {
-                          loader: 'image-webpack-loader',
-                          options: {
-                              name: '[name].[ext]',
-                              outputPath: './dist/media/',
-                              gifsicle: {
-                                  interlaced: false
-                              },
-                              optipng: {
-                                  optimizationLevel: 7
-                              },
-                              pngquant: {
-                                  quality: '65-90',
-                                  speed: 4
-                              },
-                              mozjpeg: {
-                                  progressive: true,
-                                  quality: 65
-                              },
-                              webp: {
-                                  quality: 75
-                              }
-                          }
-                      }
-                  ]
               }
           ]
       },
@@ -229,10 +196,6 @@ function getDevSettings(module) {
                   'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
                 ],
                 include: /\.module\.css$/
-              }, 
-              {
-                  test: /\.(img|png|svg)$/,
-                  use: 'url-loader'
               }
           ]
       },
