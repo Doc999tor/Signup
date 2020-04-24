@@ -1,19 +1,18 @@
-import React, {Component} from 'react'
-import {apiServices} from 'services'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import Modal from './components/modal/modal.jsx'
-import StartButton from '../../components/start-button/start-button.jsx'
+import { get } from '../../services/apiServices'
+import Modal from './components/modal/modal'
+import StartButton from '../../components/start-button/start-button'
 import './business-type.less'
 
 class BusinessType extends Component {
   state = {
     businessList: [],
-    selectedBusinessIds: [],
     isModalOpen: false
   }
-  componentDidMount () {
-    // debugger;
-    apiServices.get(_config.urls.business_types_get.replace('{lang}', _config.data.lang)).then(response => {
+
+  componentDidMount() {
+    get(_config.urls.business_types_get.replace('{lang}', _config.data.lang)).then(response => {
       if (response && response.length) {
         this.setState({businessList: response})
       }
@@ -38,7 +37,7 @@ class BusinessType extends Component {
 
   backButton = () => this.props.history.goBack()
 
-  render () {
+  render() {
     return (
       <div className='business-type' >
         <div className='top-menu-wrap'>

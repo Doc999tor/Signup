@@ -1,10 +1,11 @@
 import React from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
-import AllSet from '../all-set/all-set.jsx'
-import SignUp from '../sign-up/sign-up.jsx'
-import Onboarding from '../onboarding/index.jsx'
-import BusinessType from '../business-type/business-type.jsx'
-import {apiServices, getPrettyDate} from 'services'
+import AllSet from '../all-set/all-set'
+import SignUp from '../sign-up/sign-up'
+import Onboarding from '../onboarding/index'
+import BusinessType from '../business-type/business-type'
+import { post } from '../../services/apiServices'
+import { getPrettyDate } from '../../services/helperServices'
 
 const baseUrl = window.REACT_ROUTER_BASENAME
 
@@ -22,16 +23,17 @@ class Home extends React.Component {
   }
 
   handleEmailValue = v => {
-    this.setState({email: v}, () => sessionStorage.setItem('atz_email', this.state.email))
+    this.setState({ email: v }, () => sessionStorage.setItem('atz_email', this.state.email))
   }
 
   handlePassValue = v => {
-    this.setState({pass: v}, () => sessionStorage.setItem('atz_pass', this.state.pass))
+    this.setState({ pass: v }, () => sessionStorage.setItem('atz_pass', this.state.pass))
   }
 
   handlePhoneValue = value => this.setState({phone: value}, () => sessionStorage.setItem('atz_phone', this.state.phone))
 
-  handleFinalRedirectValue = value => this.setState({finalRedirect: value})
+  handleFinalRedirectValue = value => this.setState({ finalRedirect: value })
+
   handleCountriesValue = value => this.setState({countries: value})
 
   handleBusinessIds = id => {
@@ -45,9 +47,11 @@ class Home extends React.Component {
       })
     }
   }
-  handleChangeAds = () => this.setState({isPermitAds: !this.state.isPermitAds})
+
+  handleChangeAds = () => this.setState({ isPermitAds: !this.state.isPermitAds })
+
   handleRequest = () => {
-    let sendSingUpData = {}
+    const sendSingUpData = {}
     sendSingUpData.added = getPrettyDate()
     sendSingUpData.email = this.state.email
     sendSingUpData.pass = this.state.pass
@@ -62,16 +66,16 @@ class Home extends React.Component {
     if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) { 
       sendSingUpData.another_business_type_id = this.state.anotherBusinessType
     }
-    this.setState({isStartLoad: true})
-    apiServices.post(_config.urls.base + _config.urls.signup_post, {
+    this.setState({ isStartLoad: true });
+    post(_config.urls.base + _config.urls.signup_post, {
       params: sendSingUpData,
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
       }
     }).then(nextPath => {
-      this.setState({isStartLoad: false})
+      this.setState({ isStartLoad: false })
       if (nextPath) {
-        this.setState({finalRedirect: nextPath})
+        this.setState({ finalRedirect: nextPath })
       }
     })
     this.props.history.push({
@@ -81,9 +85,10 @@ class Home extends React.Component {
   }
 
   handleBusinessType = val => {
-    this.setState({anotherBusinessType: val})
+    this.setState({ anotherBusinessType: val })
   }
-  render () {
+
+  render() {
     return (
       <div id='home'>
         <Switch>

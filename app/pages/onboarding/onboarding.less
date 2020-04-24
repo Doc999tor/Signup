@@ -7,14 +7,32 @@
    height:100%;
    background-image: linear-gradient(to bottom, #966eff 7%, #4f2da7 92%);
    .icon-wrap {
+     position: relative;
      display: flex;
      align-items: center;
      justify-content: center;
      width: 13.75rem;
      height: 13.75rem;
      border-radius: 50%;
-     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), #7c54d6);
-   }
+     animation: pic 0.3s;
+     img {
+       top: 0;
+       z-index: 1;
+       position: absolute;
+      }
+    }
+    .icon-wrap:after {
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), #7c54d6);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      z-index: 0;
+      position: absolute;
+      content: '';
+      -webkit-animation: spin 3s infinite linear;
+      animation: spin 3s infinite linear;
+}
+
    h2 {
      margin: 0;
      width: 75%;
@@ -81,7 +99,12 @@
       transform: rotate(360deg);
     }
   }
- } 
+ }
+ @keyframes pic {
+   0% {
+     transform: scale(0.7);
+   }
+ }
  @keyframes startBtn {
    100% {
     opacity: 1;

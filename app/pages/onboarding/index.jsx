@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import './onboarding.less'
 
@@ -24,6 +24,7 @@ const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isSta
     <div className={`onboarding_page ${name}`}>
       <div className='icon-wrap'>
         <img src={_config.urls.static + icon} alt={icon} />
+        {/* <div className='bacground' /> */}
       </div>
       <h2>{text}</h2>
       <div className='progress'>

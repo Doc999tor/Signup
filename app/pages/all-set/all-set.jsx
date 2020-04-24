@@ -1,30 +1,32 @@
-import React, {Component} from 'react'
-import {apiServices} from 'services'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import StartButton from '../../components/start-button/start-button.jsx'
+import { get } from '../../services/apiServices'
+import StartButton from '../../components/start-button/start-button'
 
 import './all-set.less'
 
 class AllSet extends Component {
   state = {
-    // isPermitAds: false,
     countries_success: false,
     isAgreeToAllTerms: false
   }
-  componentDidMount () {
-    apiServices.get(_config.urls.countries_get).then(response => {
+
+  componentDidMount() {
+    get(_config.urls.countries_get).then(response => {
       if (response) {
         this.props.onHandleCountriesValue(response)
-        this.setState({countries_success: true})
+        this.setState({ countries_success: true })
       }
     }).catch(err => {
       console.log(`countries were not uploaded. Error: ${err}`)
     })
   }
+
   backButton = () => this.props.history.goBack()
 
   handleChangeAgree = () => this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})
-  render () {
+
+  render() {
     return (
       <div className='all-set'>
         <div className='all-set-wrap'>
