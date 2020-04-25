@@ -101,7 +101,7 @@ class SignUp extends Component {
   }
 
   handleGoToBusinessType = () => {
-    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
+    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
   render () {
     const { email, pass, phone } = this.props

@@ -1,6 +1,6 @@
 var lang = 'en'
 var _config = {}
-
+_config.baseUrl = `/${lang}/signup`
 _config.data = {
   isRTL: false,
   lang: lang,
@@ -34,7 +34,7 @@ _config.other_business_type_id = -1
 _config.urls = {
   business_type: '/business-type',
   privacy_policy: '/privacy-policy',
-  static: '/media/',
+  static: './media/',
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
@@ -89,7 +89,11 @@ _config.translations = {
     business_type: {
       select_business_type: 'Select Business Type or Several',
       adjuas_the_app: 'We\'ll adjust an app for you',
-      skip_here: 'Skip'
+      skip_here: 'Skip',
+      type_business_name: 'Your business type',
+      enter_different_type: 'Enter a different type of business',
+      ok: 'Ok',
+      no_thanks: 'No, thanks'
     },
     done_btn: 'Done'
   },

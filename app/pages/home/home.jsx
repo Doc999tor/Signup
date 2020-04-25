@@ -7,7 +7,7 @@ import BusinessType from '../business-type/business-type'
 import { post } from '../../services/apiServices'
 import { getPrettyDate } from '../../services/helperServices'
 
-const baseUrl = window.REACT_ROUTER_BASENAME
+const baseUrl = _config.baseUrl
 
 class Home extends React.Component {
   state = {
@@ -79,7 +79,7 @@ class Home extends React.Component {
       }
     })
     this.props.history.push({
-      pathname: window.REACT_ROUTER_BASENAME + _config.onboarding_pages[0].path,
+      pathname: _config.baseUrl + _config.onboarding_pages[0].path,
       search: window.location.search
     })
   }

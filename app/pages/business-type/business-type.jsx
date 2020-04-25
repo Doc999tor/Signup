@@ -14,14 +14,14 @@ class BusinessType extends Component {
   componentDidMount() {
     get(_config.urls.business_types_get.replace('{lang}', _config.data.lang)).then(response => {
       if (response && response.length) {
-        this.setState({businessList: response})
+        this.setState({ businessList: response })
       }
     })
   }
 
   handleSkip = () => {
     this.props.history.push({
-      pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
+      pathname: _config.baseUrl + _config.routing.all_set_path,
       search: window.location.search
     })
   }
@@ -29,7 +29,7 @@ class BusinessType extends Component {
   handleGoToAllSet = () => {
     if (this.props.selectedBusinessIds.length) {
       this.props.history.push({
-        pathname: window.REACT_ROUTER_BASENAME + _config.routing.all_set_path,
+        pathname: _config.baseUrl + _config.routing.all_set_path,
         search: window.location.search
       })
     }

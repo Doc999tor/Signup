@@ -5,7 +5,7 @@ import './onboarding.less'
 const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isStartLoad }) => {
   const nextStep = () => {
     history.push({
-      pathname: window.REACT_ROUTER_BASENAME + nextRoute,
+      pathname: _config.baseUrl + nextRoute,
       search: window.location.search
     })
   }
