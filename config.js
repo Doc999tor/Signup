@@ -91,8 +91,8 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Select Business Type or Several',
-      adjuas_the_app: 'We\'ll adjust an app for you',
+      title: 'Select Business Type or Several',
+      subtitle: 'We\'ll adjust an app for you',
       skip_here: 'Skip',
       type_business_name: 'Your business type',
       enter_different_type: 'Enter a different type of business',
@@ -132,8 +132,8 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
+      title: 'Please select business type',
+      subtitle: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -174,8 +174,8 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
+      title: 'Please select business type',
+      subtitle: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',

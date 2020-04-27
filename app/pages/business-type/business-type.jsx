@@ -45,9 +45,9 @@ class BusinessType extends Component {
             <div className='text-wrap'>
               <div className='text-container'>
                 <h2 className='text-container__title'>
-                  {_config.translations[_config.data.lang].business_type.select_business_type}
+                  {_config.translations[_config.data.lang].business_type.title}
                 </h2>
-                <p className='text-container__text'>{_config.translations[_config.data.lang].business_type.adjuas_the_app}</p>
+                <p className='text-container__text'>{_config.translations[_config.data.lang].business_type.subtitle}</p>
               </div>
             </div>
             <div className='buttons-wrap'>
