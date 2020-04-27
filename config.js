@@ -64,7 +64,11 @@ _config.translations = {
       have_acc_alredy: 'Already have an account?',
       login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
-      continue: 'Continue'
+      continue: 'Continue',
+      logo_animation: {
+        top_text: 'Appointment Scheduling',
+        bottom_text: 'CRM App for your Business'
+      }
     },
     onboarding: {
       lets_start: 'Lets Start!'

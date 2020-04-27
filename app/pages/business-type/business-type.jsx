@@ -55,30 +55,30 @@ class BusinessType extends Component {
               <button className='choose-menu__button' onClick={this.handleSkip}>{_config.translations[_config.data.lang].business_type.skip_here}</button>
             </div>
           </div>
-          <div className='bussiness-container'>
-            {
-              this.state.businessList.map((el, key) => {
-                // console.log(el)
-                let isActive = this.props.selectedBusinessIds.includes(el.id)
-                return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')}
-                  key={key} onClick={() => {
-                    if (!isActive && el.id === _config.other_business_type_id) {
-                      this.setState({isModalOpen: !this.state.isModalOpen}, () => { this.input.focus() })
-                    } else {
-                      this.props.onHandleBusinessIds(el.id)
-                    }
-                  }}>
-                  <div className='bussiness-type__info'>
-                    <img className={'bussiness-type__img' + ((isActive ? ' active_img' : ' inactive_img'))} src={_config.urls.business_types_icons + (isActive ? el.icon : `violet-${el.icon}`)} />
-                    <div className='bussiness-type__name'>{el.name}</div>
-                  </div>
-                  {isActive && <div className='bussiness-type__checkmark'>
-                    <div className='checkmark' />
-                  </div>}
-                </div>)
-              })
-            }
-          </div>
+            <div className='bussiness-container'>
+              {
+                this.state.businessList.map((el, key) => {
+                  // console.log(el)
+                  let isActive = this.props.selectedBusinessIds.includes(el.id)
+                  return (<div className={(isActive && 'bussiness-type active ' || 'bussiness-type')}
+                    key={key} onClick={() => {
+                      if (!isActive && el.id === _config.other_business_type_id) {
+                        this.setState({isModalOpen: !this.state.isModalOpen}, () => { this.input.focus() })
+                      } else {
+                        this.props.onHandleBusinessIds(el.id)
+                      }
+                    }}>
+                    <div className='bussiness-type__info'>
+                      <img className={'bussiness-type__img' + ((isActive ? ' active_img' : ' inactive_img'))} src={_config.urls.business_types_icons + (isActive ? el.icon : `violet-${el.icon}`)} />
+                      <div className='bussiness-type__name'>{el.name}</div>
+                    </div>
+                    {isActive && <div className='bussiness-type__checkmark'>
+                      <div className='checkmark' />
+                    </div>}
+                  </div>)
+                })
+              }
+            </div>
           <Modal onClose={() => this.setState({isModal: false})} isActive={this.state.isModalOpen} modalInput={this.modalInput}>
             <div className='top-container'>
               <div className='modal__title'>

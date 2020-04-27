@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
+import Slideshow from '../../components/logo-animation'
 
 import './sign-up.less'
 
@@ -103,17 +104,15 @@ class SignUp extends Component {
   handleGoToBusinessType = () => {
     this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
-  render () {
+
+  render() {
     const { email, pass, phone } = this.props
     let phoneValue = (phone === 'null' || phone === null) ? '' : phone
     const { validPhone } = this.state
     return (
       <div className='sign-up'>
         <div style={{backgroundImage: `url(/media/wave.svg), linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
-          <div className='logo-animation'>
-            <img className='sign-up-logo' src={_config.urls.static + 'logo.svg'} />
-            <img className='sign-up-logo-name' src={_config.urls.static + 'atzma.im.svg'} />
-          </div>
+          <Slideshow />
         </div>
         <div className='sign-up-wrap'>
           <div className='title-container'>
@@ -126,7 +125,7 @@ class SignUp extends Component {
             <div className='text-content-wrap'>
               <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
                 <img className='group__email'
-                  src={_config.urls.static + 'ic_email.svg'} />
+                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
                 <input type='email'
                   name='email'
                   value={email}
@@ -140,8 +139,8 @@ class SignUp extends Component {
               </div>
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
                 <img className='group__lock'
-                  src={_config.urls.static + 'ic_pass.svg'} />
-                <input type='password'
+                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
+                  <input type='password'
                   name='pass'
                   value={pass}
                   onChange={() => this.props.onHandlePassValue(this.pass.value)}
