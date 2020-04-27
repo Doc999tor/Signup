@@ -109,9 +109,10 @@ class SignUp extends Component {
     const { email, pass, phone } = this.props
     let phoneValue = (phone === 'null' || phone === null) ? '' : phone
     const { validPhone } = this.state
+    const bgrPath = _config.urls.static + 'wave.svg'
     return (
       <div className='sign-up'>
-        <div style={{backgroundImage: `url(/media/wave.svg), linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
+        <div style={{backgroundImage: `url(${bgrPath}), linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
           <Slideshow />
         </div>
         <div className='sign-up-wrap'>
