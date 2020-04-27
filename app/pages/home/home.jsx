@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import AllSet from '../all-set/all-set'
 import SignUp from '../sign-up/sign-up'
 import Onboarding from '../onboarding/index'
@@ -96,7 +96,6 @@ class Home extends React.Component {
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
           <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
           {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1] ? _config.onboarding_pages[index + 1].path : this.state.finalRedirect} text={page.text} />} />)}
-          <Redirect from='/' to={baseUrl} />
         </Switch>
       </div>
     )
