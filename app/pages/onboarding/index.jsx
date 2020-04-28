@@ -9,10 +9,16 @@ const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isSta
       search: window.location.search
     })
   }
+  const letsStart = () => {
+    history.push({
+      pathname: finalRedirect,
+      search: window.location.search
+    })
+  }
   const lastPage = _config.onboarding_pages[_config.onboarding_pages.length - 1]
   const [loader, runLoader] = useState(false)
 
-  const lastStep = () => isStartLoad ? runLoader(true) : nextStep()
+  const lastStep = () => isStartLoad ? runLoader(true) : letsStart()
 
   useEffect(() => {
     if (!isStartLoad && loader && finalRedirect) {
@@ -24,7 +30,6 @@ const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isSta
     <div className={`onboarding_page ${name}`}>
       <div className='icon-wrap'>
         <img src={_config.urls.static + icon} alt={icon} />
-        {/* <div className='bacground' /> */}
       </div>
       <h2>{text}</h2>
       <div className='progress'>

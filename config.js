@@ -197,7 +197,7 @@ _config.routing = {
       incorrect: 'incorrect'
     }
   },
-  sign_up_path: '/',
+  // sign_up_path: '/',
   all_set_path: '/all-set',
   business_type_path: '/business-type'
 }
