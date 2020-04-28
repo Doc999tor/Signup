@@ -1,14 +1,16 @@
 @import './variables.css';
+* {
+  box-sizing: border-box;
+}
 html, body, #root, #home {
-  box-shadow: 0px 0px 15px 0px rgba(75, 75, 75, 0.2);
   min-height: 100%;
   max-width: 640px;
   margin: 0 auto;
   background: var(--sec-color);
 }
-a {
-  color: blue;
-  text-decoration: none;
+#home {
+  overflow: hidden;
+  box-shadow: 0px 0px 15px 0px rgba(75, 75, 75, 0.2);
 }
 body {
     font-family: var(--font-family);
@@ -17,10 +19,30 @@ body {
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: var(--white-color);
+    color: var(--main-color);
     margin: 0px !important;
 }
 // rtl
+@keyframes nextStep {
+  0% {
+    transform: translateX(100%);
+  }
+}
+@keyframes nextStepRtl {
+  0% {
+    transform: translateX(-100%);
+  }
+}
+body[style='direction: rtl;'] {
+  .images-wrap__back {
+    transform: scale(-1, 1);
+  }
+  .business-type, .all-set {
+    animation: nextStepRtl 0.3s;
+  }
+  // .all-set {
+  //   animation: nextStepRtl 0.3s;
+  }
 body[dir=rtl] {
   img {
     transform: scaleX(-1);
@@ -54,12 +76,9 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px var(--sec-color) inset !important;
 }
-input[type="text"], input[type="password"], input[type="email"] {
-  background-color : var(--sec-color) !important; 
-}
+
 input[type="password"]:focus, input[type="text"]:focus, input[type="email"]:focus {
   outline: none !important;
-  box-shadow: 0 0 4px var(--sec-bgcolor);
 }
 
 // temp 

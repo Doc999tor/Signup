@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
+import Slideshow from '../../components/logo-animation'
 
 import './sign-up.less'
 
@@ -100,56 +101,35 @@ class SignUp extends Component {
     }, () => this.props.onHandlePhoneValue(this.state.phone || null))
   }
 
-  render () {
-    const { validPhone, phone } = this.state
+  handleGoToBusinessType = () => {
+    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+  }
+
+  render() {
+    const { email, pass, phone } = this.props
+    let phoneValue = (phone === 'null' || phone === null) ? '' : phone
+    const { validPhone } = this.state
+    const bgrPath = _config.urls.static + 'wave.svg'
     return (
-      <div style={{backgroundImage: `linear-gradient( rgba(79, 45, 167, 0.7) 100%, rgba(93, 54, 177, 0.7)100%), url(${_config.urls.static}bg-img.jpg#blur)`}} className='sign-up'>
-        <ul className='nav-lang'>
-          <li className='drop'>{_config.data.lang}
-            <ul>
-              {
-                  _config.data.all_langs.map((el, key) => {
-                    if (el !== _config.data.lang) {
-                      return (
-                        <li key={key} onClick={()=>{
-                          if (el === 'he') {
-                            _config.data.isRTL = true
-                            document.body.dir = 'rtl'
-                          } else {
-                            _config.data.isRTL = false
-                            document.body.dir = 'ltr'
-                          }
-                          _config.data.lang = el
-                          this.forceUpdate()
-                        }}>{el}</li>
-                      )
-                    }
-                  })
-                }
-            </ul>
-          </li>
-        </ul>
+      <div className='sign-up'>
+        <div style={{backgroundImage: `url(${bgrPath}), linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
+          <Slideshow />
+        </div>
         <div className='sign-up-wrap'>
-          <img className='sign-up-htm__logo' src={_config.urls.static + 'logo.svg'} />
-          <form onSubmit={e => {
-            e.preventDefault()
-          }} ref={form => this.form = form} action={_config.urls.business_type} method='POST'>
+          <div className='title-container'>
+            <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
+          </div>
+          <div className='question-container'>
+            <p className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><a href={window.location.origin + _config.urls.login} >{_config.translations[_config.data.lang].sign_up.login_in}</a></p>
+          </div>
+          <form>
             <div className='text-content-wrap'>
-              <div className='login-form__text'>{_config.translations[_config.data.lang].sign_up.fill_dateils_create}</div>
-              <button className='login-form__button google dispay-none'>
-                {/* <img className='login-form__img' src={_config.urls.static + 'search.svg'} /> */}
-                <span>{_config.translations[_config.data.lang].sign_in.login_google}</span>
-              </button>
-              <input className='login-form__time-zone'
-                type='text'
-                name='time_zone'
-                defaultValue={Intl && Intl.DateTimeFormat && Intl.DateTimeFormat().resolvedOptions().timeZone} />
-              <span className='login-form__text or dispay-none' >{_config.translations[_config.data.lang].sign_in.login_or}</span>
               <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
                 <img className='group__email'
-                  src={_config.urls.static + (this.state.isValidEmail ? 'mail.svg' : 'mail-err.svg')} />
+                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
                 <input type='email'
                   name='email'
+                  value={email}
                   ref={email => this.email = email}
                   onChange={() => this.props.onHandleEmailValue(this.email.value)}
                   // if the password and email are empty then we do not do an additional check
@@ -160,9 +140,10 @@ class SignUp extends Component {
               </div>
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
                 <img className='group__lock'
-                  src={_config.urls.static + (this.state.isValidPass ? 'lock.svg' : 'lock-err.svg')} />
-                <input type='password'
+                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
+                  <input type='password'
                   name='pass'
+                  value={pass}
                   onChange={() => this.props.onHandlePassValue(this.pass.value)}
                   // if the password and email are empty then we do not do an additional check
                   onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
@@ -170,17 +151,18 @@ class SignUp extends Component {
                   className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
-                  autoComplete='current-password' />
+                  autoComplete='new-password' />
                 {this.props.pass && <img className='group__eye'
                   onClick={this.togglePass}
                   src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
               </div>
-              <div className={'phone_strip' + (validPhone ? '' : ' err_phone')}>
-                <img className='phone_img' src={_config.urls.static + 'phone.svg'} />
+              <div className={'group' + (validPhone ? '' : ' err_phone')}>
+                <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} />
                 <input
                   type='tel'
                   name='phone'
-                  className='input_phone'
+                  value={phoneValue}
+                  className='group__input input_phone'
                   onChange={this.handleChangePhone}
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
                 />
@@ -191,32 +173,10 @@ class SignUp extends Component {
               </div>
               <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
             </div>
-            <button className='login-form__button login-button'
-              type={this.state.isValidEmail && this.state.isValidPass ? 'submit' : 'button'}
-              onClick={e => {
-                e.preventDefault()
-                this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(window.REACT_ROUTER_BASENAME + _config.routing.business_type_path)
-                // this.form.submit()
-                // grecaptcha.ready(() => {
-                //   grecaptcha.execute(_config.recaptcha_v3, {action: 'homepage'}).then(token => {
-                //     apiServices.post('http://localhost/recaptcha/index.php?token={token}'.replace('{token}', token)).then(response => {
-                //       console.log('recaptcha', response)
-                //       if (!response.success) {
-                //         grecaptcha.execute()
-                //       } else {
-                //         this.form.submit()
-                //       }
-                //     })
-                //   })
-                // })
-              }}>
+            <button className='login-form__button login-button' type='button' onClick={this.handleGoToBusinessType}>
               {_config.translations[_config.data.lang].sign_up.continue}
             </button>
           </form>
-          <footer className='dont-have-acc' onClick={() => window.location.href = window.location.origin + _config.urls.login}>
-            {_config.translations[_config.data.lang].sign_up.dont_have_acc_alredy} &nbsp;
-            <span className='dont-have-acc__login'>{_config.translations[_config.data.lang].sign_up.login_in}</span>
-          </footer>
         </div>
       </div>
     )

@@ -1,10 +1,32 @@
+var lang = 'en'
 var _config = {}
-
+_config.baseUrl = `/${lang}/signup`
 _config.data = {
-  isRTL: true,
-  lang: 'en',
+  isRTL: false,
+  lang: lang,
   all_langs: ['en', 'he', 'ru']
 }
+
+_config.onboarding_pages = [
+  {
+    name: 'appointments',
+    text: 'Create appointments quickly & stay organized',
+    icon: 'ill_appointments.svg',
+    path: '/onboarding'
+  },
+  {
+    name: 'clients',
+    text: 'Keep everything you need to know about each client',
+    icon: 'ill_clients.svg',
+    path: '/onboarding1'
+  },
+  {
+    name: 'money',
+    text: 'Increase your profit with your personal assistant',
+    icon: 'ill_money.svg',
+    path: '/onboarding2'
+  }
+]
 
 _config.other_business_type_id = -1
 
@@ -12,7 +34,7 @@ _config.other_business_type_id = -1
 _config.urls = {
   business_type: '/business-type',
   privacy_policy: '/privacy-policy',
-  static: '/media/',
+  static: './media/',
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
@@ -33,15 +55,23 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I agree to all the {privacy_policy} of the Atzmaim app and the legal',
+      agree_to_all_the_Terms: 'I have read and agree to the all Atzmaim App',
       lets_start: 'Lets Start!',
-      privacy_policy: 'Privacy Policy page'
+      privacy_policy: 'Terms and Conditions of Use'
     },
     sign_up: {
-      dont_have_acc_alredy: 'Do you have an account already?',
-      login_in: 'Login',
+      main_title: 'Sign up',
+      have_acc_alredy: 'Already have an account?',
+      login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
-      continue: 'Continue'
+      continue: 'Continue',
+      logo_animation: {
+        top_text: 'Appointment Scheduling',
+        bottom_text: 'CRM App for your Business'
+      }
+    },
+    onboarding: {
+      lets_start: 'Lets Start!'
     },
     sign_in: {
       title: 'Atzmaim',
@@ -61,16 +91,15 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
-      can_choose_more: 'You can choose more the one or',
-      skip_here: 'skip here',
-      your_choose: 'Your choose:',
+      title: 'Select Business Type or Several',
+      subtitle: 'We\'ll adjust an app for you',
+      skip_here: 'Skip',
       type_business_name: 'Your business type',
       enter_different_type: 'Enter a different type of business',
       ok: 'Ok',
       no_thanks: 'No, thanks'
-    }
+    },
+    done_btn: 'Done'
   },
   he: {
     all_set: {
@@ -103,8 +132,8 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
+      title: 'Please select business type',
+      subtitle: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -112,7 +141,8 @@ _config.translations = {
       enter_different_type: 'Enter a different type of business',
       ok: 'Ok',
       no_thanks: 'No, thanks'
-    }
+    },
+    done_btn: 'Done'
   },
   ru: {
     all_set: {
@@ -144,8 +174,8 @@ _config.translations = {
       error_incorrect: 'Your e-mail or password is incorrect'
     },
     business_type: {
-      select_business_type: 'Please select business type',
-      adjuas_the_app: 'WeвЂ™ll adjuas the app to your needs',
+      title: 'Please select business type',
+      subtitle: 'WeвЂ™ll adjuas the app to your needs',
       can_choose_more: 'You can choose more the one or',
       skip_here: 'skip here',
       your_choose: 'Your choose:',
@@ -153,7 +183,8 @@ _config.translations = {
       enter_different_type: 'Enter a different type of business',
       ok: 'Ok',
       no_thanks: 'No, thanks'
-    }
+    },
+    done_btn: 'Done'
   }
 }
 
@@ -166,7 +197,7 @@ _config.routing = {
       incorrect: 'incorrect'
     }
   },
-  sign_up_path: '/',
+  // sign_up_path: '/',
   all_set_path: '/all-set',
   business_type_path: '/business-type'
 }

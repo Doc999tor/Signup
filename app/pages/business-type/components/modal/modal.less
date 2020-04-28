@@ -24,7 +24,8 @@
 .modal {
   font-weight: 500;
   position: fixed;
-  min-width: 90vw;
+  width: 90%;
+  max-width: 35rem;
   min-height: 32.4vh;
   top: 50%;
   left: 50%;
@@ -35,7 +36,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--text-color);
   align-items: center;
   .top-container {
     padding-top: 1.9rem;
@@ -72,10 +72,12 @@
       -moz-border-radius: 0.2em;
       border-radius: 3em;
       background: var(--main-bgcolor);
+      transition: background-color 0.3s;
       color: var(--white-color);
       font-size: 1.125rem;
       &:disabled { 
         background: var(--sec-bgcolor);
+        transition: background-color 0.3s;
        }
     }
   }

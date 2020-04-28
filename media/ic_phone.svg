@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__ic_phone" width="24" height="24" viewBox="0 0 24 24">
+    <path id="prefix__border" d="M0 0H24V24H0z" transform="rotate(90 12 12)" style="opacity:0;fill:#4f2da7"/>
+    <path id="prefix__ic_phone-2" d="M8072.625 1666a2.663 2.663 0 0 1-2.625-2.7v-12.6a2.662 2.662 0 0 1 2.625-2.7h8.751a2.663 2.663 0 0 1 2.625 2.7v12.6a2.664 2.664 0 0 1-2.625 2.7zm-.875-15.3v12.6a.889.889 0 0 0 .875.9h8.751a.887.887 0 0 0 .874-.9v-12.6a.885.885 0 0 0-.874-.9h-8.751a.887.887 0 0 0-.875.9zm3.939 10.35a1.313 1.313 0 1 1 1.311 1.35 1.33 1.33 0 0 1-1.311-1.351zm-.875-7.649a.9.9 0 0 1 0-1.8h4.375a.9.9 0 0 1 0 1.8z" data-name="ic_phone" transform="translate(-8065 -1645)" style="fill:#4f2da7"/>
+</svg>
