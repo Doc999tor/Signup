@@ -10,10 +10,7 @@ const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isSta
     })
   }
   const letsStart = () => {
-    history.push({
-      pathname: finalRedirect,
-      search: window.location.search
-    })
+    location.href = window.location.origin + finalRedirect
   }
   const lastPage = _config.onboarding_pages[_config.onboarding_pages.length - 1]
   const [loader, runLoader] = useState(false)
