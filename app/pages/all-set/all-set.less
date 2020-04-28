@@ -182,3 +182,11 @@ input[type='checkbox']:checked {
     transform: scale(0);
   }
 }
+input[type='checkbox'].makeChoose {
+  border: solid 0.1rem var(--active-color);
+  transition: border-color 0.3s;
+}
+input[type='checkbox']:checked.makeChoose {
+  border: solid 0.1rem var(--dark-color);
+  transition: border-color 0.3s;
+}

@@ -1,10 +1,10 @@
 import React from 'react'
 import './start-button.less'
 
-const StartButton = ({route, active, isStartLoad}) => {
+const StartButton = ({route, active, isStartLoad, onMakeChoose, makeChoose}) => {
   return (
     <footer className='start-button-wrap'>
-      <div className='start-button'>
+      <div className='start-button' onClick={!makeChoose && onMakeChoose}>
         <button className={`all-set-form__button start ${active ? 'active' : ''}`} onClick={()=>{
           if (!isStartLoad) {
             route()

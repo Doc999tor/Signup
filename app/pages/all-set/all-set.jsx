@@ -8,7 +8,8 @@ import './all-set.less'
 class AllSet extends Component {
   state = {
     countries_success: false,
-    isAgreeToAllTerms: false
+    isAgreeToAllTerms: false,
+    makeChoose: false 
   }
 
   componentDidMount() {
@@ -24,9 +25,14 @@ class AllSet extends Component {
 
   backButton = () => this.props.history.goBack()
 
-  handleChangeAgree = () => this.setState({isAgreeToAllTerms: !this.state.isAgreeToAllTerms})
+  handleChangeAgree = () => this.setState({ isAgreeToAllTerms: !this.state.isAgreeToAllTerms })
+
+  handleMakeChoose = () => {
+    this.setState({ makeChoose: true })
+  }
 
   render() {
+    const { isAgreeToAllTerms, makeChoose } = this.state
     return (
       <div className='all-set'>
         <div className='all-set-wrap'>
@@ -51,16 +57,17 @@ class AllSet extends Component {
               </label>
             </div>
             <div className='checkbox-wrap'>
-              <input id='twice' type='checkbox'
-                value={this.state.isAgreeToAllTerms}
-                onChange={this.handleChangeAgree} />
+              <input className={makeChoose ? 'makeChoose' : 'normal'} id='twice' type='checkbox'
+                value={isAgreeToAllTerms}
+                onChange={this.handleChangeAgree}
+              />
               <label className='combined' htmlFor='twice'>
                 <span>{_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}</span>
                 <a className='term-link' target='_blank' href={_config.urls.privacy_policy}>{_config.translations[_config.data.lang].all_set.privacy_policy}</a>
               </label>
             </div>
           </div>
-          <StartButton route={this.props.onHandleRequest} active={this.state.isAgreeToAllTerms && this.state.countries_success} />
+          <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} route={this.props.onHandleRequest} active={isAgreeToAllTerms && this.state.countries_success} />
         </div>
       </div>
     )
