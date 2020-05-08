@@ -10,9 +10,17 @@
   background-color: var(--sec-color);
   .bottom_bgr {
     width: 100%;
+    position: relative;
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 12.5rem;
+    .wave {
+      position: absolute;
+      top: 8%;
+      left: 0;
+      width: 100%;
+      opacity: 0.35;
+    }
   }
   
   .sign-up-wrap {
@@ -35,7 +43,7 @@
     }
     .sign-up-question {
       margin: 0;
-      padding-bottom: 1.4rem;
+      padding: 0.3rem 0 1.4rem;
       font-size: 0.75rem;
       animation: titleMove 0.3s forwards;
       animation-delay: 1.3s;
@@ -86,6 +94,7 @@
         text-align: start;
         border-radius: 3rem;
         background-image: linear-gradient(110deg, #591ec0, #6623db 27%, #7d3ee8 53%, #be95ff 112%);
+        box-shadow: 0 10px 15px 0 rgba(41, 41, 204, 0.3);
         display: flex;
         align-items: center;
         padding: 1rem 2.25rem;
