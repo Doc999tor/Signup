@@ -168,6 +168,7 @@ export async function head(url) {
 }
 
 var _promise = (apiUrl, options) => {
+  const statusCodes = [400, 404, 422, 500]
   return new Promise((resolve, reject) => {
     var request = (apiUrl, options) => {
       var apiUrl = apiUrl;
@@ -189,12 +190,17 @@ var _promise = (apiUrl, options) => {
         if (response.status === 503) {
           setTimeout(() => {
             request(apiUrl, options)
-          }, response.headers.get('retry-after'))
+          }, response.headers.get('Retry-After') * 1000)
         }
-        if (response.status === 422) {
-          window.location.href = _config.urls.error_page
+        if (response.status === 502) {
+          setTimeout(() => {
+            request(apiUrl, options)
+          }, 1000)
         }
-        if (response.status === 400 || response.status === 405) {
+        if (statusCodes.includes(response.status)) {
+          window.location.href = config.urls.error_page
+        }
+        if (response.status === 405) {
           console.error('Response: ', response)
           reject(response)
         }
