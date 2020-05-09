@@ -41,7 +41,7 @@ class AllSet extends Component {
           </div>
           <div className='images-wrap'>
             <img className='images-wrap__background' src={_config.urls.static + 'ill_background.svg'} />
-            <img className='images-wrap__woman' src={_config.urls.static + 'ill_woman.png'} />
+            <img className='images-wrap__woman' src={_config.urls.static + 'ill_woman@3x.png'} />
           </div>
           <h2 className='all-set-form__text'>{_config.translations[_config.data.lang].all_set.we_all_set}</h2>
           <span className='all-set-form__forgot'>
