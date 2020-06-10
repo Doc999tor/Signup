@@ -2,6 +2,7 @@ var lang = 'en'
 var _config = {}
 _config.baseUrl = `/${lang}/signup`
 _config.data = {
+  phone: '+972 55 966 5243',
   isRTL: false,
   lang: lang,
   all_langs: ['en', 'he', 'ru']
@@ -39,6 +40,7 @@ _config.urls = {
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
   business_types_get: 'business_types?lang={lang}',
+  api_leads: 'https://api.bewebmaster.co.il/home/contact_us/leads',
   countries_get: 'countries',
   // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
 
@@ -62,13 +64,19 @@ _config.translations = {
     sign_up: {
       main_title: 'Sign up',
       have_acc_alredy: 'Already have an account?',
+      fill_fields_label: 'Fill in the fields and we’ll contact you',
       login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
-      continue: 'Continue',
+      send: 'Send',
+      call_now: 'OR Call now',
       logo_animation: {
         top_text: 'Appointment Scheduling',
         bottom_text: 'CRM App for your Business'
-      }
+      },
+      send_popup: {
+        sending: 'Sending',
+        success: 'Your data sent successfully We’ll contact you shortly!'
+      },
     },
     onboarding: {
       lets_start: 'Lets Start!'
@@ -82,6 +90,7 @@ _config.translations = {
       login: 'Login',
       sign_up: 'Sign Up',
       enter_phone: 'Enter your phone number',
+      enter_name: 'Enter your name',
       missing_email: 'Missing email',
       missing_password: 'Missing password',
       wrong_email: 'Wrong email try again!',

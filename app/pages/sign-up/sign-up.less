@@ -6,6 +6,7 @@
   background-size: cover;
   height:100%;
   min-height: 100vh;
+  padding-bottom: 3.5rem;
   animation: sign-up 0.3s ease-in;
   background-color: var(--sec-color);
   .bottom_bgr {
@@ -22,32 +23,43 @@
       opacity: 0.35;
     }
   }
-  
-  .sign-up-wrap {
+  .logo-animation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.125rem;
+    .sign-up-logo-name {
+      padding-top: 0.75rem;
+    }
+  }
+  .sign-up-wrap, .sending_wrap {
     position: relative;
-    top: -5rem;
+    top: -5.7rem;
     padding: 1rem 1.5rem 2.5rem;
     background-color: var(--white-color);
     width: 90%;
     border-radius: 1rem;
     box-shadow: 0 3px 20px 0 rgba(41, 41, 204, 0.2);
+  }
+  .sending_wrap {
+    padding: 0;
+    width: 80%;
+  }
+  .sign-up-wrap {
+    min-height: 20.25rem;
     h1 {
       margin: 0;
       font-size: 2rem;
-      animation: titleMove 0.3s forwards;
-      animation-delay: 1s;
-      transform: translateY(100%);
     }
     .title-container, .question-container {
       overflow: hidden;
     }
     .sign-up-question {
       margin: 0;
-      padding: 0.25rem 0 1.4rem;
+      padding: 0 0 1.4rem;
       font-size: 0.75rem;
-      animation: titleMove 0.3s forwards;
-      animation-delay: 1.3s;
-      transform: translateY(100%);
       a {
         -moz-margin-start: 0.4rem;
         -webkit-margin-start: 0.4rem;
@@ -56,19 +68,21 @@
         text-decoration: none;
       }
     }
+    .sign-fill_fields {
+      margin: 0;
+      padding: 0.3rem 0 0 0;
+      font-size: 0.75rem;
+      
+    }
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      opacity: 0;
       animation: shownForm 0.3s ease-in forwards;
       animation-delay: .5s;
       justify-content: space-between;
       .text-content-wrap {
         width: 100%;
-      }
-      .login-form__time-zone {
-        visibility: hidden;
       }
       .login-err {
         display: flex;
@@ -84,11 +98,6 @@
         font-size: 0.875rem;
         text-align: center;
         width: 100%;
-        &.or {
-          font-size: 1.025rem;
-          margin: 1rem;
-          text-transform: uppercase;
-        }
       }
       .login-form__button {
         text-align: start;
@@ -102,16 +111,11 @@
         font-size: 1rem;
         margin: 0 auto;
         font-weight: 500;
-        &.google {
-          margin: 1.5rem 1rem 0rem 1rem;
-          span {
-            padding: 0rem 0.85rem;
-          }
-        }
         &.login-button {
           position: absolute;
           bottom: -8%;
           right: 50%;
+          min-width: 9.5rem;
           transform: translateX(50%);
           text-transform: uppercase;
           justify-content: center;
@@ -163,6 +167,10 @@
           color: var(--active-color);
           transition: color 0.3s;
         }
+        input::-webkit-input-placeholder {
+          color: var(--active-color);
+          transition: color 0.3s;
+        }
       }
       .group.err {
         border: .1rem solid var(--active-color);
@@ -175,36 +183,25 @@
           transition: color 0.3s;
         }
       }
-      .login-form__forgot {
-        margin: 1.15rem 1.25rem 0 1.25rem;
-      }
     }
   }
-  .dont-have-acc {
-    text-align: center;
-    padding-bottom: 1rem;
-    margin-top: -3rem;
-    .dont-have-acc__login {
-      font-weight: bold;
+  .call_now {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 1.375rem;
+    p{
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 0.75rem;
+      margin: 0 0 0.3rem;
     }
-  }
-}
-
-@keyframes sign-up {
-  0% {
-    transform: translateY(100%);
-  }
-}
-@keyframes shownForm {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes titleMove {
-  100% {
-    transform: translateY(0)
+    a {
+      color: var(--dark-color);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+    }
   }
 }
