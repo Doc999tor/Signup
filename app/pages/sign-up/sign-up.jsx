@@ -85,9 +85,11 @@ class SignUp extends Component {
       <div className='sign-up'>
         <div style={{ backgroundImage: 'linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)' }} className='bottom_bgr'>
           <img className='wave' src={`${_config.urls.static}wave.svg`} alt='wave' />
-          <div className='logo-animation'>
-            <img className='sign-up-logo' src={`${_config.urls.static}logo.svg`} />
-            <img className='sign-up-logo-name' src={`${_config.urls.static}atzma.im.svg`} />
+          <div className='logo-wrap'>
+            <a href={_config.urls.home} className='home-link'>
+              <img className='sign-up-logo' src={`${_config.urls.static}logo.svg`} />
+              <img className='sign-up-logo-name' src={`${_config.urls.static}atzma.im.svg`} />
+            </a>
           </div>
         </div>
         {send

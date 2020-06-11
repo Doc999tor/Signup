@@ -33,6 +33,7 @@ _config.other_business_type_id = -1
 
 // _config.data.all_langs = ['en', 'he', 'ru']
 _config.urls = {
+  home: '/',
   business_type: '/business-type',
   privacy_policy: '/privacy-policy',
   static: './media/',
