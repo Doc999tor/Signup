@@ -64,7 +64,7 @@ class SignUp extends Component {
         setTimeout(() => {
           this.setState({ send: false })
           window.history.back()
-        }, 2000)
+        }, 4000)
       })
     }, 1000)
   }
