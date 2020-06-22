@@ -48,24 +48,24 @@ class AllSet extends Component {
             {_config.translations[_config.data.lang].all_set.enjoy_your_choice}
           </span>
           <div className='block-with-checkbox'>
-            <div className='checkbox-wrap'>
+            <label htmlFor='first' className='checkbox-wrap'>
               <input id='first' type='checkbox'
                 value={this.props.isPermitAds}
                 onChange={this.props.onHandleChangeAds} />
-              <label htmlFor='first'>
+              <p>
                 {_config.translations[_config.data.lang].all_set.send_important_information}
-              </label>
-            </div>
-            <div className='checkbox-wrap'>
+              </p>
+            </label>
+            <label className='checkbox-wrap' htmlFor='twice'>
               <input className={makeChoose ? 'makeChoose' : 'normal'} id='twice' type='checkbox'
                 value={isAgreeToAllTerms}
                 onChange={this.handleChangeAgree}
               />
-              <label className='combined' htmlFor='twice'>
+              <p className='combined' htmlFor='twice'>
                 <span>{_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}</span>
                 <a className='term-link' target='_blank' href={_config.urls.privacy_policy}>{_config.translations[_config.data.lang].all_set.privacy_policy}</a>
-              </label>
-            </div>
+              </p>
+            </label>
           </div>
           <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} route={this.props.onHandleRequest} active={isAgreeToAllTerms && this.state.countries_success} />
         </div>
