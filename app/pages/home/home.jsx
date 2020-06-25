@@ -95,7 +95,7 @@ class Home extends React.Component {
           <Route exact path={baseUrl} render={() => <SignUp {...this.state} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
           <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
-          {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={page.text} />} />)}
+          {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={_config.translations[_config.data.lang].onboarding_pages[page.name]?.text} />} />)}
         </Switch>
       </div>
     )

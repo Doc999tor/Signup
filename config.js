@@ -10,19 +10,16 @@ _config.data = {
 _config.onboarding_pages = [
   {
     name: 'appointments',
-    text: 'Create appointments quickly & stay organized',
     icon: 'ill_appointments.svg',
     path: '/onboarding'
   },
   {
     name: 'clients',
-    text: 'Keep everything you need to know about each client',
     icon: 'ill_clients.svg',
     path: '/onboarding1'
   },
   {
     name: 'money',
-    text: 'Increase your profit with your personal assistant',
     icon: 'ill_money.svg',
     path: '/onboarding2'
   }
@@ -70,8 +67,11 @@ _config.translations = {
         bottom_text: 'CRM App for your Business'
       }
     },
-    onboarding: {
-      lets_start: 'Lets Start!'
+    onboarding_pages: {
+      start_btn_label: 'Lets Start!',
+      appointments: { text: 'Create appointments quickly & stay organized' },
+      clients: { text: 'Keep everything you need to know about each client' },
+      money: { text: 'Increase your profit with your personal assistant' },
     },
     sign_in: {
       title: 'Atzmaim',

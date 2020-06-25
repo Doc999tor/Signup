@@ -35,7 +35,7 @@ const Onboarding = ({ name, icon, text, nextRoute, finalRedirect, history, isSta
       <button onClick={isLastPage ? lastStep : nextStep} className={'next-step' + (isLastPage ? ' lets-start' : '')} type='button'>
         {
           isLastPage
-            ? loader && isStartLoad ? <img className='loader' src={_config.urls.static + 'preloader.svg'} /> : _config.translations[_config.data.lang].onboarding.lets_start
+            ? loader && isStartLoad ? <img className='loader' src={_config.urls.static + 'preloader.svg'} /> : _config.translations[_config.data.lang].onboarding_pages.start_btn_label
             : <img src={_config.urls.static + 'ic_back.svg'} />
         }
       </button>
