@@ -141,8 +141,9 @@ class SignUp extends Component {
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
                 <img className='group__lock'
                   src={_config.urls.static + (this.state.isValidEmail ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
-                  <input type='password'
-                  name='pass'
+                <input
+                  type='password'
+                  name='new-password'
                   value={pass}
                   onChange={() => this.props.onHandlePassValue(this.pass.value)}
                   // if the password and email are empty then we do not do an additional check
@@ -151,7 +152,7 @@ class SignUp extends Component {
                   className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
-                  autoComplete='new-password' />
+                 />
                 {this.props.pass && <img className='group__eye'
                   onClick={this.togglePass}
                   src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
