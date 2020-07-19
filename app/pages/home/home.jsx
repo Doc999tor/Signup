@@ -69,36 +69,34 @@ class Home extends React.Component {
   }
 
   handleRequest = () => {
-    const sendSingUpData = {}
-    sendSingUpData.added = getPrettyDate()
-    sendSingUpData.email = this.state.email
-    sendSingUpData.pass = this.state.pass
-    sendSingUpData.phone = this.state.phone
-    sendSingUpData.permit_ads = this.state.isPermitAds
-    sendSingUpData.business_types = '[' + this.state.selectedBusinessIds + ']'
-    sendSingUpData.lang = _config.data.lang
-    sendSingUpData.timezone = this.state.countries.timezone
-    sendSingUpData.country = this.state.countries.country
-    sendSingUpData.city = this.state.countries.city
-
-    if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) { 
-      sendSingUpData.another_business_type_id = this.state.anotherBusinessType
+    let body = `added=${getPrettyDate()}&email=${this.state.email}&pass=${this.state.pass}&phone=${this.state.phone}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
+    if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) {
+      body = body + `&another_business_type_id=${this.state.anotherBusinessType}`
     }
-    this.setState({ isStartLoad: true });
-    post(_config.urls.base + _config.urls.signup_post, {
-      params: sendSingUpData,
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded'
+    this.setState({ isStartLoad: true })
+    postService(_config.urls.signup_post, body).then(r => {
+      if (r.status === 201) {
+        r.text().then(nextPath => {
+          this.setState({ isStartLoad: false })
+          if (nextPath) {
+            this.setState({ finalRedirect: nextPath })
+          }
+        })
+        this.props.history.push({
+          pathname: _config.baseUrl + _config.onboarding_pages[0].path,
+          search: window.location.search
+        })
       }
-    }).then(nextPath => {
-      this.setState({ isStartLoad: false })
-      if (nextPath) {
-        this.setState({ finalRedirect: nextPath })
+      if (r.status === 422) {
+        this.setState({
+          existingEmail: true
+        }, () => {
+          this.props.history.push({
+            pathname: baseUrl,
+            search: window.location.search
+          })
+        })
       }
-    })
-    this.props.history.push({
-      pathname: _config.baseUrl + _config.onboarding_pages[0].path,
-      search: window.location.search
     })
   }
 

@@ -35,7 +35,7 @@ _config.urls = {
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
-  api_check_email: '/check-credentials',
+  api_check_email: 'check-credentials',
   business_types_get: 'business_types?lang={lang}',
   countries_get: 'countries',
   // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
