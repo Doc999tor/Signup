@@ -1,10 +1,11 @@
 import React from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import AllSet from '../all-set/all-set'
 import SignUp from '../sign-up/sign-up'
 import Onboarding from '../onboarding/index'
 import BusinessType from '../business-type/business-type'
 import { post } from '../../services/apiServices'
+import { postService } from '../../services/api_services'
 import { getPrettyDate } from '../../services/helperServices'
 
 const baseUrl = _config.baseUrl
@@ -15,6 +16,7 @@ class Home extends React.Component {
     pass: sessionStorage.getItem('atz_pass') || '',
     phone: sessionStorage.getItem('atz_phone') || null,
     finalRedirect: '',
+    existingEmail: false,
     selectedBusinessIds: [],
     isPermitAds: false,
     isStartLoad: false,
@@ -49,6 +51,22 @@ class Home extends React.Component {
   }
 
   handleChangeAds = () => this.setState({ isPermitAds: !this.state.isPermitAds })
+
+  handleCheckEmail = () => {
+    const body = `email=${this.state.email}&pass=${this.state.pass}`
+    postService(_config.urls.api_check_email, body).then(r => {
+      if (r.status === 409 || r.status === 302) {
+        this.setState({
+          existingEmail: true
+        }, () => {
+          this.props.history.push({
+            pathname: baseUrl,
+            search: window.location.search
+          })
+        })
+      }
+    })
+  }
 
   handleRequest = () => {
     const sendSingUpData = {}
@@ -92,10 +110,11 @@ class Home extends React.Component {
     return (
       <div id='home'>
         <Switch>
-          <Route exact path={baseUrl} render={() => <SignUp {...this.state} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
+          <Route exact path={baseUrl} render={() => <SignUp {...this.state} onCheckEmail={this.handleCheckEmail} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
           <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
           {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={_config.translations[_config.data.lang].onboarding_pages[page.name]?.text} />} />)}
+          <Redirect from='/' to={baseUrl} />
         </Switch>
       </div>
     )
