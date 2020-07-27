@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import Slideshow from '../../components/logo-animation'
+import ExistingEmail from '../../components/existing_email'
 
 import './sign-up.less'
 
@@ -102,18 +103,21 @@ class SignUp extends Component {
   }
 
   handleGoToBusinessType = () => {
+    this.props.onCheckEmail()
     this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
 
   render() {
-    const { email, pass, phone } = this.props
+    const { email, pass, phone, existingEmail } = this.props
     let phoneValue = (phone === 'null' || phone === null) ? '' : phone
     const { validPhone } = this.state
     return (
       <div className='sign-up'>
         <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
           <img className='wave' src={_config.urls.static + 'wave.svg'} alt='wave' />
-          <Slideshow />
+          {!existingEmail
+            ? <Slideshow />
+            : <ExistingEmail />}
         </div>
         <div className='sign-up-wrap'>
           <div className='title-container'>
@@ -124,9 +128,9 @@ class SignUp extends Component {
           </div>
           <form>
             <div className='text-content-wrap'>
-              <div className={`group email ${this.state.isValidEmail ? '' : 'err'}`}>
+              <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
                 <img className='group__email'
-                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
+                  src={_config.urls.static + (this.state.isValidEmail && !existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
                 <input type='email'
                   name='email'
                   value={email}
@@ -140,7 +144,7 @@ class SignUp extends Component {
               </div>
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
                 <img className='group__lock'
-                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
+                  src={_config.urls.static + (this.state.isValidPass ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
                 <input
                   type='password'
                   name='new-password'
@@ -151,6 +155,7 @@ class SignUp extends Component {
                   ref={pass => this.pass = pass}
                   className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                   data-type='password'
+                  autoComplete='new-password'
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
                  />
                 {this.props.pass && <img className='group__eye'

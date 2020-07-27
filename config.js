@@ -35,6 +35,7 @@ _config.urls = {
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
+  api_check_email: 'check-credentials',
   business_types_get: 'business_types?lang={lang}',
   countries_get: 'countries',
   // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
@@ -62,6 +63,7 @@ _config.translations = {
       login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue',
+      existing_email_label: 'This email is already exist.\nMay be you’d like to log in?',
       logo_animation: {
         top_text: 'Appointment Scheduling',
         bottom_text: 'CRM App for your Business'
