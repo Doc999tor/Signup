@@ -130,7 +130,7 @@ class SignUp extends Component {
             <div className='text-content-wrap'>
               <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
                 <img className='group__email'
-                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
+                  src={_config.urls.static + (this.state.isValidEmail && !existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
                 <input type='email'
                   name='email'
                   value={email}
@@ -144,7 +144,7 @@ class SignUp extends Component {
               </div>
               <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
                 <img className='group__lock'
-                  src={_config.urls.static + (this.state.isValidEmail ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
+                  src={_config.urls.static + (this.state.isValidPass ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
                 <input
                   type='password'
                   name='new-password'
