@@ -97,9 +97,30 @@ class SignUp extends Component {
     }, () => this.props.onHandlePhoneValue(this.state.phone || null))
   }
 
+  handleCheckPhone = () => {
+    const reg = /(^[0-9-+]+$)/
+    if (this.props.phone === 'null' || this.props.phone?.trim() === '') {
+      this.setState({
+        validPhone: true
+      })
+      return true
+    }
+    if (reg.test(this.props.phone?.trim())) {
+      this.setState({
+        validPhone: true
+      })
+      return true
+    } else {
+      this.setState({
+        validPhone: false
+      })
+      return false
+    }
+  }
+
   handleGoToBusinessType = () => {
     this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.onCheckEmail()
-    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+    this.handleCheckPhone() && this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
 
   render() {
