@@ -93,7 +93,9 @@ class SignUp extends Component {
     const reg = /(^[0-9-+]+$)/
     this.setState({
       phone: value,
-      validPhone: value ? reg.test(value.trim()) : true
+      validPhone: value
+        ? value.trim() === '' ? true : reg.test(value.trim())
+        : true
     }, () => this.props.onHandlePhoneValue(this.state.phone || null))
   }
 
@@ -105,7 +107,7 @@ class SignUp extends Component {
       })
       return true
     }
-    if (reg.test(this.props.phone?.trim())) {
+    if (this.props.phone?.trim().length >= 3 && reg.test(this.props.phone?.trim())) {
       this.setState({
         validPhone: true
       })
