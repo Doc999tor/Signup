@@ -82,10 +82,6 @@ class Home extends React.Component {
             this.setState({ finalRedirect: nextPath })
           }
         })
-        this.props.history.push({
-          pathname: _config.baseUrl + _config.onboarding_pages[0].path,
-          search: window.location.search
-        })
       }
       if (r.status === 422) {
         this.setState({
@@ -97,6 +93,10 @@ class Home extends React.Component {
           })
         })
       }
+      this.props.history.push({
+        pathname: _config.baseUrl + _config.onboarding_pages[0].path,
+        search: window.location.search
+      })
     })
   }
 

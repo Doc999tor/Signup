@@ -55,25 +55,20 @@ class SignUp extends Component {
       return false
     } else { return true }
   }
+
   checkEmail = () => {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     // mail epmty
     if (this.props.email === '') {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
       return false
+    }
+    if (!re.test(this.props.email)) {
+      this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
+      return false
     } else {
-      // mail not valid (if not: @, .)
-      let checkMail = () => {
-        if (this.props.email.indexOf('@') == -1 || this.props.email.indexOf('.') == -1) {
-          return true
-        }
-      }
-      if (checkMail()) {
-        this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
-        return false
-      } else {
-        this.setState({errMessage: '', isValidEmail: true})
-        return true
-      }
+      this.setState({ errMessage: '', isValidEmail: true })
+      return true
     }
   }
 
@@ -103,7 +98,7 @@ class SignUp extends Component {
   }
 
   handleGoToBusinessType = () => {
-    this.props.onCheckEmail()
+    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.onCheckEmail()
     this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
 
