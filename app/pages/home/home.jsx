@@ -93,10 +93,10 @@ class Home extends React.Component {
           })
         })
       }
-      this.props.history.push({
-        pathname: _config.baseUrl + _config.onboarding_pages[0].path,
-        search: window.location.search
-      })
+    })
+    this.props.history.push({
+      pathname: _config.baseUrl + _config.onboarding_pages[0].path,
+      search: window.location.search
     })
   }
 
