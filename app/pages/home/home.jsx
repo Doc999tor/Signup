@@ -53,7 +53,7 @@ class Home extends React.Component {
   handleChangeAds = () => this.setState({ isPermitAds: !this.state.isPermitAds })
 
   handleCheckEmail = () => {
-    const body = `email=${this.state.email}&pass=${this.state.pass}`
+    const body = `email=${this.state.email.trim()}&pass=${this.state.pass.trim()}`
     postService(_config.urls.api_check_email, body).then(r => {
       if (r.status === 409 || r.status === 302) {
         this.setState({
@@ -69,7 +69,7 @@ class Home extends React.Component {
   }
 
   handleRequest = () => {
-    let body = `added=${getPrettyDate()}&email=${this.state.email}&pass=${this.state.pass}&phone=${this.state.phone}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
+    let body = `added=${getPrettyDate()}&email=${this.state.email.trim()}&pass=${this.state.pass.trim()}&phone=${this.state.phone.trim()}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
     if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) {
       body = body + `&another_business_type_id=${this.state.anotherBusinessType}`
     }

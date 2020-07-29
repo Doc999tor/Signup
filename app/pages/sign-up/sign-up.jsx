@@ -63,7 +63,7 @@ class SignUp extends Component {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
       return false
     }
-    if (!re.test(this.props.email)) {
+    if (!re.test(this.props.email.trim())) {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
       return false
     } else {
@@ -75,11 +75,11 @@ class SignUp extends Component {
   checkPassword = () => {
     let minPassLength = 3
     // pass epmty
-    if (this.props.pass === '') {
+    if (this.props.pass.trim() === '') {
       this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_password})
       this.checkPassAndEmail()
       return false
-    } else if (this.props.pass.length < minPassLength) {
+    } else if (this.props.pass.trim().length < minPassLength) {
       this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.password_short})
       return false
     } else {
