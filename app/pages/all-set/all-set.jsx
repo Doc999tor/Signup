@@ -9,7 +9,7 @@ class AllSet extends Component {
   state = {
     countries_success: false,
     isAgreeToAllTerms: false,
-    makeChoose: false 
+    makeChoose: false
   }
 
   componentDidMount() {
