@@ -99,7 +99,7 @@ class SignUp extends Component {
 
   handleCheckPhone = () => {
     const reg = /(^[0-9-+]+$)/
-    if (this.props.phone === 'null' || this.props.phone?.trim() === '') {
+    if (this.props.phone === 'null' || this.props.phone === null || this.props.phone?.trim() === '') {
       this.setState({
         validPhone: true
       })
