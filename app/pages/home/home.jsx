@@ -14,7 +14,7 @@ class Home extends React.Component {
   state = {
     email: sessionStorage.getItem('atz_email') || '',
     pass: sessionStorage.getItem('atz_pass') || '',
-    phone: sessionStorage.getItem('atz_phone') || null,
+    phone: sessionStorage.getItem('atz_phone') || '',
     finalRedirect: '',
     existingEmail: false,
     selectedBusinessIds: [],

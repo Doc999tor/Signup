@@ -96,7 +96,7 @@ class SignUp extends Component {
       validPhone: value
         ? value.trim() === '' ? true : reg.test(value.trim())
         : true
-    }, () => this.props.onHandlePhoneValue(this.state.phone || null))
+    }, () => this.props.onHandlePhoneValue(this.state.phone))
   }
 
   handleCheckPhone = () => {
@@ -126,9 +126,8 @@ class SignUp extends Component {
   }
 
   render() {
-    const { email, pass, phone, existingEmail } = this.props
-    let phoneValue = (phone === 'null' || phone === null) ? '' : phone
-    const { validPhone } = this.state
+    const { email, pass, existingEmail } = this.props
+    const { validPhone, phone } = this.state
     return (
       <div className='sign-up'>
         <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
@@ -185,7 +184,7 @@ class SignUp extends Component {
                 <input
                   type='tel'
                   name='phone'
-                  value={phoneValue}
+                  value={phone}
                   className='group__input input_phone'
                   onChange={this.handleChangePhone}
                   placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
