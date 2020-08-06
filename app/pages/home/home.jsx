@@ -69,7 +69,7 @@ class Home extends React.Component {
   }
 
   handleRequest = () => {
-    let body = `added=${getPrettyDate()}&email=${this.state.email?.trim()}&pass=${this.state.pass?.trim()}&phone=${this.state.phone?.trim() || null}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
+    let body = `added=${getPrettyDate()}&email=${this.state.email?.trim()}&pass=${this.state.pass?.trim()}&phone=${encodeURIComponent(this.state.phone?.trim()) || null}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
     if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) {
       body = body + `&another_business_type_id=${this.state.anotherBusinessType}`
     }

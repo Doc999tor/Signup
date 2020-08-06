@@ -185,7 +185,7 @@ class SignUp extends Component {
                   <input
                     type='tel'
                     name='phone'
-                    value={phone}
+                    value={phone || sessionStorage.getItem('atz_phone')?.trim()}
                     className='group__input input_phone'
                     onChange={this.handleChangePhone}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
