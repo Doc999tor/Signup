@@ -130,76 +130,84 @@ class SignUp extends Component {
     const { validPhone, phone } = this.state
     return (
       <div className='sign-up'>
-        <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
-          <img className='wave' src={_config.urls.static + 'wave.svg'} alt='wave' />
-          {!existingEmail
-            ? <Slideshow />
-            : <ExistingEmail />}
-        </div>
-        <div className='sign-up-wrap'>
-          <div className='title-container'>
-            <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
+        <div className='main-content'>
+          <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
+            <img className='wave' src={_config.urls.static + 'wave.svg'} alt='wave' />
+            {!existingEmail
+              ? <Slideshow />
+              : <ExistingEmail />}
           </div>
-          <div className='question-container'>
-            <a href={window.location.origin + _config.urls.login} className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
-          </div>
-          <form>
-            <div className='text-content-wrap'>
-              <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
-                <img className='group__email'
-                  src={_config.urls.static + (this.state.isValidEmail && !existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
-                <input type='email'
-                  name='email'
-                  value={email}
-                  ref={email => this.email = email}
-                  onChange={() => this.props.onHandleEmailValue(this.email.value)}
-                  // if the password and email are empty then we do not do an additional check
-                  onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
-                  className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
-                  placeholder={_config.translations[_config.data.lang].sign_in.enter_email}
-                  autoComplete='username' />
-              </div>
-              <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
-                <img className='group__lock'
-                  src={_config.urls.static + (this.state.isValidPass ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
-                <input
-                  type='password'
-                  name='new-password'
-                  value={pass}
-                  onChange={() => this.props.onHandlePassValue(this.pass.value)}
-                  // if the password and email are empty then we do not do an additional check
-                  onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
-                  ref={pass => this.pass = pass}
-                  className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
-                  data-type='password'
-                  autoComplete='new-password'
-                  placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
-                 />
-                {this.props.pass && <img className='group__eye'
-                  onClick={this.togglePass}
-                  src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
-              </div>
-              <div className={'group' + (validPhone ? '' : ' err_phone')}>
-                <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} />
-                <input
-                  type='tel'
-                  name='phone'
-                  value={phone}
-                  className='group__input input_phone'
-                  onChange={this.handleChangePhone}
-                  placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
-                />
-              </div>
-              <div className='login-err'>
-                {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}
-                <span className='login-err__text'>{this.state.errMessage}</span>
-              </div>
-              <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
+          <div className='sign-up-wrap'>
+            <div className='title-container'>
+              <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
             </div>
-            <button className='login-form__button login-button' type='button' onClick={this.handleGoToBusinessType}>
-              {_config.translations[_config.data.lang].sign_up.continue}
-            </button>
-          </form>
+            <div className='question-container'>
+              <a href={window.location.origin + _config.urls.login} className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
+            </div>
+            <form>
+              <div className='text-content-wrap'>
+                <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
+                  <img className='group__email'
+                    src={_config.urls.static + (this.state.isValidEmail && !existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')} />
+                  <input type='email'
+                    name='email'
+                    value={email}
+                    ref={email => this.email = email}
+                    onChange={() => this.props.onHandleEmailValue(this.email.value)}
+                    // if the password and email are empty then we do not do an additional check
+                    onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
+                    className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_email}
+                    autoComplete='username' />
+                </div>
+                <div className={`group password ${this.state.isValidPass ? '' : 'err'}`}>
+                  <img className='group__lock'
+                    src={_config.urls.static + (this.state.isValidPass ? 'ic_pass.svg' : 'ic_pass-error.svg')} />
+                  <input
+                    type='password'
+                    name='new-password'
+                    value={pass}
+                    onChange={() => this.props.onHandlePassValue(this.pass.value)}
+                    // if the password and email are empty then we do not do an additional check
+                    onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
+                    ref={pass => this.pass = pass}
+                    className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
+                    data-type='password'
+                    autoComplete='new-password'
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_password}
+                  />
+                  {this.props.pass && <img className='group__eye'
+                    onClick={this.togglePass}
+                    src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
+                </div>
+                <div className={'group' + (validPhone ? '' : ' err_phone')}>
+                  <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} />
+                  <input
+                    type='tel'
+                    name='phone'
+                    value={phone}
+                    className='group__input input_phone'
+                    onChange={this.handleChangePhone}
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
+                  />
+                </div>
+                <div className='login-err'>
+                  {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} />}
+                  <span className='login-err__text'>{this.state.errMessage}</span>
+                </div>
+                <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
+              </div>
+              <button className='login-form__button login-button' type='button' onClick={this.handleGoToBusinessType}>
+                {_config.translations[_config.data.lang].sign_up.continue}
+              </button>
+            </form>
+          </div>
+        </div>
+        <div className='sup-wrap'>
+          <a href={_config.urls.contact_us} className='contact_us_link'>
+            <span className='link_text'>{_config.translations[_config.data.lang].sign_up.contact_us_link_label}</span>
+            <span className='help'><img src={`${_config.urls.static}ic_help.svg`} alt='help' /></span>
+          </a>
         </div>
       </div>
     )

@@ -8,6 +8,13 @@
   min-height: 100vh;
   animation: sign-up 0.3s ease-in;
   background-color: var(--sec-color);
+  .main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+  }
   .bottom_bgr {
     width: 100%;
     position: relative;
@@ -194,6 +201,29 @@
     margin-top: -3rem;
     .dont-have-acc__login {
       font-weight: bold;
+    }
+  }
+  .contact_us_link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.375rem;
+    color: var(--main_color);
+    .link_text {
+      padding-bottom: 0.75rem;
+      font-size: 0.875rem;
+    }
+    .help {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.875rem;
+      height: 2.875rem;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px 0 rgba(41, 41, 204, 0.2);
+      background-color: var(--white-color);
     }
   }
 }

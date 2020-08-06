@@ -29,6 +29,7 @@ _config.other_business_type_id = -1
 
 // _config.data.all_langs = ['en', 'he', 'ru']
 _config.urls = {
+  contact_us: '/contact_us',
   business_type: '/business-type',
   privacy_policy: '/privacy-policy',
   static: './media/',
@@ -63,6 +64,7 @@ _config.translations = {
       login_in: ' Log In',
       fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue',
+      contact_us_link_label: 'Need a help?',
       existing_email_label: 'This email is already exist.\nMay be you’d like to log in?',
       logo_animation: {
         top_text: 'Appointment Scheduling',
