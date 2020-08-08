@@ -5,8 +5,7 @@ import Home from './pages/home/home.jsx'
 import './style.less'
 
 document.body.onload = function () {
-  const body = document.getElementsByTagName('body')[0]
-  if (_config.data.isRTL) body.style.direction = 'rtl'
+  if (_config.data.isRTL) document.body.setAttribute('dir', 'rtl')
   ReactDOM.render(
     <BrowserRouter>
       <Home />
