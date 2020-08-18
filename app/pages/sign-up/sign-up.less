@@ -13,20 +13,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
   }
   .bottom_bgr {
     width: 100%;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 12.5rem;
+    min-height: 20rem;
     .wave {
       position: absolute;
-      top: 8%;
+      bottom: 0;
       left: 0;
       width: 100%;
-      opacity: 0.35;
+      opacity: 0.8;
       z-index: 1;
     }
   }
@@ -36,7 +35,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 1.125rem;
     position: relative;
     z-index: 4;
   }
@@ -44,26 +42,59 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
     .sign-up-logo-name {
       padding-top: 0.75rem;
+    }
+    .golden_numbers {
+      position: absolute;
+      width: 11.5rem;
+      top: 14%;
+    }
+    .gift_labels {
+      position: absolute;
+      bottom: 3%;
+      border-radius: 12px;
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      background-color: rgba(39, 9, 110, 0.3);
+      padding: 0.25rem 0.75rem;
+      p {
+        margin: 0;
+        text-align: center;
+        color: var(--white-color);
+      }
+      .title {
+        font-size: 1.125rem;
+        font-weight: bold;
+      }
+      .subtitle {
+        font-size: 0.625rem;
+        font-weight: 300;
+      }
     }
   }
   .sign-up-wrap, .sending_wrap {
     position: relative;
-    top: -5.7rem;
-    padding: 1rem 1.5rem 2.5rem;
+    top: -5.4rem;
+    padding: 1.25rem 1.5rem 2.5rem;
     background-color: var(--white-color);
     width: 90%;
     z-index: 4;
     border-radius: 1rem;
     box-shadow: 0 3px 20px 0 rgba(41, 41, 204, 0.2);
   }
+  .lista-link {
+    display: flex;
+    padding-bottom: 0.25rem;
+  }
   .sending_wrap {
     padding: 0;
     width: 80%;
+    animation: sending_wrap 0.5s;
   }
   .sign-up-wrap {
-    min-height: 20.25rem;
+    min-height: 17.875rem;
     h1 {
       margin: 0;
       font-size: 2rem;
@@ -221,5 +252,10 @@
       font-size: 1rem;
       font-weight: 500;
     }
+  }
+}
+@keyframes sending_wrap {
+  0% {
+    width: 90%;
   }
 }

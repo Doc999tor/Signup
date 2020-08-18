@@ -78,6 +78,10 @@ _config.translations = {
         sending: 'Sending',
         success: 'Your data sent successfully We’ll contact you shortly!'
       },
+      gift_labels: {
+        title: '2500 הודעות sms מתנה',
+        subtitle: '* בהרשמה למסלול Premium בחודש אוגוסט'
+      }
     },
     onboarding: {
       lets_start: 'Lets Start!'

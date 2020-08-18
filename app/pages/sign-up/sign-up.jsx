@@ -88,8 +88,12 @@ class SignUp extends Component {
             <img className='wave' src={`${_config.urls.static}wave.svg`} alt='wave' />
             <div className='logo-wrap'>
               <a href={_config.urls.home} className='home-link'>
-                <img className='sign-up-logo' src={`${_config.urls.static}logo.svg`} />
-                <img className='sign-up-logo-name' src={`${_config.urls.static}atzma.im.svg`} />
+                <img className='golden_numbers' src={`${_config.urls.static}golden numbers@2x.png`} />
+                <img className='gift_box' src={`${_config.urls.static}gift box.svg`} />
+                <div className='gift_labels'>
+                  <p className='title'>{_config.translations[_config.data.lang].sign_up?.gift_labels?.title}</p>
+                  <p className='subtitle'>{_config.translations[_config.data.lang].sign_up?.gift_labels?.subtitle}</p>
+                </div>
               </a>
             </div>
           </div>
@@ -97,6 +101,9 @@ class SignUp extends Component {
             ? <SendModal sending={sending} />
             : (
               <div className='sign-up-wrap'>
+                <a href={_config.urls.home} className='lista-link'>
+                  <img className='logotype' src={`${_config.urls.static}logotype.svg`} />
+                </a>
                 <div className='title-container'>
                   <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
                 </div>
@@ -136,10 +143,6 @@ class SignUp extends Component {
               </div>
             )}
         </div>
-          <div className='call_now'>
-            <p>{_config.translations[_config.data.lang].sign_up.call_now}</p>
-          <a href={`tel:${_config.data.phone}`}>{_config.data.phone}</a>
-          </div>
       </div>
     )
   }
