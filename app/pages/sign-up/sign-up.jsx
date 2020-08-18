@@ -108,7 +108,6 @@ class SignUp extends Component {
                   <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
                 </div>
                 <div className='question-container'>
-                  <p className='sign-fill_fields'>{_config.translations[_config.data.lang].sign_up.fill_fields_label}</p>
                   <a href={window.location.origin + _config.urls.login} className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
                 </div>
                 <form>
