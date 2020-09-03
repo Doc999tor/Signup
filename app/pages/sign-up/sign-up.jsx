@@ -90,7 +90,7 @@ class SignUp extends Component {
 
   handleChangePhone = e => {
     const value = e.target.value
-    const reg = /(^[0-9-+]+$)/
+    const reg = /^[\s\d()\-*#+]+$/
     this.setState({
       phone: value,
       validPhone: value
@@ -100,7 +100,7 @@ class SignUp extends Component {
   }
 
   handleCheckPhone = () => {
-    const reg = /(^[0-9-+]+$)/
+    const reg = /^[\s\d()\-*#+]+$/
     if (this.props.phone === 'null' || this.props.phone === null || this.props.phone?.trim() === '') {
       this.setState({
         validPhone: true
