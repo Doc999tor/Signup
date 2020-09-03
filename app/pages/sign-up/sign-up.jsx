@@ -17,7 +17,7 @@ class SignUp extends Component {
 
   handleChangePhone = e => {
     const value = e.target.value
-    const reg = /(^[0-9-+]+$)/
+    const reg = /^[\s\d()\-*#+]+$/
     this.setState({
       phone: value,
       validPhone: value ? reg.test(value.trim()) : true
@@ -73,7 +73,7 @@ class SignUp extends Component {
     if (this.handleCheckName() && this.handleCheckPhone()) {
       this.handlePostRequest()
     } else {
-      const reg = /(^[0-9-+]+$)/
+      const reg = /^[\s\d()\-*#+]+$/
       !this.state.name && this.setState({ validName: false })
       !reg.test(this.state.phone) && this.setState({ validPhone: false })
     }
