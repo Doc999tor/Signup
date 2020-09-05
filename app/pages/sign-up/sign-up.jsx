@@ -29,13 +29,6 @@ class SignUp extends Component {
     }
   }
 
-  componentDidMount () {
-    // recaptcha v3
-    // loadJS(`https://www.google.com/recaptcha/api.js?render=${_config.recaptcha_v3}`, document.body)
-    // recaptcha v2
-    // loadJS('https://www.google.com/recaptcha/api.js', document.body)
-
-  }
   // toggle password -> show/hide
   togglePass = () => {
     let inputPass = this.pass
@@ -47,17 +40,9 @@ class SignUp extends Component {
       inputPass.type = 'password'
     }
   }
-  // check email and pass values
-  checkPassAndEmail = () => {
-    // if password and email empty
-    if (this.props.email === '' && this.props.pass === '') {
-      this.setState({isValidEmail: false, isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.enter_email_pass})
-      return false
-    } else { return true }
-  }
 
   checkEmail = () => {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
     // mail epmty
     if (this.props.email === '') {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
@@ -66,7 +51,8 @@ class SignUp extends Component {
     if (!re.test(this.props.email.trim())) {
       this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
       return false
-    } else {
+    }
+    if (re.test(this.props.email.trim())) {
       this.setState({ errMessage: '', isValidEmail: true })
       return true
     }
@@ -77,7 +63,6 @@ class SignUp extends Component {
     // pass epmty
     if (this.props.pass.trim() === '') {
       this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_password})
-      this.checkPassAndEmail()
       return false
     } else if (this.props.pass.trim().length < minPassLength) {
       this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.password_short})
@@ -121,8 +106,8 @@ class SignUp extends Component {
   }
 
   handleGoToBusinessType = () => {
-    this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.onCheckEmail()
-    this.handleCheckPhone() && this.checkPassword() && this.checkEmail() && this.checkPassAndEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+    this.checkPassword() && this.checkEmail() && this.props.onCheckEmail()
+    this.handleCheckPhone() && this.checkPassword() && this.checkEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
 
   render() {
@@ -155,7 +140,7 @@ class SignUp extends Component {
                     ref={email => this.email = email}
                     onChange={() => this.props.onHandleEmailValue(this.email.value)}
                     // if the password and email are empty then we do not do an additional check
-                    onBlur={() => { this.checkPassAndEmail() && this.checkEmail() }}
+                    onBlur={this.checkEmail}
                     className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_email}
                     autoComplete='username' />
@@ -169,7 +154,7 @@ class SignUp extends Component {
                     value={pass}
                     onChange={() => this.props.onHandlePassValue(this.pass.value)}
                     // if the password and email are empty then we do not do an additional check
-                    onBlur={() => { this.checkPassAndEmail() && this.checkPassword() }}
+                    onBlur={this.checkPassword}
                     ref={pass => this.pass = pass}
                     className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                     data-type='password'
