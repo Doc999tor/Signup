@@ -136,10 +136,21 @@ class SignUp extends Component {
               </div>
             )}
         </div>
-          <div className='call_now'>
-            <p>{_config.translations[_config.data.lang].sign_up.call_now}</p>
-          <a href={`tel:${_config.data.phone}`}>{_config.data.phone}</a>
+        <div className='messengers_strip'>
+          <h3>{_config.translations[_config.data.lang].sign_up.messengers_strip_lebel}</h3>
+          <div className='messengers_wrap'>
+            {_config.messengers.data.map(({ name, url, icon }) => (
+              <a className='item' href={url}>
+                <span className='icon_wrap'><img className='icon' src={_config.urls.static + icon} /></span>
+                <span className='name'>{_config.translations[_config.data.lang].sign_up.messengers[name]}</span>
+              </a>
+            ))}
           </div>
+        </div>
+        <div className='call_now'>
+          <p>{_config.translations[_config.data.lang].sign_up.call_now}</p>
+          <a href={`tel:${_config.data.phone}`}>{_config.data.phone}</a>
+        </div>
       </div>
     )
   }

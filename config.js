@@ -7,7 +7,12 @@ _config.data = {
   lang: lang,
   all_langs: ['en', 'he', 'ru']
 }
-
+_config.messengers = {
+  data: [
+    { name: 'whatsapp', icon: 'ic_whatsapp.svg', url: 'https://chat.whatsapp.com/JvjzpJsamYmE65m95lkmGz' },
+    { name: 'messenger', icon: 'ic_messenger.svg', url: 'https://m.me/join/AbbDIHCbzcIo2u-R' },
+  ],
+}
 _config.onboarding_pages = [
   {
     name: 'appointments',
@@ -78,6 +83,11 @@ _config.translations = {
         sending: 'Sending',
         success: 'Your data sent successfully We’ll contact you shortly!'
       },
+      messengers_strip_lebel: 'Choose a messaging app',
+      messengers: {
+        whatsapp: 'Whatsapp',
+        messenger: 'Messenger',
+      }
     },
     onboarding: {
       lets_start: 'Lets Start!'
