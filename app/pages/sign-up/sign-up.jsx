@@ -88,8 +88,8 @@ class SignUp extends Component {
             <img className='wave' src={`${_config.urls.static}wave.svg`} alt='wave' />
             <div className='logo-wrap'>
               <a href={_config.urls.home} className='home-link'>
-                <img className='sign-up-logo' src={`${_config.urls.static}logo.svg`} />
-                <img className='sign-up-logo-name' src={`${_config.urls.static}atzma.im.svg`} />
+                <img className='sign-up-logo' src={`${_config.urls.static}logo.svg`} alt='' />
+                <img className='sign-up-logo-name' src={`${_config.urls.static}atzma.im.svg`} alt='' />
               </a>
             </div>
           </div>
@@ -102,12 +102,12 @@ class SignUp extends Component {
                 </div>
                 <div className='question-container'>
                   <p className='sign-fill_fields'>{_config.translations[_config.data.lang].sign_up.fill_fields_label}</p>
-                  <a href={window.location.origin + _config.urls.login} className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
+                  <a href={_config.urls.login} className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
                 </div>
                 <form>
                   <div className='text-content-wrap'>
                     <div className={`group${this.state.validName ? '' : ' err'}`}>
-                      <img className='phone_img' src={`${_config.urls.static}ic_name.svg`} />
+                      <img className='phone_img' src={`${_config.urls.static}ic_name.svg`} alt='' />
                       <input
                         type='text'
                         name='name'
@@ -118,7 +118,7 @@ class SignUp extends Component {
                       />
                     </div>
                     <div className={`group${validPhone ? '' : ' err_phone'}`}>
-                      <img className='phone_img' src={`${_config.urls.static}ic_phone.svg`} />
+                      <img className='phone_img' src={`${_config.urls.static}ic_phone.svg`} alt='' />
                       <input
                         type='tel'
                         name='phone'
@@ -141,7 +141,7 @@ class SignUp extends Component {
           <div className='messengers_wrap'>
             {_config.messengers.data.map(({ name, url, icon }) => (
               <a className='item' href={url}>
-                <span className='icon_wrap'><img className='icon' src={_config.urls.static + icon} /></span>
+                <span className='icon_wrap'><img className='icon' src={_config.urls.static + icon} alt='' /></span>
                 <span className='name'>{_config.translations[_config.data.lang].sign_up.messengers[name]}</span>
               </a>
             ))}
