@@ -24,12 +24,14 @@ class Home extends React.Component {
     anotherBusinessType: ''
   }
 
-  handleEmailValue = v => {
-    this.setState({ email: v }, () => sessionStorage.setItem('atz_email', this.state.email))
+  handleEmailValue = ({ target }) => {
+    const { value } = target
+    this.setState({ email: value }, () => sessionStorage.setItem('atz_email', this.state.email))
   }
 
-  handlePassValue = v => {
-    this.setState({ pass: v }, () => sessionStorage.setItem('atz_pass', this.state.pass))
+  handlePassValue = ({ target }) => {
+    const { value } = target
+    this.setState({ pass: value }, () => sessionStorage.setItem('atz_pass', this.state.pass))
   }
 
   handlePhoneValue = value => this.setState({phone: value}, () => sessionStorage.setItem('atz_phone', this.state.phone))

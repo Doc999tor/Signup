@@ -30,16 +30,7 @@ class SignUp extends Component {
   }
 
   // toggle password -> show/hide
-  togglePass = () => {
-    let inputPass = this.pass
-    if (inputPass.type === 'password') {
-      inputPass.type = 'text'
-      this.setState({isVisiblePass: true})
-    } else {
-      this.setState({isVisiblePass: false})
-      inputPass.type = 'password'
-    }
-  }
+  togglePass = () => this.setState(prevState => ({ isVisiblePass: !prevState.isVisiblePass }))
 
   checkEmail = () => {
     const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
@@ -105,14 +96,15 @@ class SignUp extends Component {
     }
   }
 
-  handleGoToBusinessType = () => {
+  handleGoToBusinessType = e => {
+    e.preventDefault()
     this.checkPassword() && this.checkEmail() && this.props.onCheckEmail()
     this.handleCheckPhone() && this.checkPassword() && this.checkEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
   }
 
   render() {
-    const { email, pass, existingEmail } = this.props
-    const { validPhone, phone } = this.state
+    const { email, pass, existingEmail, onHandleEmailValue, onHandlePassValue } = this.props
+    const { validPhone, phone, isVisiblePass } = this.state
     return (
       <div className='sign-up'>
         <div className='main-content'>
@@ -129,7 +121,7 @@ class SignUp extends Component {
             <div className='question-container'>
               <a href={ _config.urls.login } className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
             </div>
-            <form>
+            <form onSubmit={this.handleGoToBusinessType}>
               <div className='text-content-wrap'>
                 <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
                   <img
@@ -140,8 +132,7 @@ class SignUp extends Component {
                   <input type='email'
                     name='email'
                     value={email}
-                    ref={email => this.email = email}
-                    onChange={() => this.props.onHandleEmailValue(this.email.value)}
+                    onChange={onHandleEmailValue}
                     // if the password and email are empty then we do not do an additional check
                     onBlur={this.checkEmail}
                     className={`group__input ${this.state.isValidEmail ? '' : 'err'}`}
@@ -155,13 +146,13 @@ class SignUp extends Component {
                     src={_config.urls.static + (this.state.isValidPass ? 'ic_pass.svg' : 'ic_pass-error.svg')}
                   />
                   <input
-                    type='password'
+                    type={isVisiblePass ? 'text' : 'password'}
                     name='new-password'
                     value={pass}
-                    onChange={() => this.props.onHandlePassValue(this.pass.value)}
+                    onChange={onHandlePassValue}
                     // if the password and email are empty then we do not do an additional check
                     onBlur={this.checkPassword}
-                    ref={pass => this.pass = pass}
+                    // ref={pass => this.pass = pass}
                     className={`group__input password ${this.state.isValidPass ? '' : 'err'}`}
                     data-type='password'
                     autoComplete='new-password'
@@ -171,7 +162,7 @@ class SignUp extends Component {
                     className='group__eye'
                     onClick={this.togglePass}
                     alt=''
-                    src={_config.urls.static + (this.state.isVisiblePass ? 'eye-off.svg' : 'eye.svg')} />}
+                    src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
                 <div className={'group' + (validPhone ? '' : ' err_phone')}>
                   <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
@@ -190,7 +181,7 @@ class SignUp extends Component {
                 </div>
                 <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
               </div>
-              <button className='login-form__button login-button' type='button' onClick={this.handleGoToBusinessType}>
+              <button className='login-form__button login-button' type='submit'>
                 {_config.translations[_config.data.lang].sign_up.continue}
               </button>
             </form>
