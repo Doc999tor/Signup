@@ -67,7 +67,7 @@ class AllSet extends Component {
               </p>
             </label>
           </div>
-          <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} route={this.props.onHandleRequest} active={isAgreeToAllTerms && this.state.countries_success} />
+          <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} isStartLoad={this.props.isStartLoad} route={this.props.onHandleRequest} active={isAgreeToAllTerms && this.state.countries_success} />
         </div>
       </div>
     )

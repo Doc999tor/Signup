@@ -2,9 +2,7 @@ import React from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import AllSet from '../all-set/all-set'
 import SignUp from '../sign-up/sign-up'
-import Onboarding from '../onboarding/index'
 import BusinessType from '../business-type/business-type'
-import { post } from '../../services/apiServices'
 import { postService } from '../../services/api_services'
 import { getPrettyDate } from '../../services/helperServices'
 
@@ -79,9 +77,8 @@ class Home extends React.Component {
     postService(_config.urls.signup_post, body).then(r => {
       if (r.status === 201) {
         r.text().then(nextPath => {
-          this.setState({ isStartLoad: false })
           if (nextPath) {
-            this.setState({ finalRedirect: nextPath })
+            location.href = window.location.origin + nextPath
           }
         })
       }
@@ -96,10 +93,6 @@ class Home extends React.Component {
         })
       }
     })
-    this.props.history.push({
-      pathname: _config.baseUrl + _config.onboarding_pages[0].path,
-      search: window.location.search
-    })
   }
 
   handleBusinessType = val => {
@@ -112,8 +105,8 @@ class Home extends React.Component {
         <Switch>
           <Route exact path={baseUrl} render={() => <SignUp {...this.state} onCheckEmail={this.handleCheckEmail} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
-          <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
-          {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={_config.translations[_config.data.lang].onboarding_pages[page.name]?.text} />} />)}
+          <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} isStartLoad={this.state.isStartLoad} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
+          {/* {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={_config.translations[_config.data.lang].onboarding_pages[page.name]?.text} />} />)} */}
           <Redirect from='/' to={baseUrl} />
         </Switch>
       </div>

@@ -28,10 +28,7 @@ class BusinessType extends Component {
 
   handleGoToAllSet = () => {
     if (this.props.selectedBusinessIds.length) {
-      this.props.history.push({
-        pathname: _config.baseUrl + _config.routing.all_set_path,
-        search: window.location.search
-      })
+      this.handleSkip()
     }
   }
 

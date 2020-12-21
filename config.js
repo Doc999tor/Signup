@@ -71,12 +71,6 @@ _config.translations = {
         bottom_text: 'CRM App for your Business'
       }
     },
-    onboarding_pages: {
-      start_btn_label: 'Lets Start!',
-      appointments: { text: 'Create appointments quickly & stay organized' },
-      clients: { text: 'Keep everything you need to know about each client' },
-      money: { text: 'Increase your profit with your personal assistant' },
-    },
     sign_in: {
       title: 'Atzmaim',
       login_google: 'Log in with google',
