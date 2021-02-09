@@ -1,26 +1,26 @@
 import React, { Component } from 'react'
 import { post } from '../../services/apiServices'
 import { getPrettyDate } from '../../services/helperServices.js'
+import { postValidateService } from '../../services/api_services.js'
 import SendModal from '../send_modal/index.jsx'
 
 import './sign-up.less'
 
 class SignUp extends Component {
   state = {
+    statusOutsideValidation: false,
+    incorrectNumber: false,
     name: '',
     phone: '',
     send: false,
     sending: false,
-    validPhone: true,
     validName: true,
   }
 
   handleChangePhone = e => {
     const value = e.target.value
-    const reg = /^[\s\d()\-*#+]+$/
     this.setState({
-      phone: value,
-      validPhone: value ? reg.test(value.trim()) : true
+      phone: value
     })
   }
 
@@ -40,10 +40,39 @@ class SignUp extends Component {
   }
 
   handleCheckPhone = () => {
-    if (this.state.phone && this.state.validPhone) {
+    if (this.state.phone && !this.state.incorrectNumber && !this.state.statusOutsideValidation) {
       return true
     }
     return false
+  }
+
+  handleBlurPhone = ({ target }) => {
+    const { value } = target
+    if (value) {
+      const url = _config.urls.validate_api
+      const body = `phone=${value}`
+      this.setState({
+        statusOutsideValidation: true
+      })
+      postValidateService(body, url)
+        .then(({ status }) => {
+          if (status === 200) {
+            this.setState({
+              incorrectNumber: false
+            })
+          }
+          if (status === 422) {
+            this.setState({
+              incorrectNumber: true
+            })
+          }
+        })
+        .catch(error => console.log({ error }))
+        .finally(() => this.setState({
+          statusOutsideValidation: false,
+          phoneFlag: false
+        }))
+    }
   }
 
   handlePostRequest = () => {
@@ -73,14 +102,12 @@ class SignUp extends Component {
     if (this.handleCheckName() && this.handleCheckPhone()) {
       this.handlePostRequest()
     } else {
-      const reg = /^[\s\d()\-*#+]+$/
       !this.state.name && this.setState({ validName: false })
-      !reg.test(this.state.phone) && this.setState({ validPhone: false })
     }
   }
 
   render() {
-    const { validPhone, sending, send } = this.state
+    const { incorrectNumber, sending, send } = this.state
     return (
       <div className='sign-up'>
         <div className='main-content'>
@@ -117,7 +144,7 @@ class SignUp extends Component {
                         placeholder={_config.translations[_config.data.lang].sign_in.enter_name}
                       />
                     </div>
-                    <div className={`group${validPhone ? '' : ' err_phone'}`}>
+                    <div className={`group${!incorrectNumber ? '' : ' err_phone'}`}>
                       <img className='phone_img' src={`${_config.urls.static}ic_phone.svg`} alt='' />
                       <input
                         type='tel'
@@ -125,6 +152,7 @@ class SignUp extends Component {
                         value={this.state.phone}
                         className='group__input input_phone'
                         onChange={this.handleChangePhone}
+                        onBlur={this.handleBlurPhone}
                         placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
                       />
                     </div>
