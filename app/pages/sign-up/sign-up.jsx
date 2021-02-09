@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import Slideshow from '../../components/logo-animation'
 import ExistingEmail from '../../components/existing_email'
+import { postValidateService } from '../../services/api_services'
 
 import './sign-up.less'
 
@@ -9,6 +10,8 @@ class SignUp extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      statusOutsideValidation: false,
+      incorrectNumber: false,
       isVisiblePass: false,
       isValidEmail: true,
       isValidPass: true,
@@ -68,31 +71,45 @@ class SignUp extends Component {
     const value = e.target.value
     const reg = /^[\s\d()\-*#+]+$/
     this.setState({
-      phone: value,
-      validPhone: value
-        ? value.trim() === '' ? true : reg.test(value.trim())
-        : true
+      phone: value
     }, () => this.props.onHandlePhoneValue(this.state.phone))
   }
 
   handleCheckPhone = () => {
-    const reg = /^[\s\d()\-*#+]+$/
     if (this.props.phone === 'null' || this.props.phone === null || this.props.phone?.trim() === '') {
-      this.setState({
-        validPhone: true
-      })
       return true
     }
-    if (this.props.phone?.trim().length >= 3 && reg.test(this.props.phone?.trim())) {
-      this.setState({
-        validPhone: true
-      })
+    if (this.props.phone?.trim() !== '' && !this.state.statusOutsideValidation && !this.state.incorrectNumber) {
       return true
-    } else {
+    }
+    return false
+  }
+
+  handleBlurPhone = ({ target }) => {
+    const { value } = target
+    if (value) {
+      const url = _config.urls.validate_api
+      const body = `phone=${value}`
       this.setState({
-        validPhone: false
+        statusOutsideValidation: true
       })
-      return false
+      postValidateService(body, url)
+        .then(({ status }) => {
+          if (status === 200) {
+            this.setState({
+              incorrectNumber: false
+            })
+          }
+          if (status === 422) {
+            this.setState({
+              incorrectNumber: true
+            })
+          }
+        })
+        .catch(error => console.log({ error }))
+        .finally(() => this.setState({
+          statusOutsideValidation: false
+        }))
     }
   }
 
@@ -104,7 +121,7 @@ class SignUp extends Component {
 
   render() {
     const { email, pass, existingEmail, onHandleEmailValue, onHandlePassValue } = this.props
-    const { validPhone, phone, isVisiblePass } = this.state
+    const { incorrectNumber, phone, isVisiblePass } = this.state
     return (
       <div className='sign-up'>
         <div className='main-content'>
@@ -164,7 +181,7 @@ class SignUp extends Component {
                     alt=''
                     src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
-                <div className={'group' + (validPhone ? '' : ' err_phone')}>
+                <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
                   <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
                   <input
                     type='tel'
@@ -172,6 +189,7 @@ class SignUp extends Component {
                     value={phone || sessionStorage.getItem('atz_phone')?.trim()}
                     className='group__input input_phone'
                     onChange={this.handleChangePhone}
+                    onBlur={this.handleBlurPhone}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
                   />
                 </div>

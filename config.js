@@ -40,7 +40,7 @@ _config.urls = {
   business_types_get: 'business_types?lang={lang}',
   countries_get: 'countries',
   // redirect_after_success_sign_up: 'https://atzma.im/en/calendar',
-
+  validate_api: 'https://api.bewebmaster.co.il/customers-list/clients/validate',
   error_page: 'https://api.bewebmaster.co.il/error_page',
   recaptcha_post: '/recaptcha?token={token}',
   signup_post: 'signup',
