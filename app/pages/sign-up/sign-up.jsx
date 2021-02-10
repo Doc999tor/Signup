@@ -17,10 +17,17 @@ class SignUp extends Component {
     validName: true,
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.statusOutsideValidation && !this.state.statusOutsideValidation && this.state.send && !this.state.icorrectNumber && !prevState.icorrectNumber) {
+      this.handlePostRequest()
+    }
+  }
+
   handleChangePhone = e => {
     const value = e.target.value
     this.setState({
-      phone: value
+      phone: value,
+      incorrectNumber: false,
     })
   }
 
@@ -40,7 +47,7 @@ class SignUp extends Component {
   }
 
   handleCheckPhone = () => {
-    if (this.state.phone && !this.state.incorrectNumber && !this.state.statusOutsideValidation) {
+    if (this.state.phone && !this.state.incorrectNumber) {
       return true
     }
     return false
@@ -63,20 +70,19 @@ class SignUp extends Component {
           }
           if (status === 422) {
             this.setState({
-              incorrectNumber: true
+              incorrectNumber: true,
+              send: false
             })
           }
         })
         .catch(error => console.log({ error }))
         .finally(() => this.setState({
           statusOutsideValidation: false,
-          phoneFlag: false
         }))
     }
   }
 
   handlePostRequest = () => {
-    this.setState({ send: true, sending: true });
     setTimeout(() => {
       const body = {
         name: this.state.name.trim(),
@@ -88,21 +94,26 @@ class SignUp extends Component {
         headers: {
           'content-type': 'application/x-www-form-urlencoded'
         }
-      }).then(() => {
-        this.setState({ sending: false })
-        setTimeout(() => {
-          this.setState({ send: false })
-          window.history.back()
-        }, 4000)
       })
-    }, 1000)
+        .then(() => {
+          this.setState({ sending: false })
+          setTimeout(() => {
+            this.setState({ send: false })
+            window.history.back()
+          }, 4000)
+        })
+        .catch(error => console.log({ error }))
+    }, 500)
   }
 
   sendLead = () => {
     if (this.handleCheckName() && this.handleCheckPhone()) {
-      this.handlePostRequest()
+      this.setState({ send: true, sending: true }, () => {
+        !this.state.statusOutsideValidation && this.handlePostRequest()
+      })
     } else {
       !this.state.name && this.setState({ validName: false })
+      !this.state.phone?.trim() && this.setState({ incorrectNumber : true })
     }
   }
 
