@@ -107,26 +107,24 @@ class SignUp extends Component {
       this.setState({
         statusOutsideValidation: true
       })
-      setTimeout(() => {
-        postValidateService(body, url)
-          .then(({ status }) => {
-            if (status === 200) {
-              this.setState({
-                incorrectNumber: false
-              })
-            }
-            if (status === 422) {
-              this.setState({
-                incorrectNumber: true,
-                loader: false
-              })
-            }
-          })
-          .catch(error => console.log({ error }))
-          .finally(() => this.setState({
-            statusOutsideValidation: false
-          }))
-      }, 1000);
+      postValidateService(body, url)
+        .then(({ status }) => {
+          if (status === 200) {
+            this.setState({
+              incorrectNumber: false
+            })
+          }
+          if (status === 422) {
+            this.setState({
+              incorrectNumber: true,
+              loader: false
+            })
+          }
+        })
+        .catch(error => console.log({ error }))
+        .finally(() => this.setState({
+          statusOutsideValidation: false
+        }))
     }
   }
 
