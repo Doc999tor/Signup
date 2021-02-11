@@ -52,22 +52,6 @@ class Home extends React.Component {
 
   handleChangeAds = () => this.setState({ isPermitAds: !this.state.isPermitAds })
 
-  handleCheckEmail = () => {
-    const body = `email=${this.state.email.trim()}&pass=${this.state.pass.trim()}`
-    postService(_config.urls.api_check_email, body).then(r => {
-      if (r.status === 409 || r.status === 302) {
-        this.setState({
-          existingEmail: true
-        }, () => {
-          this.props.history.push({
-            pathname: baseUrl,
-            search: window.location.search
-          })
-        })
-      }
-    })
-  }
-
   handleRequest = () => {
     let body = `added=${getPrettyDate()}&email=${this.state.email?.trim()}&pass=${this.state.pass?.trim()}&phone=${encodeURIComponent(this.state.phone?.trim()) || null}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
     if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) {
@@ -103,10 +87,9 @@ class Home extends React.Component {
     return (
       <div id='home'>
         <Switch>
-          <Route exact path={baseUrl} render={() => <SignUp {...this.state} onCheckEmail={this.handleCheckEmail} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
+          <Route exact path={baseUrl} render={() => <SignUp {...this.state} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
           <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} isStartLoad={this.state.isStartLoad} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
-          {/* {_config.onboarding_pages.map((page, index) => <Route key={page.name} isStartLoad={this.state.isStartLoad} path={baseUrl + page.path} render={() => <Onboarding {...this.state} name={page.name} icon={page.icon} nextRoute={_config.onboarding_pages[index + 1]?.path} text={_config.translations[_config.data.lang].onboarding_pages[page.name]?.text} />} />)} */}
           <Redirect from='/' to={baseUrl} />
         </Switch>
       </div>

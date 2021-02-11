@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import Slideshow from '../../components/logo-animation'
 import ExistingEmail from '../../components/existing_email'
-import { postValidateService } from '../../services/api_services'
+import { postValidateService, postService } from '../../services/api_services'
 
 import './sign-up.less'
 
+const baseUrl = _config.baseUrl
 class SignUp extends Component {
   constructor (props) {
     super(props)
@@ -15,10 +16,10 @@ class SignUp extends Component {
       isVisiblePass: false,
       isValidEmail: true,
       isValidPass: true,
+      existingEmail: false,
+      successCheck: false,
+      loader: false,
       phone: null,
-      validPhone: true,
-      passValue: '',
-      emailValue: '',
       errMessage: (() => {
         // when loading the constructor, check url for an error
         let params = (new URL(document.location)).searchParams
@@ -32,6 +33,19 @@ class SignUp extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.phone) {
+      this.handleBlurPhone(false, this.props.phone)
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { successCheck, loader } = this.state
+    if (successCheck && loader && !this.state.statusOutsideValidation && this.props.phone && prevState.statusOutsideValidation && !this.state.statusOutsideValidation && !this.state.incorrectNumber) {
+      this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+    }
+  }
+
   // toggle password -> show/hide
   togglePass = () => this.setState(prevState => ({ isVisiblePass: !prevState.isVisiblePass }))
 
@@ -39,11 +53,11 @@ class SignUp extends Component {
     const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
     // mail epmty
     if (this.props.email === '') {
-      this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email})
+      this.setState({ isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email })
       return false
     }
     if (!re.test(this.props.email.trim())) {
-      this.setState({isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email})
+      this.setState({ isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.wrong_email })
       return false
     }
     if (re.test(this.props.email.trim())) {
@@ -56,10 +70,10 @@ class SignUp extends Component {
     let minPassLength = 3
     // pass epmty
     if (this.props.pass.trim() === '') {
-      this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_password})
+      this.setState({ isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_password })
       return false
     } else if (this.props.pass.trim().length < minPassLength) {
-      this.setState({isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.password_short})
+      this.setState({ isValidPass: false, errMessage: _config.translations[_config.data.lang].sign_in.password_short })
       return false
     } else {
       this.setState({isValidPass: true, errMessage: ''})
@@ -69,9 +83,9 @@ class SignUp extends Component {
 
   handleChangePhone = e => {
     const value = e.target.value
-    const reg = /^[\s\d()\-*#+]+$/
     this.setState({
-      phone: value
+      phone: value,
+      incorrectNumber: false
     }, () => this.props.onHandlePhoneValue(this.state.phone))
   }
 
@@ -85,38 +99,75 @@ class SignUp extends Component {
     return false
   }
 
-  handleBlurPhone = ({ target }) => {
-    const { value } = target
+  handleBlurPhone = (e, phone) => {
+    const value = e ? e.target.value : phone
     if (value) {
       const url = _config.urls.validate_api
       const body = `phone=${value}`
       this.setState({
         statusOutsideValidation: true
       })
-      postValidateService(body, url)
-        .then(({ status }) => {
-          if (status === 200) {
-            this.setState({
-              incorrectNumber: false
-            })
-          }
-          if (status === 422) {
-            this.setState({
-              incorrectNumber: true
-            })
-          }
-        })
-        .catch(error => console.log({ error }))
-        .finally(() => this.setState({
-          statusOutsideValidation: false
-        }))
+      setTimeout(() => {
+        postValidateService(body, url)
+          .then(({ status }) => {
+            if (status === 200) {
+              this.setState({
+                incorrectNumber: false
+              })
+            }
+            if (status === 422) {
+              this.setState({
+                incorrectNumber: true,
+                loader: false
+              })
+            }
+          })
+          .catch(error => console.log({ error }))
+          .finally(() => this.setState({
+            statusOutsideValidation: false
+          }))
+      }, 1000);
     }
+  }
+
+  handleCheckEmail = () => {
+    const body = `email=${this.props.email.trim()}&pass=${this.props.pass.trim()}`
+    return postService(_config.urls.api_check_email, body).then(r => {
+      if (r.status === 409 || r.status === 302) {
+        this.setState({
+          existingEmail: true,
+          loader: false,
+          successCheck: false,
+        }, () => {
+          this.props.history.push({
+            pathname: baseUrl,
+            search: window.location.search
+          })
+        })
+        return false
+      } else if (r.status === 404) {
+        this.setState({
+          existingEmail: false,
+          successCheck: true
+        })
+        return true
+      }
+    })
   }
 
   handleGoToBusinessType = e => {
     e.preventDefault()
-    this.checkPassword() && this.checkEmail() && this.props.onCheckEmail()
-    this.handleCheckPhone() && this.checkPassword() && this.checkEmail() && this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+    if (this.checkEmail() && this.checkPassword() && this.handleCheckPhone()) {
+      this.setState({ loader: true })
+      this.handleCheckEmail().then(data => {
+        if (data) {
+          this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+        }
+      })
+    } else {
+      this.setState({ loader: true })
+      this.handleCheckEmail()
+    }
   }
 
   render() {
@@ -127,7 +178,7 @@ class SignUp extends Component {
         <div className='main-content'>
           <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
             <img className='wave' src={_config.urls.static + 'wave.svg'} alt='' />
-            {!existingEmail
+            {!existingEmail && !this.state.existingEmail
               ? <Slideshow />
               : <ExistingEmail />}
           </div>
@@ -140,11 +191,11 @@ class SignUp extends Component {
             </div>
             <form onSubmit={this.handleGoToBusinessType}>
               <div className='text-content-wrap'>
-                <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail ? 'existing_email' : ''}`}>
+                <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail || this.state.existingEmail ? 'existing_email' : ''}`}>
                   <img
                     className='group__email'
                     alt=''
-                    src={_config.urls.static + (this.state.isValidEmail && !existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')}
+                    src={_config.urls.static + (this.state.isValidEmail && !existingEmail && !this.state.existingEmail ? 'ic_email.svg' : 'ic_email-error.svg')}
                   />
                   <input type='email'
                     name='email'
@@ -200,7 +251,11 @@ class SignUp extends Component {
                 <div id='g-recaptcha-response' name='g-recaptcha-response' className='g-recaptcha' data-size='invisible' data-sitekey={_config.recaptcha_v2} />
               </div>
               <button className='login-form__button login-button' type='submit'>
-                {_config.translations[_config.data.lang].sign_up.continue}
+                {this.state.loader
+                  ? <img className='loader' src={_config.urls.static + 'preloader.svg'} alt='' />
+                  : <span>{_config.translations[_config.data.lang].sign_up.continue}</span>
+
+                }
               </button>
             </form>
           </div>
