@@ -42,6 +42,7 @@ _config.urls = {
   business_type: '/business-type',
   privacy_policy: '/privacy-policy',
   static: './media/',
+  validate_api: 'https://api.bewebmaster.co.il/customers-list/clients/validate',
   business_types_icons: './media/business_types_icons/',
   // api
   base: 'https://api.bewebmaster.co.il/', // domain name
