@@ -8,7 +8,7 @@ import './all-set.less'
 class AllSet extends Component {
   state = {
     countries_success: false,
-    isAgreeToAllTerms: false,
+    isAgreeToAllTerms: true,
     makeChoose: false
   }
 
@@ -51,6 +51,7 @@ class AllSet extends Component {
             <label htmlFor='first' className='checkbox-wrap'>
               <input id='first' type='checkbox'
                 value={this.props.isPermitAds}
+                checked={ this.props.isPermitAds }
                 onChange={this.props.onHandleChangeAds} />
               <p>
                 {_config.translations[_config.data.lang].all_set.send_important_information}
@@ -59,6 +60,7 @@ class AllSet extends Component {
             <label className='checkbox-wrap' htmlFor='twice'>
               <input className={makeChoose ? 'makeChoose' : 'normal'} id='twice' type='checkbox'
                 value={isAgreeToAllTerms}
+                checked={ isAgreeToAllTerms }
                 onChange={this.handleChangeAgree}
               />
               <p className='combined' htmlFor='twice'>

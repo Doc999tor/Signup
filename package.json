@@ -5,7 +5,7 @@
     "license": "ISC",
     "author": "",
     "scripts": {
-        "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --hot",
+        "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --hot --port=1234",
         "build-p": "cross-env NODE_ENV=production webpack --mode production --env"
     },
     "repository": {
