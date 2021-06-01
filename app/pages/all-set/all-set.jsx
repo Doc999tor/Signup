@@ -50,6 +50,7 @@ class AllSet extends Component {
           <div className='block-with-checkbox'>
             <label htmlFor='first' className='checkbox-wrap'>
               <input id='first' type='checkbox'
+                className={makeChoose ? 'makeChoose' : 'normal'}
                 value={this.props.isPermitAds}
                 checked={ this.props.isPermitAds }
                 onChange={this.props.onHandleChangeAds} />
@@ -69,7 +70,14 @@ class AllSet extends Component {
               </p>
             </label>
           </div>
-          <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} isStartLoad={this.props.isStartLoad} route={this.props.onHandleRequest} active={isAgreeToAllTerms && this.state.countries_success} />
+          <div id="legalLinks-container">
+            {
+              _config.legalLinks.map(
+                l => <a href={ l.link } target="_blank">{ l.text }</a>
+              )
+            }
+          </div>
+          <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} isStartLoad={this.props.isStartLoad} route={this.props.onHandleRequest} active={this.props.isPermitAds && isAgreeToAllTerms && this.state.countries_success} />
         </div>
       </div>
     )
