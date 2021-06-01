@@ -26,6 +26,7 @@ _config.onboarding_pages = [
 ]
 
 _config.other_business_type_id = -1
+_config.legalLinks = [{ text: 'תנאי השימוש של ליסטה', link: 'https://google.com' }, { text: 'פרטי ההצטרפות כמנוי', link: 'https://google.com' }, { text: 'ואת מדיניות הפרטיות שלנו', link: 'https://google.com' }]
 
 // _config.data.all_langs = ['en', 'he', 'ru']
 _config.urls = {
