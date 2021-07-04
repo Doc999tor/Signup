@@ -13,6 +13,7 @@ class Home extends React.Component {
     email: sessionStorage.getItem('atz_email') || '',
     pass: sessionStorage.getItem('atz_pass') || '',
     phone: sessionStorage.getItem('atz_phone') || '',
+    business_name: sessionStorage.getItem('atz_business_name') || '',
     finalRedirect: '',
     existingEmail: false,
     selectedBusinessIds: [],
@@ -30,6 +31,12 @@ class Home extends React.Component {
   handlePassValue = ({ target }) => {
     const { value } = target
     this.setState({ pass: value }, () => sessionStorage.setItem('atz_pass', this.state.pass))
+  }
+
+  handleChangeBusinessNameValue = ({ target }) => {
+    const { value } = target
+    console.log('value', value)
+    this.setState({ business_name: value }, () => sessionStorage.setItem('atz_business_name', this.state.business_name))
   }
 
   handlePhoneValue = value => this.setState({phone: value}, () => sessionStorage.setItem('atz_phone', this.state.phone))
@@ -53,7 +60,7 @@ class Home extends React.Component {
   handleChangeAds = () => this.setState({ isPermitAds: !this.state.isPermitAds })
 
   handleRequest = () => {
-    let body = `added=${getPrettyDate()}&email=${this.state.email?.trim()}&pass=${this.state.pass?.trim()}&phone=${encodeURIComponent(this.state.phone?.trim()) || null}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
+    let body = `added=${getPrettyDate()}&email=${this.state.email?.trim()}&pass=${this.state.pass?.trim()}&business_name=${this.state.business_name?.trim() || null}&phone=${encodeURIComponent(this.state.phone?.trim()) || null}&permit_ads=${this.state.isPermitAds}&business_types=[${this.state.selectedBusinessIds}]&lang=${_config.data.lang}&timezone=${this.state.countries.timezone}&country=${this.state.countries.country}&city=${this.state.countries.city}`
     if (this.state.selectedBusinessIds.includes(_config.other_business_type_id) && this.state.anotherBusinessType) {
       body = body + `&another_business_type_id=${this.state.anotherBusinessType}`
     }
@@ -87,7 +94,7 @@ class Home extends React.Component {
     return (
       <div id='home'>
         <Switch>
-          <Route exact path={baseUrl} render={() => <SignUp {...this.state} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
+          <Route exact path={baseUrl} render={() => <SignUp {...this.state} existingEmail={this.state.existingEmail} onHandlePhoneValue={this.handlePhoneValue} onChangeBusinessNameValue={this.handleChangeBusinessNameValue} onHandlePassValue={this.handlePassValue} onHandleEmailValue={this.handleEmailValue} />} />
           <Route path={baseUrl + _config.routing.business_type_path} render={() => <BusinessType {...this.state} onHandleBusinessIds={this.handleBusinessIds} onHandleBusinessType={this.handleBusinessType} />} />
           <Route path={baseUrl + _config.routing.all_set_path} render={() => <AllSet {...this.state} isStartLoad={this.state.isStartLoad} onHandleCountriesValue={this.handleCountriesValue} onHandleChangeAds={this.handleChangeAds} onHandleRequest={this.handleRequest} />} />
           <Redirect from='/' to={baseUrl} />

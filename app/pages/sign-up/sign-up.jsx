@@ -169,7 +169,7 @@ class SignUp extends Component {
   }
 
   render() {
-    const { email, pass, existingEmail, onHandleEmailValue, onHandlePassValue } = this.props
+    const { business_name, email, pass, existingEmail, onHandleEmailValue, onHandlePassValue, onChangeBusinessNameValue } = this.props
     const { incorrectNumber, phone, isVisiblePass } = this.state
     return (
       <div className='sign-up'>
@@ -230,13 +230,24 @@ class SignUp extends Component {
                     alt=''
                     src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
+                <div className='group'>
+                  <img className='phone_img' src={_config.urls.static + 'briefcase.svg'} alt='' />
+                  <input
+                    type='text'
+                    name='business_name'
+                    value={business_name || sessionStorage.getItem('atz_business_name')?.trim()}
+                    className='group__input input_phone'
+                    onChange={onChangeBusinessNameValue}
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_business_name}
+                  />
+                </div>
                 <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
                   <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
                   <input
                     type='tel'
                     name='phone'
                     value={phone || sessionStorage.getItem('atz_phone')?.trim()}
-                    className='group__input input_phone'
+                    className='group__input'
                     onChange={this.handleChangePhone}
                     onBlur={this.handleBlurPhone}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
