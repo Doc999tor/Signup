@@ -236,7 +236,7 @@ class SignUp extends Component {
                     type='text'
                     name='business_name'
                     value={business_name || sessionStorage.getItem('atz_business_name')?.trim()}
-                    className='group__input input_phone'
+                    className='group__input'
                     onChange={onChangeBusinessNameValue}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_business_name}
                   />
@@ -247,7 +247,7 @@ class SignUp extends Component {
                     type='tel'
                     name='phone'
                     value={phone || sessionStorage.getItem('atz_phone')?.trim()}
-                    className='group__input'
+                    className='group__input input_phone'
                     onChange={this.handleChangePhone}
                     onBlur={this.handleBlurPhone}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
