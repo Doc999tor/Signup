@@ -231,7 +231,9 @@ class SignUp extends Component {
                     src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
                 <div className='group'>
-                  <img className='phone_img' src={_config.urls.static + 'briefcase.svg'} alt='' />
+                  <div className='image_wrap'>
+                    <img className='phone_img' src={_config.urls.static + 'briefcase.svg'} alt='' />
+                  </div>
                   <input
                     type='text'
                     name='business_name'

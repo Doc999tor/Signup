@@ -35,7 +35,6 @@ class Home extends React.Component {
 
   handleChangeBusinessNameValue = ({ target }) => {
     const { value } = target
-    console.log('value', value)
     this.setState({ business_name: value }, () => sessionStorage.setItem('atz_business_name', this.state.business_name))
   }
 
