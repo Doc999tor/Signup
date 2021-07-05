@@ -81,6 +81,7 @@ _config.translations = {
       login: 'Login',
       sign_up: 'Sign Up',
       enter_phone: 'Enter your phone number',
+      enter_business_name: 'Enter business name',
       missing_email: 'Missing email',
       missing_password: 'Missing password',
       wrong_email: 'Wrong email try again!',
