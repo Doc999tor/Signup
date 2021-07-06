@@ -48,7 +48,7 @@ class AllSet extends Component {
             {_config.translations[_config.data.lang].all_set.enjoy_your_choice}
           </span>
           <div className='block-with-checkbox'>
-            <label htmlFor='first' className='checkbox-wrap'>
+            <div className='checkbox-wrap'>
               <input id='first' type='checkbox'
                 className={makeChoose ? 'makeChoose' : 'normal'}
                 value={this.props.isPermitAds}
@@ -57,25 +57,25 @@ class AllSet extends Component {
               <p>
                 {_config.translations[_config.data.lang].all_set.send_important_information}
               </p>
-            </label>
-            <label className='checkbox-wrap' htmlFor='twice'>
+            </div>
+            <div className='checkbox-wrap'>
               <input className={makeChoose ? 'makeChoose' : 'normal'} id='twice' type='checkbox'
                 value={isAgreeToAllTerms}
                 checked={ isAgreeToAllTerms }
                 onChange={this.handleChangeAgree}
               />
-              <p className='combined' htmlFor='twice'>
-                <span>{_config.translations[_config.data.lang].all_set.agree_to_all_the_Terms}</span>
-                <a className='term-link' target='_blank' href={_config.urls.privacy_policy}>{_config.translations[_config.data.lang].all_set.privacy_policy}</a>
+              <p className='combined'>
+                <span>{
+                  _config.translations[_config.data.lang].all_set.agree_to_all_the_Terms_1
+                }{
+                  _config.legalLinks.map(
+                    (l, i) => <><a href={ l.link } target="_blank">{ l.text }</a>{ _config.legalLinks[i+1] ? ', ' : '' }</>
+                  )
+                }{
+                  _config.translations[_config.data.lang].all_set.agree_to_all_the_Terms_2
+                }</span>
               </p>
-            </label>
-          </div>
-          <div id="legalLinks-container">
-            {
-              _config.legalLinks.map(
-                l => <a href={ l.link } target="_blank">{ l.text }</a>
-              )
-            }
+            </div>
           </div>
           <StartButton onMakeChoose={this.handleMakeChoose} makeChoose={makeChoose} isStartLoad={this.props.isStartLoad} route={this.props.onHandleRequest} active={this.props.isPermitAds && isAgreeToAllTerms && this.state.countries_success} />
         </div>

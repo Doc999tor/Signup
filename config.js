@@ -55,7 +55,8 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I have read and agree to the all Atzmaim App',
+      agree_to_all_the_Terms_1: 'I agree to ',
+      agree_to_all_the_Terms_2: ' of the Atzmaim app',
       lets_start: 'Lets Start!',
       privacy_policy: 'Terms and Conditions of Use'
     },
@@ -107,7 +108,8 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I agree to all the Terms of Use of the Atzmaim app and the legal',
+      agree_to_all_the_Terms_1: 'I agree to ',
+      agree_to_all_the_Terms_2: ' of the Atzmaim app',
       lets_start: 'Lets Start!'
     },
     sign_up: {
@@ -150,7 +152,8 @@ _config.translations = {
       enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
       you_can_continue: 'Now you can continue working in the application.',
       send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms: 'I agree to all the Terms of Use of the Atzmaim app and the legal',
+      agree_to_all_the_Terms_1: 'I agree to ',
+      agree_to_all_the_Terms_2: ' of the Atzmaim app',
       lets_start: 'Lets Start!'
     },
     sign_up: {
