@@ -8,6 +8,10 @@ import './sign-up.less'
 
 const baseUrl = _config.baseUrl
 class SignUp extends Component {
+  phoneValidationPromise = Promise.resolve()
+  phoneValidationStarted = false
+  phoneValidationFinished = false
+
   constructor (props) {
     super(props)
     this.state = {
@@ -105,9 +109,11 @@ class SignUp extends Component {
       const url = _config.urls.validate_api
       const body = `phone=${value}`
       this.setState({
-        statusOutsideValidation: true
+        statusOutsideValidation: true,
       })
-      postValidateService(body, url)
+      this.phoneValidationStarted = true
+      this.phoneValidationFinished = false
+      this.phoneValidationPromise = postValidateService(body, url)
         .then(({ status }) => {
           if (status === 200) {
             this.setState({
@@ -121,10 +127,13 @@ class SignUp extends Component {
             })
           }
         })
-        .catch(error => console.log({ error }))
-        .finally(() => this.setState({
-          statusOutsideValidation: false
-        }))
+        .finally(() => {
+          this.setState({
+            statusOutsideValidation: false
+          });
+          this.phoneValidationFinished = true
+          this.phoneValidationStarted = false
+        })
     }
   }
 
@@ -155,16 +164,23 @@ class SignUp extends Component {
 
   handleGoToBusinessType = e => {
     e.preventDefault()
-    if (this.checkEmail() && this.checkPassword() && this.handleCheckPhone()) {
+    const submitAction = () => {
       this.setState({ loader: true })
       this.handleCheckEmail().then(data => {
         if (data) {
           this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
         }
       })
+    }
+    const submitForm = () => {
+      if (this.checkEmail() && this.checkPassword() && this.handleCheckPhone()) {
+        submitAction()
+      }
+    }
+    if (this.phoneValidationStarted && !this.phoneValidationFinished) {
+      this.phoneValidationPromise.then(submitForm)
     } else {
-      this.setState({ loader: true })
-      this.handleCheckEmail()
+      submitForm()
     }
   }
 
@@ -230,6 +246,18 @@ class SignUp extends Component {
                     alt=''
                     src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
+                <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
+                  <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
+                  <input
+                    type='tel'
+                    name='phone'
+                    value={phone || sessionStorage.getItem('atz_phone')?.trim()}
+                    className='group__input input_phone'
+                    onChange={this.handleChangePhone}
+                    onBlur={this.handleBlurPhone}
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
+                  />
+                </div>
                 <div className='group'>
                   <div className='image_wrap'>
                     <img className='phone_img' src={_config.urls.static + 'briefcase.svg'} alt='' />
@@ -243,18 +271,6 @@ class SignUp extends Component {
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_business_name}
                   />
                 </div>
-                <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
-                  <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
-                  <input
-                    type='tel'
-                    name='phone'
-                    value={phone || sessionStorage.getItem('atz_phone')?.trim()}
-                    className='group__input input_phone'
-                    onChange={this.handleChangePhone}
-                    onBlur={this.handleBlurPhone}
-                    placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
-                  />
-                </div>
                 <div className='login-err'>
                   {this.state.errMessage && <img className='login-err__img' src={_config.urls.static + 'vector.svg'} alt='' />}
                   <span className='login-err__text'>{this.state.errMessage}</span>
@@ -265,7 +281,6 @@ class SignUp extends Component {
                 {this.state.loader
                   ? <img className='loader' src={_config.urls.static + 'preloader.svg'} alt='' />
                   : <span>{_config.translations[_config.data.lang].sign_up.continue}</span>
-
                 }
               </button>
             </form>
