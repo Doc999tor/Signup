@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import Slideshow from '../../components/logo-animation'
 import ExistingEmail from '../../components/existing_email'
@@ -11,13 +11,11 @@ class SignUp extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      statusOutsideValidation: false,
       incorrectNumber: false,
       isVisiblePass: false,
       isValidEmail: true,
       isValidPass: true,
       existingEmail: false,
-      successCheck: false,
       loader: false,
       phone: null,
       errMessage: (() => {
@@ -34,15 +32,8 @@ class SignUp extends Component {
   }
 
   componentDidMount() {
-    if (this.props.phone) {
-      this.handleBlurPhone(false, this.props.phone)
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { successCheck, loader } = this.state
-    if (successCheck && loader && !this.state.statusOutsideValidation && this.props.phone && prevState.statusOutsideValidation && !this.state.statusOutsideValidation && !this.state.incorrectNumber) {
-      this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
+    if (this.props.phone?.trim() !== '') {
+      this.setState({ phone: this.props.phone?.trim() })
     }
   }
 
@@ -93,39 +84,30 @@ class SignUp extends Component {
     if (this.props.phone === 'null' || this.props.phone === null || this.props.phone?.trim() === '') {
       return true
     }
-    if (this.props.phone?.trim() !== '' && !this.state.statusOutsideValidation && !this.state.incorrectNumber) {
-      return true
-    }
-    return false
+    return this.props.phone?.trim() !== '' && !this.state.incorrectNumber;
   }
 
-  handleBlurPhone = (e, phone) => {
-    const value = e ? e.target.value : phone
-    if (value) {
-      const url = _config.urls.validate_api
-      const body = `phone=${value}`
-      this.setState({
-        statusOutsideValidation: true
+  handlePhoneValidation = phone => {
+    const url = _config.urls.validate_api
+    const body = `phone=${phone?.trim()}`
+
+    return postValidateService(body, url)
+      .then(({ status }) => {
+        if (status === 200) {
+          this.setState({
+            incorrectNumber: false
+          })
+          return true
+        }
+        if (status === 422) {
+          this.setState({
+            incorrectNumber: true,
+            loader: false
+          })
+          return false
+        }
       })
-      postValidateService(body, url)
-        .then(({ status }) => {
-          if (status === 200) {
-            this.setState({
-              incorrectNumber: false
-            })
-          }
-          if (status === 422) {
-            this.setState({
-              incorrectNumber: true,
-              loader: false
-            })
-          }
-        })
-        .catch(error => console.log({ error }))
-        .finally(() => this.setState({
-          statusOutsideValidation: false
-        }))
-    }
+      .catch(error => console.log({ error }))
   }
 
   handleCheckEmail = () => {
@@ -135,42 +117,48 @@ class SignUp extends Component {
         this.setState({
           existingEmail: true,
           loader: false,
-          successCheck: false,
         }, () => {
           this.props.history.push({
             pathname: baseUrl,
             search: window.location.search
           })
         })
-        return false
       } else if (r.status === 404) {
         this.setState({
           existingEmail: false,
-          successCheck: true
+        }, () => {
+          this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
         })
-        return true
       }
     })
   }
 
-  handleGoToBusinessType = e => {
-    e.preventDefault()
+  handleGoToBusinessType = () => {
     if (this.checkEmail() && this.checkPassword() && this.handleCheckPhone()) {
-      this.setState({ loader: true })
-      this.handleCheckEmail().then(data => {
-        if (data) {
-          this.props.history.push(_config.baseUrl + _config.routing.business_type_path)
-        }
-      })
+      this.handleCheckEmail()
     } else {
-      this.setState({ loader: true })
       this.handleCheckEmail()
     }
+  }
+
+  handleSubmitForm = e => {
+    e.preventDefault()
+    this.setState({ loader: true })
+    if (this.state.phone !== 'null' && this.state.phone !== null && this.state.phone?.trim() !== '') {
+      this.handlePhoneValidation(this.state.phone).then(isValid => {
+        if (isValid) {
+          this.handleGoToBusinessType()
+        }
+      })
+      return
+    }
+    this.handleGoToBusinessType()
   }
 
   render() {
     const { business_name, email, pass, existingEmail, onHandleEmailValue, onHandlePassValue, onChangeBusinessNameValue } = this.props
     const { incorrectNumber, phone, isVisiblePass } = this.state
+
     return (
       <div className='sign-up'>
         <div className='main-content'>
@@ -187,7 +175,7 @@ class SignUp extends Component {
             <div className='question-container'>
               <a href={ _config.urls.login } className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
             </div>
-            <form onSubmit={this.handleGoToBusinessType}>
+            <form onSubmit={this.handleSubmitForm}>
               <div className='text-content-wrap'>
                 <div className={`group email ${this.state.isValidEmail ? '' : 'err'} ${existingEmail || this.state.existingEmail ? 'existing_email' : ''}`}>
                   <img
@@ -248,10 +236,9 @@ class SignUp extends Component {
                   <input
                     type='tel'
                     name='phone'
-                    value={phone || sessionStorage.getItem('atz_phone')?.trim()}
+                    value={phone}
                     className='group__input input_phone'
                     onChange={this.handleChangePhone}
-                    onBlur={this.handleBlurPhone}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
                   />
                 </div>
