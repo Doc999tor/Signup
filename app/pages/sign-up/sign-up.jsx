@@ -111,7 +111,7 @@ class SignUp extends Component {
   }
 
   handleCheckEmail = () => {
-    const body = `email=${this.props.email.trim()}&pass=${this.props.pass.trim()}`
+    const body = `email=${encodeURIComponent(this.props.email.trim())}&pass=${encodeURIComponent(this.props.pass.trim())}`
     return postService(_config.urls.api_check_email, body).then(r => {
       if (r.status === 409 || r.status === 302) {
         this.setState({
@@ -218,6 +218,17 @@ class SignUp extends Component {
                     alt=''
                     src={`${_config.urls.static}${isVisiblePass ? 'eye-off' : 'eye'}.svg`} />}
                 </div>
+                <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
+                  <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
+                  <input
+                    type='tel'
+                    name='phone'
+                    value={phone}
+                    className='group__input input_phone'
+                    onChange={this.handleChangePhone}
+                    placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
+                  />
+                </div>
                 <div className='group'>
                   <div className='image_wrap'>
                     <img className='phone_img' src={_config.urls.static + 'briefcase.svg'} alt='' />
@@ -229,17 +240,6 @@ class SignUp extends Component {
                     className='group__input'
                     onChange={onChangeBusinessNameValue}
                     placeholder={_config.translations[_config.data.lang].sign_in.enter_business_name}
-                  />
-                </div>
-                <div className={'group' + (!incorrectNumber ? '' : ' err_phone')}>
-                  <img className='phone_img' src={_config.urls.static + 'ic_phone.svg'} alt='' />
-                  <input
-                    type='tel'
-                    name='phone'
-                    value={phone}
-                    className='group__input input_phone'
-                    onChange={this.handleChangePhone}
-                    placeholder={_config.translations[_config.data.lang].sign_in.enter_phone}
                   />
                 </div>
                 <div className='login-err'>
