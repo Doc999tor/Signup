@@ -18,6 +18,8 @@
     "quotes": ["error", "single"],
     "prefer-destructuring": "off",
     "comma-dangle": "off",
+    "linebreak-style": "off",
+    "prefer-template": "off",
     "semi": "off",
     "object-curly-newline": "off",
     "no-nested-ternary": "off",

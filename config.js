@@ -62,9 +62,9 @@ _config.translations = {
     },
     sign_up: {
       main_title: 'Sign up',
-      have_acc_alredy: 'Already have an account?',
+      subtitle: 'Subtitle',
+      have_acc_already: 'Already have an account?',
       login_in: ' Log In',
-      fill_dateils_create: 'Fill your dateils to create account:',
       continue: 'Continue',
       contact_us_link_label: 'Need a help?',
       existing_email_label: 'This email is already exist.\nMay be you’d like to log in?',
@@ -102,93 +102,6 @@ _config.translations = {
     },
     done_btn: 'Done'
   },
-  he: {
-    all_set: {
-      we_all_set: "We're all set!",
-      enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
-      you_can_continue: 'Now you can continue working in the application.',
-      send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms_1: 'I agree to ',
-      agree_to_all_the_Terms_2: ' of the Atzmaim app',
-      lets_start: 'Lets Start!'
-    },
-    sign_up: {
-      fill_dateils_create: 'ЧћЧњЧђ Ч¤ЧЁЧЧ™Чќ Ч›Ч“Ч™ ЧњЧ¦Ч•ЧЁ Ч—Ч©Ч‘Ч•Чџ:',
-      continue: 'Continue'
-    },
-    sign_in: {
-      title: 'Atzmaim',
-      login_google: 'Log in with google',
-      login_or: 'or',
-      enter_email: 'enter your email',
-      enter_password: 'enter your password',
-      login: 'Login',
-      sign_up: 'Sign Up',
-      enter_phone: 'Enter your phone number',
-      missing_email: 'Missing email',
-      missing_password: 'Missing password',
-      wrong_email: 'Wrong email try again!',
-      enter_email_pass: 'Enter email and password',
-      password_short: 'password is too short',
-      // new
-      error_incorrect: 'Your e-mail or password is incorrect'
-    },
-    business_type: {
-      title: 'Please select business type',
-      subtitle: 'WeвЂ™ll adjuas the app to your needs',
-      can_choose_more: 'You can choose more the one or',
-      skip_here: 'skip here',
-      your_choose: 'Your choose:',
-      type_business_name: 'Your business type',
-      enter_different_type: 'Enter a different type of business',
-      ok: 'Ok',
-      no_thanks: 'No, thanks'
-    },
-    done_btn: 'Done'
-  },
-  ru: {
-    all_set: {
-      we_all_set: "ru ruru We're all set!",
-      enjoy_your_choice: 'Thanks for being awesome, we hope you enjoy your choice',
-      you_can_continue: 'Now you can continue working in the application.',
-      send_important_information: 'We are going to send important information and some tips for running your app better. Are you ok with it?',
-      agree_to_all_the_Terms_1: 'I agree to ',
-      agree_to_all_the_Terms_2: ' of the Atzmaim app',
-      lets_start: 'Lets Start!'
-    },
-    sign_up: {
-      fill_dateils_create: ' rur urururFill your dateils to create account:',
-      continue: 'Continue'
-    },
-    sign_in: {
-      title: 'ru Atzmaim',
-      login_google: 'Log in with google',
-      login_or: 'or',
-      enter_email: 'enter your email',
-      enter_phone: 'Enter your phone number',
-      enter_password: 'enter your password',
-      login: 'Login',
-      sign_up: 'Sign Up',
-      missing_email: 'Missing email',
-      missing_password: 'Missing password',
-      wrong_email: 'ru Wrong email try again!',
-      enter_email_pass: 'Enter email and password',
-      password_short: 'password is too short',
-      error_incorrect: 'Your e-mail or password is incorrect'
-    },
-    business_type: {
-      title: 'Please select business type',
-      subtitle: 'WeвЂ™ll adjuas the app to your needs',
-      can_choose_more: 'You can choose more the one or',
-      skip_here: 'skip here',
-      your_choose: 'Your choose:',
-      type_business_name: 'Your business type',
-      enter_different_type: 'Enter a different type of business',
-      ok: 'Ok',
-      no_thanks: 'No, thanks'
-    },
-    done_btn: 'Done'
-  }
 }
 
 _config.routing = {

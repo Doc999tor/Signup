@@ -42,8 +42,8 @@ class SignUp extends Component {
 
   checkEmail = () => {
     const re = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
-    // mail epmty
-    if (this.props.email === '') {
+    // email empty
+    if (!this.props.email.trim()) {
       this.setState({ isValidEmail: false, errMessage: _config.translations[_config.data.lang].sign_in.missing_email })
       return false
     }
@@ -107,7 +107,6 @@ class SignUp extends Component {
           return false
         }
       })
-      .catch(error => console.log({ error }))
   }
 
   handleCheckEmail = () => {
@@ -144,6 +143,11 @@ class SignUp extends Component {
   handleSubmitForm = e => {
     e.preventDefault()
     this.setState({ loader: true })
+
+    if (!this.state.isValidEmail) {
+      return
+    }
+
     if (this.state.phone !== 'null' && this.state.phone !== null && this.state.phone?.trim() !== '') {
       this.handlePhoneValidation(this.state.phone).then(isValid => {
         if (isValid) {
@@ -162,7 +166,7 @@ class SignUp extends Component {
     return (
       <div className='sign-up'>
         <div className='main-content'>
-          <div style={{backgroundImage: `linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)`}} className='bottom_bgr'>
+          <div style={{backgroundImage: 'linear-gradient(123deg, #591ec0, #6623db 28%, #7d3ee8 54%, #be95ff 113%)'}} className='bottom_bgr'>
             <img className='wave' src={_config.urls.static + 'wave.svg'} alt='' />
             {!existingEmail && !this.state.existingEmail
               ? <Slideshow />
@@ -172,8 +176,8 @@ class SignUp extends Component {
             <div className='title-container'>
               <h1>{_config.translations[_config.data.lang].sign_up.main_title}</h1>
             </div>
-            <div className='question-container'>
-              <a href={ _config.urls.login } className='sign-up-question'><span>{_config.translations[_config.data.lang].sign_up.have_acc_alredy}</span><span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span></a>
+            <div className='subtitle-container'>
+              <p>{_config.translations[_config.data.lang].sign_up.subtitle}</p>
             </div>
             <form onSubmit={this.handleSubmitForm}>
               <div className='text-content-wrap'>
@@ -252,14 +256,19 @@ class SignUp extends Component {
                 {this.state.loader
                   ? <img className='loader' src={_config.urls.static + 'preloader.svg'} alt='' />
                   : <span>{_config.translations[_config.data.lang].sign_up.continue}</span>
-
                 }
               </button>
             </form>
           </div>
         </div>
         <div className='sup-wrap'>
-          <a href={_config.urls.contact_us} className='contact_us_link'>
+          <div className='question-container'>
+            <a href={_config.urls.login} className='sign-up-question'>
+              <span>{_config.translations[_config.data.lang].sign_up.have_acc_already}</span>
+              <span className='login_label'>{_config.translations[_config.data.lang].sign_up.login_in}</span>
+            </a>
+          </div>
+          <a href={_config.urls.contact_us} className='contact_us_link' target='_blank'>
             <span className='link_text'>{_config.translations[_config.data.lang].sign_up.contact_us_link_label}</span>
             <span className='help'><img src={`${_config.urls.static}ic_help.svg`} alt='help' /></span>
           </a>
